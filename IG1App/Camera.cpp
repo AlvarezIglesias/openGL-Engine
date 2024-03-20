@@ -186,7 +186,7 @@ Camera::yawReal(GLdouble a)
 void
 Camera::rollReal(GLdouble a)
 {
-	mLook += mFront * a;
+	mUp += mRight * a;
 	setVM();
 	// glm::rotate returns mViewMat * rotationMatrix
 }
