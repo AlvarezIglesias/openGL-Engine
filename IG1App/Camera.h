@@ -30,6 +30,7 @@ public:
 	void rollReal(GLdouble a);  // rotates a degrees on the Z axis
 
 	void orbit(GLdouble incAng, GLdouble incY); //APARTADO 48
+	void setCenital(); //APARTADO 50
 
 	void moveLR(GLdouble cs);
 	void moveFB(GLdouble cs);

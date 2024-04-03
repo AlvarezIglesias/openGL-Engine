@@ -203,3 +203,10 @@ Camera::orbit(GLdouble incAng, GLdouble incY) {
 	mEye.y += incY;
 	setVM();
 }
+
+void Camera::setCenital() {
+	mEye = dvec3(0, 700, 0);
+	mLook = dvec3(0, 0, 0);
+	mUp = dvec3(0, 0, 1);
+	setVM();
+}
