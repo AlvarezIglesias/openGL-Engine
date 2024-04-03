@@ -90,6 +90,9 @@ IG1App::iniWinOpenGL()
 	glutKeyboardFunc(s_key);
 	glutSpecialFunc(s_specialKey);
 	glutDisplayFunc(s_display);
+	glutMouseFunc(s_mouse);
+	glutMotionFunc(s_motion);
+	glutMouseWheelFunc(s_mouseWheel);
 
 
 
@@ -260,6 +263,20 @@ IG1App::specialKey(int key, int x, int y)
 	if (need_redisplay)
 		glutPostRedisplay(); // marks the window as needing to be redisplayed -> calls to
 		                     // display()
+}
+
+void 
+IG1App::mouse(int button, int state, int x, int y) {
+	mMouseButt = button;
+
+}
+void 
+IG1App::motion(int x, int y) {
+
+}
+void 
+IG1App::mouseWheel(int n, int d, int x, int y) {
+
 }
 
 
