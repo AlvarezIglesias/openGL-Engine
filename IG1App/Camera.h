@@ -29,6 +29,8 @@ public:
 	void yawReal(GLdouble a);   // rotates a degrees on the Y axis
 	void rollReal(GLdouble a);  // rotates a degrees on the Z axis
 
+	void orbit(GLdouble incAng, GLdouble incY); //APARTADO 48
+
 	void moveLR(GLdouble cs);
 	void moveFB(GLdouble cs);
 	void moveUD(GLdouble cs);
@@ -71,6 +73,8 @@ protected:
 	GLdouble mScaleFact = 1;                // scale factor
 	GLdouble mFovy = 60.0;
 	bool bOrto = true;                      // orthogonal or perspective projection
+	GLdouble mAng = 45.0;
+	GLdouble mRadio = 500.0;
 
 	Viewport* mViewPort; // the viewport
 
