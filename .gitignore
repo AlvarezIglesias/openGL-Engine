@@ -1,2 +1,7 @@
 
 /.vs
+/bin
+/bin
+*.obj
+/IG1App/x64
+/IG1App/x64
