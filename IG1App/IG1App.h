@@ -66,6 +66,7 @@ protected:
 	void update();
 
 	Scene* current_scene() const { return mScenes[mId % mScenes.size()]; };
+	Camera* current_camera() const;
 
 	// static callbacks
 	static void s_display() { s_ig1app.display(); };
