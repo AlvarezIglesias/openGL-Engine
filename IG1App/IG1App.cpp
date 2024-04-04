@@ -38,9 +38,10 @@ IG1App::init()
 
 	// create the scene after creating the context
 	// allocate memory and resources
-	mViewPort =
-	  new Viewport(mWinW, mWinH); // glutGet(GLUT_WINDOW_WIDTH), glutGet(GLUT_WINDOW_HEIGHT)
-	mCamera = new Camera(mViewPort);
+	mViewPorts =
+	{ new Viewport(mWinW, mWinH), new Viewport(mWinW, mWinH) };
+	
+	for (Viewport* vp : mViewPorts) mCameras.push_back(new Camera(vp));
 
 	Scene* s2D = new Scene();
 	s2D->init({ new RGBRectangle(400,200) , new RegularPolygon(40, 200), new RGBTriangle(50), new EjesRGB(300) });
@@ -62,8 +63,10 @@ IG1App::init()
 		});
 
 	mScenes.push_back(sPr2);
+	mCameras[0]->set3D();
+	mCameras[1]->set3D();
+	mCameras[1]->setCenital();
 
-	mCamera->set2D();
 }
 
 void
@@ -94,6 +97,9 @@ IG1App::iniWinOpenGL()
 	glutKeyboardFunc(s_key);
 	glutSpecialFunc(s_specialKey);
 	glutDisplayFunc(s_display);
+	glutMouseFunc(s_mouse);
+	glutMotionFunc(s_motion);
+	glutMouseWheelFunc(s_mouseWheel);
 
 
 
@@ -107,10 +113,9 @@ IG1App::free()
 	for( Scene* s : mScenes)
 		delete s;
 
-	delete mCamera;
-	mCamera = nullptr;
-	delete mViewPort;
-	mViewPort = nullptr;
+	for(Camera* c : mCameras) delete c;
+	for(Viewport* vp : mViewPorts) delete vp;
+
 }
 
 void
@@ -118,9 +123,36 @@ IG1App::display() const
 { // double buffering
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clears the back buffer
-	current_scene()->render(*mCamera); // uploads the viewport and camera to the GPU
+	if (!m2Vistas) display1V(); // uploads the viewport and camera to the GPU
+	else display2V();
 	glutSwapBuffers(); // swaps the front and back buffer
 }
+
+void
+IG1App::display1V() const
+{ 
+	mViewPorts[0]->setSize(mWinW, mWinH);
+	(*mCameras[0]).setSize(mViewPorts[0]->width(), mViewPorts[0]->height());
+	current_scene()->render(*mCameras[0]); // uploads the viewport and camera to the GPU
+}
+
+void 
+IG1App::display2V() const{
+
+	for (int i = 0; i < 2; i++)
+	{
+		mViewPorts[i]->setSize(mWinW / 2, mWinH);
+		(*mCameras[i]).setSize(mViewPorts[i]->width(), mViewPorts[i]->height());
+	}
+
+
+	current_scene()->render(*mCameras[0]);
+
+	mViewPorts[1]->setPos(mWinW / 2, 0);
+	//(*mCameras[1]).setCenital();
+	current_scene()->render((*mCameras[1]));
+}
+
 
 void
 IG1App::resize(int newWidth, int newHeight)
@@ -128,11 +160,12 @@ IG1App::resize(int newWidth, int newHeight)
 	mWinW = newWidth;
 	mWinH = newHeight;
 
-	// Resize Viewport to the new window size
-	mViewPort->setSize(newWidth, newHeight);
-
-	// Resize Scene Visible Area such that the scale is not modified
-	mCamera->setSize(mViewPort->width(), mViewPort->height());
+	for (int i = 0; i < mViewPorts.size(); i++) {
+		// Resize Viewport to the new window size
+		mViewPorts[i]->setSize(newWidth, newHeight);
+		// Resize Scene Visible Area such that the scale is not modified
+		mCameras[i]->setSize(mViewPorts[i]->width(), mViewPorts[i]->height());
+	}
 }
 
 void
@@ -145,16 +178,16 @@ IG1App::key(unsigned char key, int x, int y)
 			glutLeaveMainLoop(); // stops main loop and destroy the OpenGL context
 			break;
 		case '+':
-			mCamera->setScale(+0.01); // zoom in  (increases the scale)
+			mCameras[0]->setScale(+0.01); // zoom in  (increases the scale)
 			break;
 		case '-':
-			mCamera->setScale(-0.01); // zoom out (decreases the scale)
+			mCameras[0]->setScale(-0.01); // zoom out (decreases the scale)
 			break;
 		case 'l':
-			mCamera->set3D();
+			mCameras[0]->set3D();
 			break;
 		case 'o':
-			mCamera->set2D();
+			mCameras[0]->set2D();
 			break;
 		case '0':
 			setScene(0);
@@ -177,8 +210,16 @@ IG1App::key(unsigned char key, int x, int y)
 			photo->save("image.bmp");
 			break;
 		case 'p':
-			// APARTADO 16
-			mCamera->changePrj();
+			mCameras[0]->changePrj();
+			break;
+		case 'O':
+			mCameras[0]->orbit(1, 1);
+			break;
+		case 'c':
+			mCameras[0]->setCenital();
+			break;
+		case 'k':
+			m2Vistas = !m2Vistas;
 			break;
 		default:
 			need_redisplay = false;
@@ -200,26 +241,26 @@ IG1App::specialKey(int key, int x, int y)
 		case GLUT_KEY_RIGHT:
 			if (mdf == GLUT_ACTIVE_CTRL)
 				//mCamera->pitch(-1); // rotates -1 on the X axis
-				mCamera->pitchReal(-5);
+				mCameras[0]->pitchReal(-5);
 			else
 				//mCamera->pitch(1); // rotates 1 on the X axis
-				mCamera->pitchReal(5);
+				mCameras[0]->pitchReal(5);
 			break;
 		case GLUT_KEY_LEFT:
 			if (mdf == GLUT_ACTIVE_CTRL)
 				//mCamera->yaw(1); // rotates 1 on the Y axis
-				mCamera->yawReal(5);
+				mCameras[0]->yawReal(5);
 			else
 				//mCamera->yaw(-1); // rotate -1 on the Y axis
-				mCamera->yawReal(-5);
+				mCameras[0]->yawReal(-5);
 			break;
 		case GLUT_KEY_UP:
 			//mCamera->roll(1); // rotates 1 on the Z axis
-			mCamera->rollReal(0.01);
+			mCameras[0]->rollReal(0.01);
 			break;
 		case GLUT_KEY_DOWN:
 			//mCamera->roll(-1); // rotates -1 on the Z axis
-			mCamera->rollReal(-0.01);
+			mCameras[0]->rollReal(-0.01);
 			break;
 		default:
 			need_redisplay = false;
@@ -229,6 +270,32 @@ IG1App::specialKey(int key, int x, int y)
 	if (need_redisplay)
 		glutPostRedisplay(); // marks the window as needing to be redisplayed -> calls to
 		                     // display()
+}
+
+void 
+IG1App::mouse(int button, int state, int x, int y) {
+	mMouseButt = button;
+
+}
+void 
+IG1App::motion(int x, int y) {
+
+	glm::dvec2 delta = mMouseCoord - glm::dvec2(x, y);
+	
+	if (mMouseButt==0) {
+		(*mCameras[0]).moveLR(delta.x);
+		(*mCameras[0]).moveUD(delta.y);
+	}else if (mMouseButt == 1) {
+		(*mCameras[0]).pitchReal(delta.x);
+		(*mCameras[0]).yawReal(delta.y);
+	}
+	mMouseCoord = glm::dvec2(x, y);
+
+	glutPostRedisplay();
+}
+void 
+IG1App::mouseWheel(int n, int d, int x, int y) {
+
 }
 
 

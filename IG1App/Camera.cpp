@@ -41,6 +41,8 @@ Camera::set2D()
 	mEye = dvec3(0, 0, 500);
 	mLook = dvec3(0, 0, 0);
 	mUp = dvec3(0, 1, 0);
+	mRadio = 500.0;
+	mAng = 45.0;
 	setVM();
 }
 
@@ -50,6 +52,8 @@ Camera::set3D()
 	mEye = dvec3(500, 500, 500);
 	mLook = dvec3(0, 10, 0);
 	mUp = dvec3(0, 1, 0);
+	mRadio = 500.0;
+	mAng = 45.0;
 	setVM();
 }
 
@@ -191,6 +195,22 @@ Camera::rollReal(GLdouble a)
 	// glm::rotate returns mViewMat * rotationMatrix
 }
 
+void 
+Camera::orbit(GLdouble incAng, GLdouble incY) {
+	mAng += incAng;
+	mEye.x = mLook.x + cos(radians(mAng)) * mRadio;
+	mEye.z = mLook.z - sin(radians(mAng)) * mRadio;
+	mEye.y += incY;
+	setVM();
+}
+
+void Camera::setCenital() {
+	mEye = dvec3(0, 700, 0);
+	mLook = dvec3(0, 0, 0);
+	mUp = dvec3(0, 0, 1);
+	setVM();
+}
+
 void
 Camera::update(){
 	double r = 200.0;
@@ -201,3 +221,4 @@ Camera::update(){
 
 	setVM();
 }
+
