@@ -273,6 +273,18 @@ IG1App::mouse(int button, int state, int x, int y) {
 void 
 IG1App::motion(int x, int y) {
 
+	glm::dvec2 delta = mMouseCoord - glm::dvec2(x, y);
+	
+	if (mMouseButt==0) {
+		(*mCameras[0]).moveLR(delta.x);
+		(*mCameras[0]).moveUD(delta.y);
+	}else if (mMouseButt == 1) {
+		(*mCameras[0]).pitchReal(delta.x);
+		(*mCameras[0]).yawReal(delta.y);
+	}
+	mMouseCoord = glm::dvec2(x, y);
+
+	glutPostRedisplay();
 }
 void 
 IG1App::mouseWheel(int n, int d, int x, int y) {
