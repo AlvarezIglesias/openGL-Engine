@@ -190,3 +190,14 @@ Camera::rollReal(GLdouble a)
 	setVM();
 	// glm::rotate returns mViewMat * rotationMatrix
 }
+
+void
+Camera::update(){
+	double r = 200.0;
+	time_step++;
+
+	mEye = dvec3(0, 0, 500); // Upper camera
+	mLook = dvec3(r * cos(radians(time_step)), r * sin(radians(time_step)), 0); // Triangle position
+
+	setVM();
+}

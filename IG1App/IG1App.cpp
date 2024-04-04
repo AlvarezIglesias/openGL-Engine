@@ -42,9 +42,17 @@ IG1App::init()
 	  new Viewport(mWinW, mWinH); // glutGet(GLUT_WINDOW_WIDTH), glutGet(GLUT_WINDOW_HEIGHT)
 	mCamera = new Camera(mViewPort);
 
+	Scene* s2D = new Scene();
+	s2D->init({ new RGBRectangle(400,200) , new RegularPolygon(40, 200), new RGBTriangle(50), new EjesRGB(300) });
+	mScenes.push_back(s2D);
+
+	Scene* s3D = new Scene();
+	s3D->init({ new RGBCube(200) , new EjesRGB(300) });
+	mScenes.push_back(s3D);
+
 	Scene* sPr2 = new Scene();
 	photo = new Photo(200, 100);
-	sPr2->init({ 
+	sPr2->initPr2({
 		  new Ground(400,400)
 		, new Box(100)
 		, new Star3D(30, 8, 30)
@@ -53,17 +61,7 @@ IG1App::init()
 		, photo
 		});
 
-
-
 	mScenes.push_back(sPr2);
-
-	/*Scene* s2D = new Scene();
-	s2D->init({ new RGBRectangle(400,200) , new RegularPolygon(40, 200), new RGBTriangle(50), new EjesRGB(300) });
-	mScenes.push_back(s2D);
-
-	Scene* s3D = new Scene();
-	s3D->init({ new RGBCube(200) , new EjesRGB(300) });
-	mScenes.push_back(s3D);*/
 
 	mCamera->set2D();
 }
@@ -165,7 +163,7 @@ IG1App::key(unsigned char key, int x, int y)
 			setScene(1);
 			break;
 		case '2':
-			setScene(21010);
+			setScene(2);
 			break;
 		case 'u':
 			update();
@@ -237,5 +235,10 @@ IG1App::specialKey(int key, int x, int y)
 void
 IG1App::update() {
 	current_scene()->update();
+
+	if (mId == 0) {
+		mCamera->update();
+	}
+
 	glutPostRedisplay();
 }

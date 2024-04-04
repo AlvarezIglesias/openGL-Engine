@@ -19,9 +19,16 @@ Scene::init()
 	//gObjects.push_back(new RGBCube(200.0));
 }
 
-
 void
 Scene::init(std::vector<Abs_Entity*> _gObjects) {
+	setGL(); // OpenGL settings
+	glEnable(GL_DEPTH_TEST);
+
+	gObjects = _gObjects;
+}
+
+void
+Scene::initPr2(std::vector<Abs_Entity*> _gObjects) {
 	setGL(); // OpenGL settings
 	glEnable(GL_DEPTH_TEST);
 
