@@ -214,7 +214,7 @@ void Camera::setCenital() {
 void
 Camera::update(){
 	double r = 200.0;
-	time_step++;
+	time_step += 0.1;
 
 	mEye = dvec3(0, 0, 500); // Upper camera
 	mLook = dvec3(r * cos(radians(time_step)), r * sin(radians(time_step)), 0); // Triangle position

@@ -304,7 +304,7 @@ IG1App::update() {
 	current_scene()->update();
 
 	if (mId == 0) {
-		mCamera->update();
+		mCameras[0]->update();
 	}
 
 	glutPostRedisplay();
