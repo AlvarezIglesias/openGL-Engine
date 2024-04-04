@@ -43,9 +43,17 @@ IG1App::init()
 	
 	for (Viewport* vp : mViewPorts) mCameras.push_back(new Camera(vp));
 
+	Scene* s2D = new Scene();
+	s2D->init({ new RGBRectangle(400,200) , new RegularPolygon(40, 200), new RGBTriangle(50), new EjesRGB(300) });
+	mScenes.push_back(s2D);
+
+	Scene* s3D = new Scene();
+	s3D->init({ new RGBCube(200) , new EjesRGB(300) });
+	mScenes.push_back(s3D);
+
 	Scene* sPr2 = new Scene();
 	photo = new Photo(200, 100);
-	sPr2->init({ 
+	sPr2->initPr2({
 		  new Ground(400,400)
 		, new Box(100)
 		, new Star3D(30, 8, 30)
@@ -54,12 +62,11 @@ IG1App::init()
 		, photo
 		});
 
-
-
 	mScenes.push_back(sPr2);
 	mCameras[0]->set3D();
 	mCameras[1]->set3D();
 	mCameras[1]->setCenital();
+
 }
 
 void
@@ -189,7 +196,7 @@ IG1App::key(unsigned char key, int x, int y)
 			setScene(1);
 			break;
 		case '2':
-			setScene(21010);
+			setScene(2);
 			break;
 		case 'u':
 			update();
@@ -295,5 +302,10 @@ IG1App::mouseWheel(int n, int d, int x, int y) {
 void
 IG1App::update() {
 	current_scene()->update();
+
+	if (mId == 0) {
+		mCamera->update();
+	}
+
 	glutPostRedisplay();
 }

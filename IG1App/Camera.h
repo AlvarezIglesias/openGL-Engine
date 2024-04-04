@@ -58,6 +58,9 @@ public:
 
 	void changePrj();
 
+	// Apartado 47
+	void update();
+
 protected:
 	glm::dvec3 mEye = {0.0, 0.0, 500.0}; // camera's position
 	glm::dvec3 mLook = {0.0, 0.0, 0.0};  // target's position
@@ -87,6 +90,9 @@ protected:
 
 	// APARTADO 40
 	void setAxes();
+
+	// APARTADO 47
+	float time_step = 0;
 };
 
 #endif //_H_Camera_H_
