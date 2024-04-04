@@ -60,6 +60,7 @@ public:
 
 	// Apartado 47
 	void update();
+	void setOnTriangle();
 
 protected:
 	glm::dvec3 mEye = {0.0, 0.0, 500.0}; // camera's position

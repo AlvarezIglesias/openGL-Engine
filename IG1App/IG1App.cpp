@@ -67,6 +67,10 @@ IG1App::init()
 	mCameras[1]->set3D();
 	mCameras[1]->setCenital();
 
+	if (mId == 0) {
+		mCameras[0]->setOnTriangle();
+	}
+
 }
 
 void

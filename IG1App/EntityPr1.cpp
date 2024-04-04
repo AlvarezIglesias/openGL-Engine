@@ -61,7 +61,7 @@ RGBTriangle::~RGBTriangle()
 
 void
 RGBTriangle::update() {
-	time_step += 0.1;
+	time_step += 0.01;
 	double r = 200.0;
 
 	mPosition = dvec3(r * cos(radians(time_step)), r * sin(radians(time_step)) , 0);
