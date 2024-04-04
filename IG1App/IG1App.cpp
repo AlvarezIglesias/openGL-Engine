@@ -65,11 +65,15 @@ IG1App::init()
 	mScenes.push_back(sPr2);
 	mCameras[0]->set3D();
 	mCameras[1]->set3D();
-	mCameras[1]->setCenital();
+	//mCameras[1]->setCenital();
+
+	setScene(2);
 
 	if (mId == 0) {
 		mCameras[0]->setOnTriangle();
 	}
+
+	mCameras[1]->setOnTriangle();
 
 }
 
@@ -150,11 +154,10 @@ IG1App::display2V() const{
 	}
 
 
-	current_scene()->render(*mCameras[0]);
+	mScenes[2]->render(*mCameras[0]);
 
 	mViewPorts[1]->setPos(mWinW / 2, 0);
-	//(*mCameras[1]).setCenital();
-	current_scene()->render((*mCameras[1]));
+	mScenes[0]->render((*mCameras[1]));
 }
 
 
@@ -318,10 +321,14 @@ IG1App::mouseWheel(int n, int d, int x, int y) {
 
 void
 IG1App::update() {
-	current_scene()->update();
+	
 
-	if (mId == 0) {
-		mCameras[0]->update();
+	if (current_camera() == mCameras[1]) {
+		mCameras[1]->update();
+		mScenes[0]->update();
+	}
+	else {
+		mScenes[2]->update();
 	}
 
 	glutPostRedisplay();
