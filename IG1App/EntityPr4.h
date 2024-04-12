@@ -3,6 +3,7 @@
 
 #include <GL/freeglut.h>
 #include <glm/glm.hpp>
+#include <vector>
 #include "Entity.h"
 #include "Mesh.h"
 
@@ -30,7 +31,6 @@ protected:
 class Cylinder : public QuadricEntity
 {
 public:
-	~Cylinder() {};
 	explicit Cylinder(GLdouble ru, GLdouble rd, GLdouble h);
 	virtual void render(glm::dmat4 const& modelViewMat) const;
 protected:
@@ -40,7 +40,6 @@ protected:
 class Disk : public QuadricEntity
 {
 public:
-	~Disk() {}
 	explicit Disk(GLdouble rri, GLdouble rro);
 	virtual void render(glm::dmat4 const& modelViewMat) const;
 protected:
@@ -50,7 +49,19 @@ protected:
 class PartialDisk : public QuadricEntity
 {
 public:
-	~PartialDisk();
-	explicit PartialDisk(GLdouble w, GLdouble h);
+	explicit PartialDisk(GLdouble rri, GLdouble rro);
 	virtual void render(glm::dmat4 const& modelViewMat) const;
+protected:
+	GLdouble ri, ro;
 };
+
+// APARTADO 59
+class CompoundEntity : public Abs_Entity {
+public:
+	~CompoundEntity();
+	void addEntity(Abs_Entity* ae);
+	virtual void render(glm::dmat4 const& modelViewMat) const;
+protected:
+	std::vector<Abs_Entity*> gObjects;
+};
+

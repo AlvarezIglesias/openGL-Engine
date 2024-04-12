@@ -42,7 +42,7 @@ void Cylinder::render(glm::dmat4 const& modelViewMat) const {
 }
 
 //----------------------------------------------------------------------------------------------
-// Disc
+// Disk
 //----------------------------------------------------------------------------------------------
 Disk::Disk(GLdouble rri, GLdouble rro) { ri = rri; ro = rro; }
 void Disk::render(glm::dmat4 const& modelViewMat) const {
@@ -56,4 +56,41 @@ void Disk::render(glm::dmat4 const& modelViewMat) const {
 	gluDisk(q, ri, ro, 50, 50);
 	// Aquí se debe recuperar el color :
 	// glColor3f (1.0 , 1.0 , 1.0);
+}
+
+//----------------------------------------------------------------------------------------------
+// Partial Disk
+//----------------------------------------------------------------------------------------------
+Disk::Disk(GLdouble rri, GLdouble rro) { ri = rri; ro = rro; }
+void Disk::render(glm::dmat4 const& modelViewMat) const {
+	dmat4 aMat = modelViewMat * mModelMat;
+	upload(aMat);
+	// Aquí se puede fijar el color de la esfera así:
+	// glEnable ( GL_COLOR_MATERIAL );
+	// glColor3f (...);
+	// Aquí se puede fijar el modo de dibujar la esfera :
+	// gluQuadricDrawStyle (q, ...);
+	gluPartialDisk(q, ri, ro, 50, 50, 90, 270); // Dos últimos: Ángulos en grados
+	// Aquí se debe recuperar el color :
+	// glColor3f (1.0 , 1.0 , 1.0);
+}
+
+//----------------------------------------------------------------------------------------------
+// Compound Entity
+//----------------------------------------------------------------------------------------------
+
+CompoundEntity::~CompoundEntity(){
+	for (Abs_Entity* ent : gObjects) {
+		delete ent;
+	}
+}
+
+void CompoundEntity::addEntity(Abs_Entity* ae) {
+	gObjects.push_back(ae);
+}
+
+void CompoundEntity::render(glm::dmat4 const& modelViewMat) const {
+	for (Abs_Entity* ent : gObjects) {
+		ent->render(modelViewMat);
+	}
 }
