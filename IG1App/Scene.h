@@ -31,6 +31,9 @@ public:
 	// APARTADO 13
 	void update() const;
 
+	// APARTADO 56
+	void sceneDirLight(Camera const& cam) const;
+
 protected:
 	void free();
 	void setGL();

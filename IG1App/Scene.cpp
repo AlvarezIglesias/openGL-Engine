@@ -98,6 +98,8 @@ Scene::setGL()
 	// OpenGL basic setting
 	//glClearColor(1.0, 1.0, 1.0, 1.0); // background color (alpha=1 -> opaque)
 	
+	glEnable(GL_COLOR_MATERIAL); // APARTADO 56
+
 	//APARTADO 1
 	glClearColor(0.6, 0.7, 0.8, 1.0);
 
@@ -109,6 +111,8 @@ Scene::setGL()
 void
 Scene::resetGL()
 {
+	glDisable(GL_COLOR_MATERIAL); // APARTADO 56
+
 	glClearColor(1.0, .0, .0, .0); // background color (alpha=1 -> opaque)
 	glDisable(GL_DEPTH_TEST);     // disable Depth test
 
@@ -118,6 +122,8 @@ Scene::resetGL()
 void
 Scene::render(Camera const& cam) const
 {
+	sceneDirLight(cam); // APARTADO 56
+
 	cam.upload();
 
 	for (Abs_Entity* el : gObjects) {
@@ -134,3 +140,20 @@ Scene::update() const
 		el->update();
 	}
 }
+
+// Apartado 56
+void Scene::sceneDirLight(Camera const& cam) const {
+	glEnable(GL_LIGHTING);
+	glEnable(GL_LIGHT0);
+	glm::fvec4 posDir = { 1, 1, 1, 0 };
+	glMatrixMode(GL_MODELVIEW);
+	glLoadMatrixd(value_ptr(cam.viewMat()));
+	glLightfv(GL_LIGHT0, GL_POSITION, value_ptr(posDir));
+	glm::fvec4 ambient = { 0, 0, 0, 1 };
+	glm::fvec4 diffuse = { 1, 1, 1, 1 };
+	glm::fvec4 specular = { 0.5, 0.5, 0.5, 1 };
+	glLightfv(GL_LIGHT0, GL_AMBIENT, value_ptr(ambient));
+	glLightfv(GL_LIGHT0, GL_DIFFUSE, value_ptr(diffuse));
+	glLightfv(GL_LIGHT0, GL_SPECULAR, value_ptr(specular));
+}
+

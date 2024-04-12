@@ -322,7 +322,6 @@ IG1App::mouseWheel(int n, int d, int x, int y) {
 void
 IG1App::update() {
 	
-
 	if (current_camera() == mCameras[1]) {
 		mCameras[1]->update();
 		mScenes[0]->update();
