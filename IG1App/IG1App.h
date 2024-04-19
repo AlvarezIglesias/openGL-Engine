@@ -14,6 +14,7 @@
 #include "Scene.h"
 #include "Viewport.h"
 
+#include "EntityPr4.h"
 #include "EntityPr2.h"
 #include "EntityPr1.h"
 #include "Entity.h"

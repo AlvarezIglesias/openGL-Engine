@@ -25,6 +25,7 @@ public:
 	void init();
 	void init(std::vector<Abs_Entity*> _gObjects);
 	void initPr2(std::vector<Abs_Entity*> _gObjects);
+	void initPr3(std::vector<Abs_Entity*> && _gObjects);
 
 	void render(Camera const& cam) const;
 

@@ -47,6 +47,10 @@ public:
 	// Apartado 28
 	static Mesh* generateStar3DTexCor(GLdouble re, GLuint np, GLdouble h);
 
+	/******************************** PARTE 4 ******************************/
+
+	static Mesh* generateWingAdvancedTIE(GLdouble w, GLdouble h);
+
 
 protected:
 	GLuint mPrimitive =

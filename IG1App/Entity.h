@@ -34,6 +34,9 @@ public:
 	void setTexture1(Texture* aText) { mTexture1 = aText; };
 	void setTexture2(Texture* aText) { mTexture2 = aText; };
 
+	std::string mTexture1Path = "";
+	std::string mTexture2Path = "";
+
 protected:
 	Mesh* mMesh = nullptr; // the mesh
 	glm::dmat4 mModelMat;  // modeling matrix
@@ -41,6 +44,7 @@ protected:
 
 	glm::dvec3 mPosition;	   // APARTADO 14, position
 	glm::dvec3 mRotation;	   // APARTADO 14, rotation
+
 	Texture* mTexture1 = nullptr;
 	Texture* mTexture2 = nullptr;
 

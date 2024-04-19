@@ -61,8 +61,8 @@ void Disk::render(glm::dmat4 const& modelViewMat) const {
 //----------------------------------------------------------------------------------------------
 // Partial Disk
 //----------------------------------------------------------------------------------------------
-Disk::Disk(GLdouble rri, GLdouble rro) { ri = rri; ro = rro; }
-void Disk::render(glm::dmat4 const& modelViewMat) const {
+PartialDisk::PartialDisk(GLdouble rri, GLdouble rro) { ri = rri; ro = rro; }
+void PartialDisk::render(glm::dmat4 const& modelViewMat) const {
 	dmat4 aMat = modelViewMat * mModelMat;
 	upload(aMat);
 	// Aquí se puede fijar el color de la esfera así:
@@ -89,8 +89,47 @@ void CompoundEntity::addEntity(Abs_Entity* ae) {
 	gObjects.push_back(ae);
 }
 
+void CompoundEntity::addEntity(std::vector<Abs_Entity*> & aes) {
+	for (Abs_Entity* ae : aes) gObjects.push_back(ae);
+}
+
 void CompoundEntity::render(glm::dmat4 const& modelViewMat) const {
 	for (Abs_Entity* ent : gObjects) {
 		ent->render(modelViewMat);
+	}
+}
+
+
+
+
+//----------------------------------------------------------------------------------------------
+// Compound Entity
+//----------------------------------------------------------------------------------------------
+
+WingAdvancedTIE::WingAdvancedTIE()
+			: Abs_Entity() {
+	mMesh = Mesh::generateWingAdvancedTIE(500, 500);
+	mTexture1Path = "../bmps/noche.bmp";
+}
+
+
+void WingAdvancedTIE::render(glm::dmat4 const& modelViewMat) const {
+	if (mMesh != nullptr) {
+		dmat4 aMat = modelViewMat * mModelMat; // glm matrix multiplication
+		upload(aMat);
+
+		glColor4d(1.0, 1.0, 1.0, 1.0);
+
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+
+		mTexture1->bind(GL_REPLACE);
+
+		mMesh->render();
+
+		mTexture1->unbind();
+		glPointSize(1);
+		glLineWidth(1);
+		glColor4d(1.0, 1.0, 1.0, 1.0);
+		glPolygonMode(GL_FRONT, GL_FILL);
 	}
 }

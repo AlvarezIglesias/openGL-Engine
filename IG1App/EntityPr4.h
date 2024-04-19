@@ -10,14 +10,11 @@
 // APARTADO 57
 class QuadricEntity : public Abs_Entity {
 public:
-	QuadricEntity();
+	QuadricEntity() { q = gluNewQuadric(); };
 	~QuadricEntity() { gluDeleteQuadric(q); };
 protected:
 	GLUquadricObj* q;
 };
-QuadricEntity::QuadricEntity() {
-	q = gluNewQuadric();
-}
 
 class Sphere : public QuadricEntity {
 public:
@@ -60,8 +57,18 @@ class CompoundEntity : public Abs_Entity {
 public:
 	~CompoundEntity();
 	void addEntity(Abs_Entity* ae);
+	void addEntity(std::vector<Abs_Entity*>& aes);
 	virtual void render(glm::dmat4 const& modelViewMat) const;
 protected:
 	std::vector<Abs_Entity*> gObjects;
 };
+
+// APARTADO 60
+class WingAdvancedTIE : public Abs_Entity {
+public:
+	WingAdvancedTIE();
+	~WingAdvancedTIE() {}
+	virtual void render(glm::dmat4 const& modelViewMat) const;
+};
+
 

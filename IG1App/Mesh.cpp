@@ -424,5 +424,50 @@ Mesh::generateStar3DTexCor(GLdouble re, GLuint np, GLdouble h)
 }
 
 
+// APARTADO 60
+Mesh* 
+Mesh::generateWingAdvancedTIE(GLdouble w, GLdouble h) {
+
+	Mesh* mesh = new Mesh();
+
+	mesh->mPrimitive = GL_TRIANGLE_STRIP;
+	mesh->mNumVertices = 8;
+	mesh->vVertices.reserve(mesh->mNumVertices);
+	mesh->vTexCoords.reserve(mesh->mNumVertices);
+
+	GLdouble x = w / 2;
+
+	// vertices
+	mesh->vVertices.emplace_back(-x, -h, 0.0);
+	mesh->vVertices.emplace_back(x, -h, 0.0);
+
+	mesh->vVertices.emplace_back(-x, -h * 0.666, h * 0.333);
+	mesh->vVertices.emplace_back(x, -h * 0.666, h * 0.333);
+
+	mesh->vVertices.emplace_back(-x, -h * 0.333, h * 0.333);
+	mesh->vVertices.emplace_back(x, -h * 0.333, h * 0.333);
+
+	mesh->vVertices.emplace_back(-x, 0.0, 0.0);
+	mesh->vVertices.emplace_back(x, 0.0, 0.0);
+
+	// texCoords
+	mesh->vTexCoords.emplace_back(0.0, 0.0);
+	mesh->vTexCoords.emplace_back(1.0, 0.0);
+
+	mesh->vTexCoords.emplace_back(0.0, 0.333);
+	mesh->vTexCoords.emplace_back(1.0, 0.333);
+
+	mesh->vTexCoords.emplace_back(0.0, 0.666);
+	mesh->vTexCoords.emplace_back(1.0, 0.666);
+
+	mesh->vTexCoords.emplace_back(0.0, 1.0);
+	mesh->vTexCoords.emplace_back(1.0, 1.0);
+
+
+
+
+	return mesh;
+}
+
 
 

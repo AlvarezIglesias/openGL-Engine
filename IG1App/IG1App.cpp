@@ -43,6 +43,10 @@ IG1App::init()
 	
 	for (Viewport* vp : mViewPorts) mCameras.push_back(new Camera(vp));
 
+	Scene* sP4 = new Scene();
+	sP4->initPr3({ new WingAdvancedTIE(), new Ground(400,400) });
+	mScenes.push_back(sP4);
+
 	Scene* s2D = new Scene();
 	s2D->init({ new RGBRectangle(400,200) , new RegularPolygon(40, 200), new RGBTriangle(50), new EjesRGB(300) });
 	mScenes.push_back(s2D);
@@ -67,7 +71,7 @@ IG1App::init()
 	mCameras[1]->set3D();
 	//mCameras[1]->setCenital();
 
-	setScene(2);
+	setScene(0);
 
 	if (mId == 0) {
 		mCameras[0]->setOnTriangle();
