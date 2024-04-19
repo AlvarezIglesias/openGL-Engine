@@ -35,7 +35,7 @@ Scene::initPr2(std::vector<Abs_Entity*> _gObjects) {
 	gObjects = _gObjects;
 
 	//Suelo
-	Texture* text_bc = new Texture();
+	/*Texture* text_bc = new Texture();
 	text_bc->load("../bmps/baldosaC.bmp");
 	gTextures.push_back(text_bc);
 	_gObjects[0]->setTexture1(gTextures.back());
@@ -73,7 +73,7 @@ Scene::initPr2(std::vector<Abs_Entity*> _gObjects) {
 	Texture* text_photo = new Texture();
 	text_photo->load("../bmps/noche.bmp");
 	gTextures.push_back(text_photo);
-	_gObjects[5]->setTexture1(gTextures.back());
+	_gObjects[5]->setTexture1(gTextures.back());*/
 
 }
 

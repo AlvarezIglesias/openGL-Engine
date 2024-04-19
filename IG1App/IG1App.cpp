@@ -44,7 +44,7 @@ IG1App::init()
 	for (Viewport* vp : mViewPorts) mCameras.push_back(new Camera(vp));
 
 	Scene* sP4 = new Scene();
-	sP4->initPr3({ new WingAdvancedTIE(), new Ground(400,400) });
+	sP4->initPr3({ new AdvancedTIE(), new Ground(400,400)});
 	mScenes.push_back(sP4);
 
 	Scene* s2D = new Scene();

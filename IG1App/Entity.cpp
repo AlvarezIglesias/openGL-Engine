@@ -12,6 +12,21 @@ Abs_Entity::upload(dmat4 const& modelViewMat) const
 	glLoadMatrixd(value_ptr(modelViewMat)); // transfers modelView matrix to the GPU
 }
 
+dmat4 
+Abs_Entity::complete_transform(dmat4 const& modelViewMat) const
+{
+	dmat4 aMat = modelViewMat
+		* mModelMat
+		* scale(dmat4(1), mScale)
+		* rotate(dmat4(1), radians(mRotation.x), dvec3(1, 0, 0))
+		* rotate(dmat4(1), radians(mRotation.y), dvec3(0, 1, 0))
+		* rotate(dmat4(1), radians(mRotation.z), dvec3(0, 0, 1)) // glm matrix multiplication
+		* translate(dmat4(1), mPosition);
+
+	return aMat;
+}
+
+
 EjesRGB::EjesRGB(GLdouble l)
   : Abs_Entity()
 {
@@ -35,3 +50,4 @@ EjesRGB::render(dmat4 const& modelViewMat) const
 		glLineWidth(1);
 	}
 }
+

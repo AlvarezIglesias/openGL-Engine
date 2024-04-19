@@ -12,7 +12,7 @@ using namespace glm;
 //----------------------------------------------------------------------------------------------
 Sphere::Sphere(GLdouble rr) { r = rr; }
 void Sphere::render(glm::dmat4 const& modelViewMat) const {
-	dmat4 aMat = modelViewMat * mModelMat;
+	dmat4 aMat = complete_transform(modelViewMat);
 	upload(aMat);
 	// Aquí se puede fijar el color de la esfera así:
 	// glEnable ( GL_COLOR_MATERIAL );
@@ -29,7 +29,7 @@ void Sphere::render(glm::dmat4 const& modelViewMat) const {
 //----------------------------------------------------------------------------------------------
 Cylinder::Cylinder(GLdouble rru, GLdouble rrd, GLdouble hh) { ru = rru; rd = rrd; h = hh; }
 void Cylinder::render(glm::dmat4 const& modelViewMat) const {
-	dmat4 aMat = modelViewMat * mModelMat;
+	dmat4 aMat = complete_transform(modelViewMat);
 	upload(aMat);
 	// Aquí se puede fijar el color de la esfera así:
 	// glEnable ( GL_COLOR_MATERIAL );
@@ -46,7 +46,7 @@ void Cylinder::render(glm::dmat4 const& modelViewMat) const {
 //----------------------------------------------------------------------------------------------
 Disk::Disk(GLdouble rri, GLdouble rro) { ri = rri; ro = rro; }
 void Disk::render(glm::dmat4 const& modelViewMat) const {
-	dmat4 aMat = modelViewMat * mModelMat;
+	dmat4 aMat = complete_transform(modelViewMat);
 	upload(aMat);
 	// Aquí se puede fijar el color de la esfera así:
 	// glEnable ( GL_COLOR_MATERIAL );
@@ -63,7 +63,7 @@ void Disk::render(glm::dmat4 const& modelViewMat) const {
 //----------------------------------------------------------------------------------------------
 PartialDisk::PartialDisk(GLdouble rri, GLdouble rro) { ri = rri; ro = rro; }
 void PartialDisk::render(glm::dmat4 const& modelViewMat) const {
-	dmat4 aMat = modelViewMat * mModelMat;
+	dmat4 aMat = complete_transform(modelViewMat);
 	upload(aMat);
 	// Aquí se puede fijar el color de la esfera así:
 	// glEnable ( GL_COLOR_MATERIAL );
@@ -100,22 +100,22 @@ void CompoundEntity::render(glm::dmat4 const& modelViewMat) const {
 }
 
 
-
-
 //----------------------------------------------------------------------------------------------
 // Compound Entity
 //----------------------------------------------------------------------------------------------
 
-WingAdvancedTIE::WingAdvancedTIE()
+WingAdvancedTIE::WingAdvancedTIE(GLdouble w, GLdouble h)
 			: Abs_Entity() {
-	mMesh = Mesh::generateWingAdvancedTIE(500, 500);
+	mMesh = Mesh::generateWingAdvancedTIE(w, h);
 	mTexture1Path = "../bmps/noche.bmp";
 }
 
 
 void WingAdvancedTIE::render(glm::dmat4 const& modelViewMat) const {
 	if (mMesh != nullptr) {
-		dmat4 aMat = modelViewMat * mModelMat; // glm matrix multiplication
+
+		dmat4 aMat = complete_transform(modelViewMat);
+		
 		upload(aMat);
 
 		glColor4d(1.0, 1.0, 1.0, 1.0);
@@ -133,3 +133,16 @@ void WingAdvancedTIE::render(glm::dmat4 const& modelViewMat) const {
 		glPolygonMode(GL_FRONT, GL_FILL);
 	}
 }
+
+
+//----------------------------------------------------------------------------------------------
+// Compound Entity
+//----------------------------------------------------------------------------------------------
+
+AdvancedTIE::AdvancedTIE()
+	: CompoundEntity() {
+	Abs_Entity* left_wing = new WingAdvancedTIE(50, 100);
+
+	addEntity(left_wing);
+}
+

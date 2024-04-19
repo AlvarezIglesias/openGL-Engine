@@ -66,9 +66,17 @@ protected:
 // APARTADO 60
 class WingAdvancedTIE : public Abs_Entity {
 public:
-	WingAdvancedTIE();
+	WingAdvancedTIE(GLdouble w, GLdouble h);
 	~WingAdvancedTIE() {}
 	virtual void render(glm::dmat4 const& modelViewMat) const;
 };
+
+// APARTADO 60
+class AdvancedTIE : public CompoundEntity {
+public:
+	AdvancedTIE();
+	~AdvancedTIE() {}
+};
+
 
 

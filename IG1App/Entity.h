@@ -11,7 +11,7 @@ class Abs_Entity // abstract class
 {
 public:
 	Abs_Entity()
-	  : mModelMat(1.0), mColor(1), mPosition(0), mRotation(0){}; // 4x4 identity matrix
+	  : mModelMat(1.0), mColor(1), mPosition(0), mRotation(0), mScale(1){}; // 4x4 identity matrix
 	virtual ~Abs_Entity() = default;
 
 	Abs_Entity(const Abs_Entity& e) = delete;            // no copy constructor
@@ -31,11 +31,12 @@ public:
 	virtual void update() {};
 
 	// APARTADO 19
-	void setTexture1(Texture* aText) { mTexture1 = aText; };
-	void setTexture2(Texture* aText) { mTexture2 = aText; };
+	void addTextures(std::vector<Texture*> & textures) { mTextures = textures ; };
 
-	std::string mTexture1Path = "";
-	std::string mTexture2Path = "";
+	glm::dmat4 complete_transform(glm::dmat4 const& modelViewMat) const;
+
+
+	std::vector<std::string> mTexture1Path;
 
 protected:
 	Mesh* mMesh = nullptr; // the mesh
@@ -44,9 +45,9 @@ protected:
 
 	glm::dvec3 mPosition;	   // APARTADO 14, position
 	glm::dvec3 mRotation;	   // APARTADO 14, rotation
+	glm::dvec3 mScale;	   
 
-	Texture* mTexture1 = nullptr;
-	Texture* mTexture2 = nullptr;
+	std::vector<Texture*> mTextures;
 
 	// transfers modelViewMat to the GPU
 	virtual void upload(glm::dmat4 const& mModelViewMat) const;
