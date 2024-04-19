@@ -87,7 +87,7 @@ Scene::initPr3(std::vector<Abs_Entity*> && _gObjects) {
 	for (Abs_Entity* e : gObjects) {
 		if (e->mTexture1Path != "") {
 			Texture* text = new Texture();
-			text->load("e->mTexture1Path");
+			text->load(e->mTexture1Path);
 			gTextures.push_back(text);
 			e->setTexture1(gTextures.back());
 		}
