@@ -47,7 +47,7 @@ IG1App::init()
 	sP4->initPr3({ new AdvancedTIE(), new Ground(400,400)});
 	mScenes.push_back(sP4);
 
-	Scene* s2D = new Scene();
+	/*Scene* s2D = new Scene();
 	s2D->init({ new RGBRectangle(400,200) , new RegularPolygon(40, 200), new RGBTriangle(50), new EjesRGB(300) });
 	mScenes.push_back(s2D);
 
@@ -69,15 +69,15 @@ IG1App::init()
 	mScenes.push_back(sPr2);
 	mCameras[0]->set3D();
 	mCameras[1]->set3D();
-	//mCameras[1]->setCenital();
+	//mCameras[1]->setCenital();*/
 
 	setScene(0);
 
-	if (mId == 0) {
+	/*if (mId == 0) {
 		mCameras[0]->setOnTriangle();
 	}
 
-	mCameras[1]->setOnTriangle();
+	mCameras[1]->setOnTriangle();*/
 
 }
 

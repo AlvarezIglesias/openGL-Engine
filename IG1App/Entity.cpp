@@ -51,3 +51,16 @@ EjesRGB::render(dmat4 const& modelViewMat) const
 	}
 }
 
+
+void
+Abs_Entity::initTextures(std::vector<Texture*>& sceneTextures) {
+
+	for (std::string s : mTexturePaths) {
+		Texture* text = new Texture();
+		text->load(s);
+		mTextures.push_back(text);
+		sceneTextures.push_back(text);
+
+	}
+
+}

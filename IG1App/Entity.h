@@ -31,21 +31,22 @@ public:
 	virtual void update() {};
 
 	// APARTADO 19
-	void addTextures(std::vector<Texture*> & textures) { mTextures = textures ; };
+	//void addTextures(std::vector<Texture*> & textures) { mTextures = textures ; };
+
+	virtual void initTextures(std::vector<Texture*>& sceneTextures);
 
 	glm::dmat4 complete_transform(glm::dmat4 const& modelViewMat) const;
 
+	std::vector<std::string> mTexturePaths;
 
-	std::vector<std::string> mTexture1Path;
+	glm::dvec3 mPosition;
+	glm::dvec3 mRotation;
+	glm::dvec3 mScale;
 
 protected:
 	Mesh* mMesh = nullptr; // the mesh
 	glm::dmat4 mModelMat;  // modeling matrix
-	glm::dvec4 mColor;	   // APARTADO 4
-
-	glm::dvec3 mPosition;	   // APARTADO 14, position
-	glm::dvec3 mRotation;	   // APARTADO 14, rotation
-	glm::dvec3 mScale;	   
+	glm::dvec4 mColor;	   // APARTADO 4   
 
 	std::vector<Texture*> mTextures;
 

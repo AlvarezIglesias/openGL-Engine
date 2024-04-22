@@ -15,7 +15,7 @@ using namespace glm;
 Ground::Ground(GLdouble w, GLdouble h)
 	: Abs_Entity()
 {
-	mTexture1Path = "../bmps/baldosaC.bmp";
+	mTexturePaths = { "../bmps/baldosaC.bmp" };
 	mMesh = Mesh::generateRectangleTexCor(w, h, 4, 4);
 	mRotation = dvec3(90, 0, 90);
 }
@@ -42,11 +42,11 @@ Ground::render(dmat4 const& modelViewMat) const
 
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
-		mTexture1->bind(GL_REPLACE);
+		mTextures[0]->bind(GL_REPLACE);
 		
 		mMesh->render();
 
-		mTexture1->unbind();
+		mTextures[0]->unbind();
 		glPointSize(1);
 		glLineWidth(1);
 		glColor4d(1.0, 1.0, 1.0, 1.0);
@@ -84,15 +84,15 @@ BoxOutline::render(dmat4 const& modelViewMat) const
 
 		glEnable(GL_CULL_FACE);
 
-		mTexture1->bind(GL_MODULATE);
+		mTextures[0]->bind(GL_MODULATE);
 		glCullFace(GL_BACK);
 		mMesh->render();
-		mTexture1->unbind();
+		mTextures[0]->unbind();
 
-		mTexture2->bind(GL_MODULATE);
+		mTextures[1]->bind(GL_MODULATE);
 		glCullFace(GL_FRONT);
 		mMesh->render();
-		mTexture2->unbind();
+		mTextures[1]->unbind();
 
 		glDisable(GL_CULL_FACE);
 
@@ -145,18 +145,18 @@ Star3D::render(dmat4 const& modelViewMat) const
 
 		upload(aMat1);
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-		mTexture1->bind(GL_REPLACE);
+		mTextures[0]->bind(GL_REPLACE);
 		mMesh->render();
-		mTexture1->unbind();
+		mTextures[0]->unbind();
 
 		dmat4 aMat2 = aMat1
 			* rotate(dmat4(1), radians(180.0), dvec3(0, 1, 0));
 			//* translate(dmat4(1), mPosition);
 
 		upload(aMat2);
-		mTexture1->bind(GL_REPLACE);
+		mTextures[0]->bind(GL_REPLACE);
 		mMesh->render();
-		mTexture1->unbind();
+		mTextures[0]->unbind();
 
 		glPointSize(1);
 		glLineWidth(1);
@@ -204,9 +204,9 @@ GlassParapet::render(dmat4 const& modelViewMat) const
 		glDisable(GL_DEPTH_TEST);// Si no, hay caras que no estan bien ordenadas en z
 
 
-		mTexture1->bind(GL_MODULATE);
+		mTextures[0]->bind(GL_MODULATE);
 		mMesh->render();
-		mTexture1->unbind();
+		mTextures[0]->unbind();
 
 		glEnable(GL_DEPTH_TEST);
 		glDisable(GL_BLEND);
@@ -250,11 +250,11 @@ Photo::render(dmat4 const& modelViewMat) const
 
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
-		mTexture1->bind(GL_REPLACE);
+		mTextures[0]->bind(GL_REPLACE);
 
 		mMesh->render();
 
-		mTexture1->unbind();
+		mTextures[0]->unbind();
 		glPointSize(1);
 		glLineWidth(1);
 		glColor4d(1.0, 1.0, 1.0, 1.0);
@@ -264,13 +264,13 @@ Photo::render(dmat4 const& modelViewMat) const
 
 void
 Photo::update() {
-	mTexture1->loadColorBuffer(800, 600); // Tamaño de la ventana
+	mTextures[0]->loadColorBuffer(800, 600); // Tamaño de la ventana
 }
 
 
 void 
 Photo::save(const std::string filename) const{
-	mTexture1->save(filename);
+	mTextures[0]->save(filename);
 }
 
 
@@ -331,43 +331,43 @@ Box::render(dmat4 const& modelViewMat) const
 		// Box outline
 		upload(aMat);
 		
-		mTexture1->bind(GL_MODULATE);
+		mTextures[0]->bind(GL_MODULATE);
 		glCullFace(GL_BACK);
 		mMesh->render();
-		mTexture1->unbind();
+		mTextures[0]->unbind();
 
-		mTexture2->bind(GL_MODULATE);
+		mTextures[1]->bind(GL_MODULATE);
 		glCullFace(GL_FRONT);
 		mMesh->render();
-		mTexture2->unbind();
+		mTextures[1]->unbind();
 		//End Box outline
 
 		// Box Top lid
 		upload(aMatTopLid);
 
-		mTexture1->bind(GL_MODULATE);
+		mTextures[0]->bind(GL_MODULATE);
 		glCullFace(GL_BACK);
 		mMeshTopLid->render();
-		mTexture1->unbind();
+		mTextures[0]->unbind();
 
-		mTexture2->bind(GL_MODULATE);
+		mTextures[1]->bind(GL_MODULATE);
 		glCullFace(GL_FRONT);
 		mMeshTopLid->render();
-		mTexture2->unbind();
+		mTextures[1]->unbind();
 		//End
 
 		// Box bot lid
 		upload(aMatBotLid);
 
-		mTexture1->bind(GL_MODULATE);
+		mTextures[0]->bind(GL_MODULATE);
 		glCullFace(GL_BACK);
 		mMeshBotLid->render();
-		mTexture1->unbind();
+		mTextures[0]->unbind();
 
-		mTexture2->bind(GL_MODULATE);
+		mTextures[1]->bind(GL_MODULATE);
 		glCullFace(GL_FRONT);
 		mMeshBotLid->render();
-		mTexture2->unbind();
+		mTextures[1]->unbind();
 		//End
 
 		glDisable(GL_CULL_FACE);
@@ -418,11 +418,11 @@ Grass::render(dmat4 const& modelViewMat) const
 			glDisable(GL_DEPTH_TEST); // Si no, no se transparentan los otros hierbajos renderizados
 			glEnable(GL_BLEND);
 
-			mTexture1->bind(GL_REPLACE);
+			mTextures[0]->bind(GL_REPLACE);
 
 			mMesh->render();
 
-			mTexture1->unbind();
+			mTextures[0]->unbind();
 			glEnable(GL_DEPTH_TEST);
 			glDisable(GL_BLEND);
 

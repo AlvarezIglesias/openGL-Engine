@@ -59,6 +59,7 @@ public:
 	void addEntity(Abs_Entity* ae);
 	void addEntity(std::vector<Abs_Entity*>& aes);
 	virtual void render(glm::dmat4 const& modelViewMat) const;
+	void initTextures(std::vector<Texture*>& sceneTextures);
 protected:
 	std::vector<Abs_Entity*> gObjects;
 };

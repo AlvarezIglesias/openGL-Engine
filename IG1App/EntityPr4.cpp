@@ -98,6 +98,17 @@ void CompoundEntity::render(glm::dmat4 const& modelViewMat) const {
 		ent->render(modelViewMat);
 	}
 }
+void CompoundEntity::initTextures(std::vector<Texture*>& sceneTextures) {
+	for (std::string s : mTexturePaths) {
+		Texture* text = new Texture();
+		text->load(s);
+		mTextures.push_back(text);
+		sceneTextures.push_back(text);
+	}
+	for (Abs_Entity* ent : gObjects) {
+		ent->initTextures(sceneTextures);
+	}
+}
 
 
 //----------------------------------------------------------------------------------------------
@@ -107,7 +118,7 @@ void CompoundEntity::render(glm::dmat4 const& modelViewMat) const {
 WingAdvancedTIE::WingAdvancedTIE(GLdouble w, GLdouble h)
 			: Abs_Entity() {
 	mMesh = Mesh::generateWingAdvancedTIE(w, h);
-	mTexture1Path = "../bmps/noche.bmp";
+	mTexturePaths = { "../bmps/noche.bmp" };
 }
 
 
@@ -122,11 +133,11 @@ void WingAdvancedTIE::render(glm::dmat4 const& modelViewMat) const {
 
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
-		mTexture1->bind(GL_REPLACE);
+		mTextures[0]->bind(GL_REPLACE);
 
 		mMesh->render();
 
-		mTexture1->unbind();
+		mTextures[0]->unbind();
 		glPointSize(1);
 		glLineWidth(1);
 		glColor4d(1.0, 1.0, 1.0, 1.0);
@@ -142,7 +153,9 @@ void WingAdvancedTIE::render(glm::dmat4 const& modelViewMat) const {
 AdvancedTIE::AdvancedTIE()
 	: CompoundEntity() {
 	Abs_Entity* left_wing = new WingAdvancedTIE(50, 100);
-
 	addEntity(left_wing);
+	Abs_Entity* right_wing = new WingAdvancedTIE(50, 100);
+	right_wing->mRotation.x = 180;
+	addEntity(right_wing);
 }
 

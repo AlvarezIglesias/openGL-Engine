@@ -85,12 +85,7 @@ Scene::initPr3(std::vector<Abs_Entity*> && _gObjects) {
 	gObjects = _gObjects;
 
 	for (Abs_Entity* e : gObjects) {
-		if (e->mTexture1Path != "") {
-			Texture* text = new Texture();
-			text->load(e->mTexture1Path);
-			gTextures.push_back(text);
-			e->setTexture1(gTextures.back());
-		}
+		e->initTextures(gTextures);
 	}
 
 }
@@ -173,5 +168,11 @@ void Scene::sceneDirLight(Camera const& cam) const {
 	glLightfv(GL_LIGHT0, GL_AMBIENT, value_ptr(ambient));
 	glLightfv(GL_LIGHT0, GL_DIFFUSE, value_ptr(diffuse));
 	glLightfv(GL_LIGHT0, GL_SPECULAR, value_ptr(specular));
+}
+
+
+void 
+Scene::registerTexture(Texture* texture) {
+	gTextures.push_back(texture);
 }
 

@@ -35,13 +35,15 @@ public:
 	// APARTADO 56
 	void sceneDirLight(Camera const& cam) const;
 
+	void registerTexture(Texture* texture);
+
 protected:
 	void free();
 	void setGL();
 	void resetGL();
 
 	std::vector<Abs_Entity*> gObjects; // Entities (graphic objects) of the scene
-	std::vector<Texture*>gTextures; // APARTADO 19
+	std::vector<Texture*> gTextures; // APARTADO 19
 };
 
 #endif //_H_Scene_H_
