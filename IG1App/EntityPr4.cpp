@@ -153,9 +153,16 @@ void WingAdvancedTIE::render(glm::dmat4 const& modelViewMat) const {
 AdvancedTIE::AdvancedTIE()
 	: CompoundEntity() {
 	Abs_Entity* left_wing = new WingAdvancedTIE(50, 100);
+	left_wing->mPosition.z = 50;
 	addEntity(left_wing);
 	Abs_Entity* right_wing = new WingAdvancedTIE(50, 100);
 	right_wing->mRotation.x = 180;
+	right_wing->mPosition.z = 50;
 	addEntity(right_wing);
+	Abs_Entity* sphere = new Sphere(50);
+	addEntity(sphere);
+
+	Abs_Entity* conection_left_wing = new Cylinder(80, 80, 80);
+	conection_left_wing->mPosition.y = 100;
 }
 
