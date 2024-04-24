@@ -16,12 +16,12 @@ void Sphere::render(glm::dmat4 const& modelViewMat) const {
 	upload(aMat);
 	// Aquí se puede fijar el color de la esfera así:
 	// glEnable ( GL_COLOR_MATERIAL );
-	// glColor3f (...);
+	glColor3f(mColor[0], mColor[1], mColor[2]);
 	// Aquí se puede fijar el modo de dibujar la esfera :
 	// gluQuadricDrawStyle (q, ...);
 	gluSphere(q, r, 50, 50);
 	// Aquí se debe recuperar el color :
-	// glColor3f (1.0 , 1.0 , 1.0);
+	glColor3f (1.0 , 1.0 , 1.0);
 }
 
 //----------------------------------------------------------------------------------------------
@@ -33,12 +33,12 @@ void Cylinder::render(glm::dmat4 const& modelViewMat) const {
 	upload(aMat);
 	// Aquí se puede fijar el color de la esfera así:
 	// glEnable ( GL_COLOR_MATERIAL );
-	// glColor3f (...);
+	glColor3f(mColor[0], mColor[1], mColor[2]);
 	// Aquí se puede fijar el modo de dibujar la esfera :
 	// gluQuadricDrawStyle (q, ...);
 	gluCylinder(q, ru, rd, h, 50, 50);
 	// Aquí se debe recuperar el color :
-	// glColor3f (1.0 , 1.0 , 1.0);
+	glColor3f (1.0 , 1.0 , 1.0);
 }
 
 //----------------------------------------------------------------------------------------------
@@ -50,12 +50,12 @@ void Disk::render(glm::dmat4 const& modelViewMat) const {
 	upload(aMat);
 	// Aquí se puede fijar el color de la esfera así:
 	// glEnable ( GL_COLOR_MATERIAL );
-	// glColor3f (...);
+	glColor3f(mColor[0], mColor[1], mColor[2]);
 	// Aquí se puede fijar el modo de dibujar la esfera :
 	// gluQuadricDrawStyle (q, ...);
 	gluDisk(q, ri, ro, 50, 50);
 	// Aquí se debe recuperar el color :
-	// glColor3f (1.0 , 1.0 , 1.0);
+	glColor3f (1.0 , 1.0 , 1.0);
 }
 
 //----------------------------------------------------------------------------------------------
@@ -67,12 +67,12 @@ void PartialDisk::render(glm::dmat4 const& modelViewMat) const {
 	upload(aMat);
 	// Aquí se puede fijar el color de la esfera así:
 	// glEnable ( GL_COLOR_MATERIAL );
-	// glColor3f (...);
+	glColor3f(mColor[0], mColor[1], mColor[2]);
 	// Aquí se puede fijar el modo de dibujar la esfera :
 	// gluQuadricDrawStyle (q, ...);
 	gluPartialDisk(q, ri, ro, 50, 50, 90, 270); // Dos últimos: Ángulos en grados
 	// Aquí se debe recuperar el color :
-	// glColor3f (1.0 , 1.0 , 1.0);
+	glColor3f (1.0 , 1.0 , 1.0);
 }
 
 //----------------------------------------------------------------------------------------------
@@ -112,7 +112,7 @@ void CompoundEntity::initTextures(std::vector<Texture*>& sceneTextures) {
 
 
 //----------------------------------------------------------------------------------------------
-// Compound Entity
+// Wing Advanced TIE
 //----------------------------------------------------------------------------------------------
 
 WingAdvancedTIE::WingAdvancedTIE(GLdouble w, GLdouble h)
@@ -129,11 +129,15 @@ void WingAdvancedTIE::render(glm::dmat4 const& modelViewMat) const {
 		
 		upload(aMat);
 
-		glColor4d(1.0, 1.0, 1.0, 1.0);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+		glColor4d(1.0, 1.0, 1.0, 0.5);
 
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
-		mTextures[0]->bind(GL_REPLACE);
+		mTextures[0]->bind(GL_MODULATE);
+		glEnable(GL_BLEND);
+		glDisable(GL_DEPTH_TEST);
 
 		mMesh->render();
 
@@ -141,28 +145,56 @@ void WingAdvancedTIE::render(glm::dmat4 const& modelViewMat) const {
 		glPointSize(1);
 		glLineWidth(1);
 		glColor4d(1.0, 1.0, 1.0, 1.0);
+		glEnable(GL_DEPTH_TEST);
+		glDisable(GL_BLEND);
 		glPolygonMode(GL_FRONT, GL_FILL);
 	}
 }
 
 
 //----------------------------------------------------------------------------------------------
-// Compound Entity
+// AdvancedTIE
 //----------------------------------------------------------------------------------------------
 
 AdvancedTIE::AdvancedTIE()
 	: CompoundEntity() {
+
+	// Left Wing
 	Abs_Entity* left_wing = new WingAdvancedTIE(50, 100);
 	left_wing->mPosition.z = 50;
 	addEntity(left_wing);
+	
+	// Right Wing
 	Abs_Entity* right_wing = new WingAdvancedTIE(50, 100);
 	right_wing->mRotation.x = 180;
 	right_wing->mPosition.z = 50;
 	addEntity(right_wing);
+	
+	// Sphere
 	Abs_Entity* sphere = new Sphere(50);
+	sphere->mColor = dvec4(0.0, 65.0 / 255.0, 106.0 / 255.0, 1.0);
 	addEntity(sphere);
 
-	Abs_Entity* conection_left_wing = new Cylinder(80, 80, 80);
-	conection_left_wing->mPosition.y = 100;
+	// Connection
+	Abs_Entity* connection = new Cylinder(10, 10, 180);
+	connection->mPosition.z = -90;
+	connection->mColor = dvec4(0.0, 65.0 / 255.0, 106.0 / 255.0, 1.0);
+	addEntity(connection);
+
+	// 0 65 106 / 255
+
+	// Front
+	Abs_Entity* front = new Cylinder(10, 10, 60);
+	front->mRotation.y += 90;
+	front->mColor = dvec4(0.0, 65.0 / 255.0, 106.0 / 255.0, 1.0);
+	addEntity(front);
+
+	// Disk
+	Abs_Entity* disk = new Disk(0, 10);
+	disk->mPosition.z += 60;
+	disk->mRotation.y += 90;
+	disk->mColor = dvec4(0.0, 65.0 / 255.0, 106.0 / 255.0, 1.0);
+	addEntity(disk);
+
 }
 
