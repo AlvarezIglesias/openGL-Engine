@@ -63,6 +63,7 @@ Ground::render(dmat4 const& modelViewMat) const
 BoxOutline::BoxOutline(GLdouble length)
 	: Abs_Entity()
 {
+	mTexturePaths = { "../bmps/container.bmp", "../bmps/papelE.bmp" };
 	mMesh = Mesh::generateBoxOutline(length);
 	//mRotation = dvec3(90, 0, 90);
 }
@@ -114,6 +115,7 @@ BoxOutline::render(dmat4 const& modelViewMat) const
 Star3D::Star3D(GLdouble re, GLuint np, GLdouble h)
 	: Abs_Entity()
 {
+	mTexturePaths = { "../bmps/baldosaP.bmp" };
 	mMesh = Mesh::generateStar3DTexCor(re, np, h);
 	mPosition = dvec3(-140, 200, -140);
 }
@@ -173,6 +175,7 @@ Star3D::render(dmat4 const& modelViewMat) const
 GlassParapet::GlassParapet(GLdouble _length)
 	: Abs_Entity()
 {
+	mTexturePaths = { "../bmps/windowV.bmp" };
 	mMesh = Mesh::generateBoxOutline(_length);
 	length = _length;
 	
@@ -223,6 +226,7 @@ GlassParapet::render(dmat4 const& modelViewMat) const
 Photo::Photo(GLdouble w, GLdouble h)
 	: Abs_Entity()
 {
+	mTexturePaths = { "../bmps/noche.bmp" };
 	mMesh = Mesh::generateRectangleTexCor(w, h, 1, 1);
 	mRotation = dvec3(90, 0, 90);
 	mPosition = dvec3(mPosition.x, mPosition.y + 1, mPosition.z);
@@ -282,6 +286,8 @@ Photo::save(const std::string filename) const{
 Box::Box(GLdouble _length)
 	: Abs_Entity()
 {
+	mTexturePaths = { "../bmps/container.bmp", "../bmps/papelE.bmp" };
+
 	length = _length;
 	mMesh = Mesh::generateBoxOutline(_length);
 	mMeshTopLid = Mesh::generateRectangleTexCor(length, length, 1, 1);
@@ -385,9 +391,9 @@ Box::render(dmat4 const& modelViewMat) const
 Grass::Grass(GLdouble w, GLdouble h)
 	: Abs_Entity()
 {
+	mTexturePaths = { "../bmps/grass.bmp" };
 	mMesh = Mesh::generateRectangleTexCor(w, h, 1, 1);
 	mPosition = dvec3(170, h / 2, 170);
-
 }
 
 Grass::~Grass()
