@@ -79,5 +79,19 @@ public:
 	~AdvancedTIE() {}
 };
 
+// APARTADO 64
+class IndexedBox : public Abs_Entity {
+public:
+	IndexedBox();
+	~IndexedBox() {};
+	virtual void render(glm::dmat4 const& modelViewMat) const;
+};
 
+// APARTADO 64
+class TrianguloFicticio : public CompoundEntity {
+public:
+	TrianguloFicticio();
+	~TrianguloFicticio() {};
+	void update();
+};
 

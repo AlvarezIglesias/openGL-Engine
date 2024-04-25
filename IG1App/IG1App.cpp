@@ -44,8 +44,21 @@ IG1App::init()
 	for (Viewport* vp : mViewPorts) mCameras.push_back(new Camera(vp));
 
 	Scene* sP4 = new Scene();
-	sP4->initPr3({ new AdvancedTIE()}); // , new Ground(400,400)
+
+	Abs_Entity* planet = new Sphere(3000);
+	planet->mColor = { 255.0 / 255.0, 233.0 / 255.0, 0.0 , 1.0};
+
+	Abs_Entity* ship = new AdvancedTIE();
+	ship->mPosition.z = 4000;
+
+	current_camera()->setEye(ship->mPosition);
+
+	sP4->initPr3({ planet, ship , new EjesRGB(5000) }); // , new Ground(400,400), new AdvancedTIE() new IndexedBox()
 	mScenes.push_back(sP4);
+
+	//Scene* sP4 = new Scene();
+	//sP4->initPr3({ new TrianguloFicticio() , new AdvancedTIE() , new EjesRGB(400)}); // , new Ground(400,400), new AdvancedTIE() new IndexedBox()
+	//mScenes.push_back(sP4);
 
 	/*Scene* s2D = new Scene();
 	s2D->init({ new RGBRectangle(400,200) , new RegularPolygon(40, 200), new RGBTriangle(50), new EjesRGB(300) });
@@ -331,7 +344,8 @@ IG1App::update() {
 		mScenes[0]->update();
 	}
 	else {
-		mScenes[2]->update();
+		//mScenes[2]->update();
+		mScenes[mId]->update();
 	}
 
 	glutPostRedisplay();

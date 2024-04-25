@@ -63,4 +63,24 @@ protected:
 	virtual void draw() const;
 };
 
+// INDEX MESH
+
+// Apartado 62
+class IndexMesh : public Mesh {
+public:
+	//~IndexMesh() { delete[] vIndexes; }
+	GLuint index_size() const { return nNumIndices; }; // number of elements
+	std::vector<GLuint> const& indices() const { return vIndexes; };
+
+	static IndexMesh* generateIndexedBox(GLdouble length);
+	glm::dvec3 buildNormalVectors(int init);
+
+
+protected:
+	void draw() const;
+	void buildNormalVectors();
+	GLuint nNumIndices = 0;
+	std::vector<GLuint> vIndexes;
+};
+
 #endif //_H_Scene_H_

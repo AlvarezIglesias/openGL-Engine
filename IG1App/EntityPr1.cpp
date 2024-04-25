@@ -72,10 +72,8 @@ void
 RGBTriangle::render(dmat4 const& modelViewMat) const
 {
 	if (mMesh != nullptr) {
-		dmat4 aMat = modelViewMat 
-					* mModelMat 
-					* translate(dmat4(1), mPosition) 
-					* rotate(dmat4(1), radians(mRotation.z), dvec3(0,0,1)); // glm matrix multiplication
+		dmat4 aMat = complete_transform(modelViewMat);
+		//complete_transform(modelViewMat) * mModelMat;
 		upload(aMat);
 
 		glPolygonMode(GL_FRONT, GL_FILL);

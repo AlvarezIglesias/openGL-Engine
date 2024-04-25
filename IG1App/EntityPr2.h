@@ -93,4 +93,5 @@ public:
 	~Grass();
 	explicit Grass(GLdouble w, GLdouble h);
 	virtual void render(glm::dmat4 const& modelViewMat) const;
+	void initTextures(std::vector<Texture*>& sceneTextures);
 };

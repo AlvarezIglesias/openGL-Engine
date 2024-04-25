@@ -17,9 +17,6 @@ Mesh::draw() const
 void
 Mesh::render() const
 {
-
-
-
 	if (vVertices.size() > 0) { // transfer data
 		// transfer the coordinates of the vertices
 		glEnableClientState(GL_VERTEX_ARRAY);
@@ -35,11 +32,17 @@ Mesh::render() const
 			                                    // each component, stride, pointer
 		}
 
+		if (vNormals.size() > 0) {
+			glEnableClientState(GL_NORMAL_ARRAY);
+			glNormalPointer(GL_DOUBLE, 0, vNormals.data());
+		}
+
 		draw();
 
 		glDisableClientState(GL_COLOR_ARRAY);
 		glDisableClientState(GL_VERTEX_ARRAY);
 		glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+		glDisableClientState(GL_NORMAL_ARRAY);
 	}
 }
 
@@ -467,5 +470,113 @@ Mesh::generateWingAdvancedTIE(GLdouble w, GLdouble h) {
 	return mesh;
 }
 
+/*******************************PARTE 4 * ******************************/
+
+glm::dvec3
+IndexMesh::buildNormalVectors(int init) {
+	dvec3 n = dvec3(0, 0, 0);
+	dvec3 vertActual;
+	dvec3 vertSiguiente;
+	for (int i = init; i < init + 3; i++) {
+		vertActual = vVertices[vIndexes[i]];
+		vertSiguiente = vVertices[vIndexes[(i + 1) % vIndexes.size()]];
+		n.x += (vertActual.y - vertSiguiente.y) * (vertActual.z + vertSiguiente.z);
+		n.y += (vertActual.z - vertSiguiente.z) * (vertActual.x + vertSiguiente.x);
+		n.z += (vertActual.x - vertSiguiente.x) * (vertActual.y + vertSiguiente.y);
+	}
+	return glm::normalize(n);
+}
+
+void
+IndexMesh::draw() const {
+	glDrawElements(mPrimitive, nNumIndices, GL_UNSIGNED_INT, vIndexes.data());
+}
+
+void 
+IndexMesh::buildNormalVectors() {
+
+	for (int i = 0; i < nNumIndices/3; i++) {
+		vNormals.push_back(buildNormalVectors(i * 3));
+	}
+}
+
+
+// APARTADO 10
+IndexMesh* IndexMesh::generateIndexedBox(GLdouble length) {
+
+
+	IndexMesh* mesh = new IndexMesh();
+	mesh->mNumVertices = 8;
+	mesh->nNumIndices = 36;
+	mesh->mPrimitive = GL_TRIANGLES;
+	//mesh->vColors.reserve(mesh->mNumVertices);
+	//mesh->vVertices.reserve(mesh->mNumVertices);
+	//mesh->vNormals.reserve(mesh->mNumVertices);
+	//mesh->vIndexes.reserve(mesh->mNumVertices);
+
+	GLdouble x, y, z = x = y = length / 2;
+
+	mesh->vVertices = {
+		{-x, -y, -z,},  // 0 Front, Bottom, Left
+		{ x, -y, -z,},  // 1 Front, Bottom, Right
+		{ x,  y, -z,},  // 2 Front, Top, Right
+		{-x,  y, -z,},  // 3 Front, Top, Left
+		{-x, -y,  z,},  // 4 Back, Bottom, Left
+		{ x, -y,  z,},  // 5 Back, Bottom, Right
+		{ x,  y,  z,},  // 6 Back, Top, Right
+		{-x,  y,  z },  // 7 Back, Top, Left
+	};
+
+	//green
+	mesh->vColors = {
+		{0.0 , 1.0 , 0.0 , 1.0} ,
+		{0.0 , 1.0 , 0.0 , 1.0} ,
+		{0.0 , 1.0 , 0.0 , 1.0} ,
+		{0.0 , 1.0 , 0.0 , 1.0} ,
+		{0.0 , 1.0 , 0.0 , 1.0} ,
+		{0.0 , 1.0 , 0.0 , 1.0} ,
+		{0.0 , 1.0 , 0.0 , 1.0} ,
+		{0.0 , 1.0 , 0.0 , 1.0}
+	};
+
+	mesh->vIndexes = {
+		//front
+		0,1,2,
+		2,3,0,
+		//back
+		6,5,4,
+		6,4,7,
+		//bottom
+		0,4,1,
+		1,4,5,
+		//top
+		6,7,3,
+		6,3,2,
+		//left
+		4,0,3,
+		4,3,7,
+		//right
+		5,6,2,
+		1,5,2
+	};
+
+	mesh->buildNormalVectors();
+	/*mesh->vNormals = {
+		mesh->buildNormalVectors(0),
+		mesh->buildNormalVectors(3),
+		mesh->buildNormalVectors(6),
+		mesh->buildNormalVectors(9),
+		mesh->buildNormalVectors(12),
+		mesh->buildNormalVectors(15),
+		mesh->buildNormalVectors(18),
+		mesh->buildNormalVectors(21),
+		mesh->buildNormalVectors(24),
+		mesh->buildNormalVectors(27),
+		mesh->buildNormalVectors(30),
+		mesh->buildNormalVectors(33)
+	};*/
+
+	return mesh;
+}
 
 

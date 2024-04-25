@@ -441,3 +441,13 @@ Grass::render(dmat4 const& modelViewMat) const
 		}
 	}
 }
+
+void
+Grass::initTextures(std::vector<Texture*>& sceneTextures) {
+	for (std::string s : mTexturePaths) {
+		Texture* text = new Texture();
+		text->load(s, u8vec3(0.0, 0.0, 0.0), GLubyte(0.0));
+		mTextures.push_back(text);
+		sceneTextures.push_back(text);
+	}
+}

@@ -1,5 +1,6 @@
 #include "Entity.h"
 #include "EntityPr4.h"
+#include "EntityPr1.h"
 #include "Texture.h"
 
 #include <glm/gtc/matrix_transform.hpp>
@@ -94,8 +95,12 @@ void CompoundEntity::addEntity(std::vector<Abs_Entity*> & aes) {
 }
 
 void CompoundEntity::render(glm::dmat4 const& modelViewMat) const {
+	
+	glm::dmat4 modelViewMatComp = complete_transform(modelViewMat) * mModelMat;
+	upload(modelViewMatComp);
+
 	for (Abs_Entity* ent : gObjects) {
-		ent->render(modelViewMat);
+		ent->render(modelViewMatComp);
 	}
 }
 void CompoundEntity::initTextures(std::vector<Texture*>& sceneTextures) {
@@ -167,7 +172,7 @@ AdvancedTIE::AdvancedTIE()
 	// Right Wing
 	Abs_Entity* right_wing = new WingAdvancedTIE(50, 100);
 	right_wing->mRotation.x = 180;
-	right_wing->mPosition.z = 50;
+	right_wing->mPosition.z = -50;
 	addEntity(right_wing);
 	
 	// Sphere
@@ -196,5 +201,43 @@ AdvancedTIE::AdvancedTIE()
 	disk->mColor = dvec4(0.0, 65.0 / 255.0, 106.0 / 255.0, 1.0);
 	addEntity(disk);
 
+}
+
+//----------------------------------------------------------------------------------------------
+// Indexed Box
+//----------------------------------------------------------------------------------------------
+
+IndexedBox::IndexedBox() {
+	mMesh = IndexMesh::generateIndexedBox(200);
+}
+
+void
+IndexedBox::render(glm::dmat4 const& modelViewMat) const {
+	dmat4 aMat = complete_transform(modelViewMat);
+	upload(aMat);
+
+	glPolygonMode(GL_BACK, GL_FILL);
+	mMesh->render();
+
+	glPointSize(1);
+	glLineWidth(1);
+	glColor4d(1.0, 1.0, 1.0, 1.0);
+	glPolygonMode(GL_FRONT, GL_FILL);
+}
+
+
+TrianguloFicticio::TrianguloFicticio() {
+	Abs_Entity* triangle = new RGBTriangle(50);
+	triangle->mPosition.x = 300;
+	addEntity(triangle);
+	Abs_Entity* circle = new RegularPolygon(20, 300);
+	addEntity(circle);
+
+}
+
+void
+TrianguloFicticio::update() {
+	mRotation.z += 5;
+	gObjects[0]->mRotation.y -= 5;
 }
 

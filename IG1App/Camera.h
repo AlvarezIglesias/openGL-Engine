@@ -36,7 +36,7 @@ public:
 	void moveFB(GLdouble cs);
 	void moveUD(GLdouble cs);
 
-
+	void setEye(glm::dvec3 new_eye) { mEye = new_eye; };
 
 	// projection matrix
 	glm::dmat4 const& projMat() const { return mProjMat; };

@@ -18,10 +18,10 @@ Abs_Entity::complete_transform(dmat4 const& modelViewMat) const
 	dmat4 aMat = modelViewMat
 		* mModelMat
 		* scale(dmat4(1), mScale)
+		* translate(dmat4(1), mPosition)
 		* rotate(dmat4(1), radians(mRotation.x), dvec3(1, 0, 0))
 		* rotate(dmat4(1), radians(mRotation.y), dvec3(0, 1, 0))
-		* rotate(dmat4(1), radians(mRotation.z), dvec3(0, 0, 1)) // glm matrix multiplication
-		* translate(dmat4(1), mPosition);
+		* rotate(dmat4(1), radians(mRotation.z), dvec3(0, 0, 1)); // glm matrix multiplication;
 
 	return aMat;
 }
