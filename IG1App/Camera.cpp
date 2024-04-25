@@ -223,12 +223,12 @@ Camera::setOnTriangle() {
 
 void
 Camera::update(){
-	double r = 200.0;
+	/*double r = 200.0;
 	time_step += 0.01;
 
 	mEye = dvec3(r * cos(radians(time_step)), r * sin(radians(time_step)), 500); // Upper camera
 	mLook = dvec3(r * cos(radians(time_step)), r * sin(radians(time_step)), 0); // Triangle position
-	mUp = dvec3(0, 1, 0);
+	mUp = dvec3(0, 1, 0);*/
 
 	setVM();
 }

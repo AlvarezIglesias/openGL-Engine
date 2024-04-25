@@ -56,11 +56,11 @@ IG1App::init()
 	sP4->initPr3({ planet, ship , new EjesRGB(2000) }); // , new Ground(400,400), new AdvancedTIE() new IndexedBox()
 	mScenes.push_back(sP4);
 
-	//Scene* sP4 = new Scene();
-	//sP4->initPr3({ new TrianguloFicticio() , new AdvancedTIE() , new EjesRGB(400)}); // , new Ground(400,400), new AdvancedTIE() new IndexedBox()
-	//mScenes.push_back(sP4);
+	Scene* sP4_2 = new Scene();
+	sP4_2->initPr3({ new TrianguloFicticio() , new AdvancedTIE() , new EjesRGB(400)}); // , new Ground(400,400), new AdvancedTIE() new IndexedBox()
+	mScenes.push_back(sP4_2);
 
-	/*Scene* s2D = new Scene();
+	Scene* s2D = new Scene();
 	s2D->init({ new RGBRectangle(400,200) , new RegularPolygon(40, 200), new RGBTriangle(50), new EjesRGB(300) });
 	mScenes.push_back(s2D);
 
@@ -70,7 +70,7 @@ IG1App::init()
 
 	Scene* sPr2 = new Scene();
 	photo = new Photo(200, 100);
-	sPr2->initPr2({
+	sPr2->initPr3({
 		  new Ground(400,400)
 		, new Box(100)
 		, new Star3D(30, 8, 30)
@@ -80,7 +80,7 @@ IG1App::init()
 		});
 
 	mScenes.push_back(sPr2);
-	mCameras[0]->set3D();
+/*	mCameras[0]->set3D();
 	mCameras[1]->set3D();
 	//mCameras[1]->setCenital();*/
 
@@ -214,14 +214,14 @@ IG1App::key(unsigned char key, int x, int y)
 			current_camera()->set2D();
 			break;
 		case '0':
-			setScene(0);
+			setScene(--mId);
 			break;
 		case '1':
-			setScene(1);
+			setScene(++mId);
 			break;
-		case '2':
-			setScene(2);
-			break;
+		//case '2':
+		//	setScene(2);
+		//	break;
 		case 'u':
 			update();
 			break;
