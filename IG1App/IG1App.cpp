@@ -43,6 +43,49 @@ IG1App::init()
 	
 	for (Viewport* vp : mViewPorts) mCameras.push_back(new Camera(vp));
 
+	// Granjero Opcional
+
+	Scene* sP4Opt = new Scene();
+	CompoundEntity* granjero = new CompoundEntity();
+
+	Abs_Entity* cabeza = new Sphere(150);
+	cabeza->mColor = {255.0 / 255.0, 127.5 / 255.0, 0.0, 1.0};
+	granjero->addEntity(cabeza);
+
+	Abs_Entity* sombrero = new Disk(20, 150);
+	sombrero->mColor = { 255.0 / 255.0, 0.0, 0.0, 1.0 };
+	sombrero->mRotation.x = 90;
+	sombrero->mPosition.y = 120;
+	granjero->addEntity(sombrero);
+
+	Abs_Entity* barba = new PartialDisk(45, 90);
+	barba->mColor = { 0.0, 255.0, 0.0, 1.0 };
+	barba->mRotation.z = 45;
+	barba->mPosition.y = -20;
+	barba->mPosition.z = 120;
+	granjero->addEntity(barba);
+
+	Abs_Entity* ojoD = new Cylinder(0, 15, 25);
+	ojoD->mColor = { 0.3, 0.33, 0.4, 1.0 };
+	ojoD->mPosition.y = 70;
+	ojoD->mPosition.z = 150;
+	ojoD->mPosition.x = -30;
+	ojoD->mRotation.x = 180;
+	granjero->addEntity(ojoD);
+
+	Abs_Entity* ojoI = new Cylinder(0, 15, 25);
+	ojoI->mColor = { 0.0, 0.19, 0.3, 1.0 };
+	ojoI->mPosition.y = 70;
+	ojoI->mPosition.z = 150;
+	ojoI->mPosition.x = 30;
+	ojoI->mRotation.x = 180;
+	granjero->addEntity(ojoI);
+
+	sP4Opt->initPr3({ granjero });
+	mScenes.push_back(sP4Opt);
+
+	// Pr4
+
 	Scene* sP4 = new Scene();
 
 	Abs_Entity* planet = new Sphere(3000);
