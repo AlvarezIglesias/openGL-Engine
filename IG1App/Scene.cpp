@@ -176,3 +176,20 @@ Scene::registerTexture(Texture* texture) {
 	gTextures.push_back(texture);
 }
 
+void Scene::rotate()
+{
+	if (ship != nullptr) {
+		ship->mRotation.y += 5;
+		update();
+	}
+}
+
+void Scene::orbit()
+{
+	if (ship != nullptr) {
+		ship->mRotation.z += 5;
+		update();
+	}
+}
+
+

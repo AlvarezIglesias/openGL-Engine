@@ -6,6 +6,7 @@
 
 #include "Camera.h"
 #include "Entity.h"
+#include "EntityPr4.h"
 
 #include <vector>
 
@@ -37,10 +38,18 @@ public:
 
 	void registerTexture(Texture* texture);
 
+	// APARTADO 68
+
+	void rotate();
+	void orbit();
+	void setShip(ShipOrbit* _ship) { ship = _ship; };
+
 protected:
 	void free();
 	void setGL();
 	void resetGL();
+
+	ShipOrbit * ship = nullptr;
 
 	std::vector<Abs_Entity*> gObjects; // Entities (graphic objects) of the scene
 	std::vector<Texture*> gTextures; // APARTADO 19

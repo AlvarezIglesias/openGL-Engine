@@ -95,3 +95,13 @@ public:
 	void update();
 };
 
+
+// APARTADO 64
+class ShipOrbit : public CompoundEntity {
+public:
+	ShipOrbit(GLdouble orbitRaidus);
+	~ShipOrbit() {};
+	void update();
+	GLdouble directionY = 0;
+
+};

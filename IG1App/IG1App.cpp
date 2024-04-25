@@ -45,15 +45,15 @@ IG1App::init()
 
 	Scene* sP4 = new Scene();
 
-	Abs_Entity* planet = new Sphere(3000);
+	Abs_Entity* planet = new Sphere(500);
 	planet->mColor = { 255.0 / 255.0, 233.0 / 255.0, 0.0 , 1.0};
 
-	Abs_Entity* ship = new AdvancedTIE();
-	ship->mPosition.z = 4000;
+	ShipOrbit* ship = new ShipOrbit(800);
+	sP4->setShip(ship);
 
 	current_camera()->setEye(ship->mPosition);
 
-	sP4->initPr3({ planet, ship , new EjesRGB(5000) }); // , new Ground(400,400), new AdvancedTIE() new IndexedBox()
+	sP4->initPr3({ planet, ship , new EjesRGB(2000) }); // , new Ground(400,400), new AdvancedTIE() new IndexedBox()
 	mScenes.push_back(sP4);
 
 	//Scene* sP4 = new Scene();
@@ -241,6 +241,12 @@ IG1App::key(unsigned char key, int x, int y)
 			break;
 		case 'c':
 			current_camera()->setCenital();
+			break;
+		case 'f':
+			current_scene()->rotate();
+			break;
+		case 'g':
+			current_scene()->orbit();
 			break;
 		case 'k':
 			m2Vistas = !m2Vistas;

@@ -189,7 +189,7 @@ AdvancedTIE::AdvancedTIE()
 	// 0 65 106 / 255
 
 	// Front
-	Abs_Entity* front = new Cylinder(10, 10, 60);
+	Abs_Entity* front = new Cylinder(10, 10, 100);
 	front->mRotation.y += 90;
 	front->mColor = dvec4(0.0, 65.0 / 255.0, 106.0 / 255.0, 1.0);
 	addEntity(front);
@@ -241,3 +241,20 @@ TrianguloFicticio::update() {
 	gObjects[0]->mRotation.y -= 5;
 }
 
+
+
+
+ShipOrbit::ShipOrbit(GLdouble orbitRaidus) {
+	Abs_Entity* ship = new AdvancedTIE();
+	ship->mPosition.x = orbitRaidus;
+	ship->mRotation.z = 90;
+	addEntity(ship);
+	Abs_Entity* circle = new RegularPolygon(100, orbitRaidus);
+	addEntity(circle);
+
+}
+
+void
+ShipOrbit::update() {
+	
+}
