@@ -84,6 +84,10 @@ IG1App::init()
 	sP4Opt->initPr3({ granjero });
 	mScenes.push_back(sP4Opt);
 
+	Scene* sP5 = new Scene();
+	sP5->initPr3({new Cone(50,50,5)}); // , new Ground(400,400), new AdvancedTIE() new IndexedBox()
+	mScenes.push_back(sP5);
+
 	// Pr4
 
 	Scene* sP4 = new Scene();

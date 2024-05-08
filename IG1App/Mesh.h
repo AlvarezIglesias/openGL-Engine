@@ -52,6 +52,8 @@ public:
 	static Mesh* generateWingAdvancedTIE(GLdouble w, GLdouble h);
 
 
+
+
 protected:
 	GLuint mPrimitive =
 	  GL_TRIANGLES;          // graphic primitive: GL_POINTS, GL_LINES, GL_TRIANGLES, ...
@@ -81,6 +83,17 @@ protected:
 	void buildNormalVectors();
 	GLuint nNumIndices = 0;
 	std::vector<GLuint> vIndexes;
+};
+
+// APARTADO 69
+class MbR : public IndexMesh
+{
+public:
+	static MbR* generaIndexMbR(GLuint mm, GLuint mn, glm::dvec3* perfil);
+
+protected:
+
+
 };
 
 #endif //_H_Scene_H_

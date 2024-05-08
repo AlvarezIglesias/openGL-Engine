@@ -580,3 +580,60 @@ IndexMesh* IndexMesh::generateIndexedBox(GLdouble length) {
 }
 
 
+MbR* MbR::generaIndexMbR(GLuint mm, GLuint nn, glm::dvec3* perfil)
+{
+	MbR* mesh = new MbR();
+	mesh->mNumVertices = 8;
+	mesh->nNumIndices = 36;
+	mesh->mPrimitive = GL_TRIANGLES;
+
+	// Definir la primitiva como GL_TRIANGLES
+	// Definir el número de vértices como nn*mm
+	// Usar un vector auxiliar de vértices
+	dvec3* vs = new dvec3[mesh->mNumVertices];
+	for (int i = 0; i < nn; i++) {
+		// Generar la muestra i- ésima de vértices
+		GLdouble theta = i * 360 / nn;
+		GLdouble c = cos(radians(theta));
+		GLdouble s = sin(radians(theta));
+
+
+
+		for (int j = 0; j < mm; j++) {
+			GLdouble z = -s * perfil[j].x + c * perfil[j].z;
+			vs[i] = dvec3(cos(theta), perfil[j].y, z);
+		}
+	}
+
+	int indiceMayor = 0;
+	// El contador i recorre las muestras alrededor del eje Y
+	for (int i = 0; i < nn; i++){
+		// El contador j recorre los vértices del perfil ,
+		// de abajo arriba . Las caras cuadrangulares resultan
+		// al unir la muestra i- ésima con la (i +1)% nn - ésima
+		for (int j = 0; j < mm - 1; j++){
+			// El contador indice sirve para llevar cuenta
+			// de los índices generados hasta ahora . Se recorre
+			// la cara desde la esquina inferior izquierda
+			int indice = i * mm + j;
+			mesh->vIndexes[indiceMayor] = indice;
+			indiceMayor++;
+			mesh->vIndexes[indiceMayor] = (indice + mm) % (nn * mm);
+			indiceMayor++;
+			mesh->vIndexes[indiceMayor] = (indice + mm + 1) % (nn * mm);
+			indiceMayor++;
+			mesh->vIndexes[indiceMayor] = (indice + mm + 1) % (nn * mm);
+			indiceMayor++;
+			mesh->vIndexes[indiceMayor] = indice + 1;
+			indiceMayor++;
+			mesh->vIndexes[indiceMayor] = indice;
+			indiceMayor++;
+		}
+	}
+
+
+	return mesh;
+
+
+}
+
