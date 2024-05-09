@@ -61,9 +61,9 @@ void Light::setSpec(glm::fvec4 sp) {
 	specular= sp; uploadL();
 };
 
-void Light::setPosDir(glm::fvec4 pd) {
+/*void Light::setPosDir(glm::fvec4 pd) {
 	posDir = pd; uploadL();
-};
+};*/
 
 //----------------------------------------------------------------------------------------------
 // DirLight

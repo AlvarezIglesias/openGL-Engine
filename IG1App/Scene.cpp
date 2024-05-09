@@ -1,5 +1,6 @@
 #include "Scene.h"
 #include "CheckML.h"
+#include "Light.h"
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include "EntityPr1.h"
@@ -135,7 +136,7 @@ Scene::resetGL()
 void
 Scene::render(Camera const& cam) const
 {
-	sceneDirLight(cam); // APARTADO 56
+	// sceneDirLight(cam); // APARTADO 56
 
 	cam.upload();
 
@@ -168,6 +169,17 @@ void Scene::sceneDirLight(Camera const& cam) const {
 	glLightfv(GL_LIGHT0, GL_AMBIENT, value_ptr(ambient));
 	glLightfv(GL_LIGHT0, GL_DIFFUSE, value_ptr(diffuse));
 	glLightfv(GL_LIGHT0, GL_SPECULAR, value_ptr(specular));
+}
+
+// APARTADO 73
+void Scene::initDirLight() {
+	Scene::dirLight = new DirLight();
+	Scene::dirLight->setPosDir(glm::fvec4{ 1, 1, 1, 0 });
+	Scene::dirLight->setAmb(glm::fvec4{ 0, 0, 0, 1 });
+	Scene::dirLight->setDiff(glm::fvec4{ 1, 1, 1, 1 });
+	Scene::dirLight->setSpec(glm::fvec4{ 0.5, 0.5, 0.5, 1 });
+
+	Scene::dirLight->enable();
 }
 
 

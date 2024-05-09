@@ -45,7 +45,7 @@ public:
 	void setAmb(glm::fvec4 amb);
 	void setDiff(glm::fvec4 diff);
 	void setSpec(glm::fvec4 sp);
-	void setPosDir(glm::fvec4 pd);
+	//void setPosDir(glm::fvec4 pd);
 };
 
 // Apartado 75

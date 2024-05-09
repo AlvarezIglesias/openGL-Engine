@@ -5,6 +5,7 @@
 #include <glm/glm.hpp>
 
 #include "Camera.h"
+#include "Light.h"
 #include "Entity.h"
 #include "EntityPr4.h"
 
@@ -44,6 +45,9 @@ public:
 	void orbit();
 	void setShip(ShipOrbit* _ship) { ship = _ship; };
 
+	// APARTADO 73
+	static void initDirLight();
+
 protected:
 	void free();
 	void setGL();
@@ -53,6 +57,9 @@ protected:
 
 	std::vector<Abs_Entity*> gObjects; // Entities (graphic objects) of the scene
 	std::vector<Texture*> gTextures; // APARTADO 19
+
+	// APARTADO 73
+	static DirLight* dirLight;
 };
 
 #endif //_H_Scene_H_
