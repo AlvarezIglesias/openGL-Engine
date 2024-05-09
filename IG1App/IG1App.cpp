@@ -47,6 +47,7 @@ IG1App::init()
 	glEnable(GL_LIGHTING);
 
 	Scene::initDirLight();
+	Scene::initPosLight();
 
 	// Granjero Opcional
 
@@ -304,6 +305,12 @@ IG1App::key(unsigned char key, int x, int y)
 			break;
 		case 'w':
 			current_scene()->dirLight->disable();
+			break;
+		case 'a':
+			current_scene()->posLight->enable();
+			break;
+		case 's':
+			current_scene()->posLight->disable();
 			break;
 		default:
 			need_redisplay = false;

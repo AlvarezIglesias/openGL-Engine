@@ -51,6 +51,7 @@ public:
 
 	// Apartado 77
 	static PosLight* posLight;
+	static void initPosLight();
 
 protected:
 	void free();
