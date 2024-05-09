@@ -93,6 +93,7 @@ IG1App::init()
 	// Pr4
 
 	Scene* sP4 = new Scene();
+	sP4->backgroundColor = { 0.0,0.0,0.0,1.0 };
 
 	Abs_Entity* planet = new Sphere(500);
 	planet->mColor = { 255.0 / 255.0, 233.0 / 255.0, 0.0 , 1.0};
@@ -106,8 +107,12 @@ IG1App::init()
 	mScenes.push_back(sP4);
 
 	Scene* sP4_2 = new Scene();
-	sP4_2->initPr3({ new TrianguloFicticio() , new AdvancedTIE() , new EjesRGB(400)}); // , new Ground(400,400), new AdvancedTIE() new IndexedBox()
+	sP4_2->initPr3({ new IndexedBox()}); // , new Ground(400,400), new AdvancedTIE() new IndexedBox()
 	mScenes.push_back(sP4_2);
+
+	Scene* sP4_3 = new Scene();
+	sP4_3->initPr3({ new TrianguloFicticio() , new AdvancedTIE() , new EjesRGB(400)}); // , new Ground(400,400), new AdvancedTIE() new IndexedBox()
+	mScenes.push_back(sP4_3);
 
 	Scene* s2D = new Scene();
 	s2D->init({ new RGBRectangle(400,200) , new RegularPolygon(40, 200), new RGBTriangle(50), new EjesRGB(300) });
@@ -129,11 +134,13 @@ IG1App::init()
 		});
 
 	mScenes.push_back(sPr2);
-/*	mCameras[0]->set3D();
-	mCameras[1]->set3D();
+	current_camera()->set3D();
+	current_camera()->changePrj();
+/*	mCameras[1]->set3D();
 	//mCameras[1]->setCenital();*/
 
-	setScene(0);
+	setScene(3);
+	current_scene()->setBackground();
 
 	/*if (mId == 0) {
 		mCameras[0]->setOnTriangle();
@@ -264,9 +271,11 @@ IG1App::key(unsigned char key, int x, int y)
 			break;
 		case '0':
 			setScene(--mId);
+			current_scene()->setBackground();
 			break;
 		case '1':
 			setScene(++mId);
+			current_scene()->setBackground();
 			break;
 		//case '2':
 		//	setScene(2);

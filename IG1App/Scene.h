@@ -44,6 +44,11 @@ public:
 	void orbit();
 	void setShip(ShipOrbit* _ship) { ship = _ship; };
 
+	glm::dvec4 backgroundColor = { 0.6, 0.7, 0.8, 1.0 };
+	void setBackground() { glClearColor(backgroundColor.x, backgroundColor.y, backgroundColor.z, backgroundColor.a); };
+
+
+
 protected:
 	void free();
 	void setGL();
@@ -53,6 +58,7 @@ protected:
 
 	std::vector<Abs_Entity*> gObjects; // Entities (graphic objects) of the scene
 	std::vector<Texture*> gTextures; // APARTADO 19
+
 };
 
 #endif //_H_Scene_H_

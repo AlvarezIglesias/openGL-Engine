@@ -1,8 +1,10 @@
-﻿  IG1App.cpp
-  main.cpp
-  Scene.cpp
-C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\Scene.cpp(122,25): warning C4305: 'argumento': truncamiento de 'double' a 'GLclampf'
-C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\Scene.cpp(122,20): warning C4305: 'argumento': truncamiento de 'double' a 'GLclampf'
-C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\Scene.cpp(122,15): warning C4305: 'argumento': truncamiento de 'double' a 'GLclampf'
-  Generando código...
+﻿  Mesh.cpp
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\Mesh.cpp(63,20): warning C4018: '<': no coinciden signed/unsigned
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\Mesh.cpp(375,20): warning C4018: '<': no coinciden signed/unsigned
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\Mesh.cpp(498,20): warning C4018: '<': no coinciden signed/unsigned
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\Mesh.cpp(579,20): warning C4018: '<': no coinciden signed/unsigned
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\Mesh.cpp(585,21): warning C4018: '<': no coinciden signed/unsigned
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\Mesh.cpp(595,20): warning C4018: '<': no coinciden signed/unsigned
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\Mesh.cpp(599,21): warning C4018: '<': no coinciden signed/unsigned
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\Mesh.cpp(614,41): warning C4267: '=': conversión de 'size_t' a 'GLuint'; posible pérdida de datos
   IG1App.vcxproj -> C:\MisCosas\Programacion\Clase\openGL-Engine\bin\IG1AppDebug.exe

@@ -114,7 +114,7 @@ Scene::setGL()
 	glEnable(GL_COLOR_MATERIAL); // APARTADO 56
 
 	//APARTADO 1
-	glClearColor(0.0, 0.0, 0.0, 1.0); //CAMBIADO PARA FONDO NEGRO
+	glClearColor(backgroundColor.x, backgroundColor.y, backgroundColor.z, backgroundColor.a);
 
 	glEnable(GL_DEPTH_TEST);          // enable Depth test
 

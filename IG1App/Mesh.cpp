@@ -561,21 +561,6 @@ IndexMesh* IndexMesh::generateIndexedBox(GLdouble length) {
 	};
 
 	mesh->buildNormalVectors();
-	/*mesh->vNormals = {
-		mesh->buildNormalVectors(0),
-		mesh->buildNormalVectors(3),
-		mesh->buildNormalVectors(6),
-		mesh->buildNormalVectors(9),
-		mesh->buildNormalVectors(12),
-		mesh->buildNormalVectors(15),
-		mesh->buildNormalVectors(18),
-		mesh->buildNormalVectors(21),
-		mesh->buildNormalVectors(24),
-		mesh->buildNormalVectors(27),
-		mesh->buildNormalVectors(30),
-		mesh->buildNormalVectors(33)
-	};*/
-
 	return mesh;
 }
 

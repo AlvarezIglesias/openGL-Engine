@@ -109,7 +109,7 @@ Toroid::Toroid(GLdouble r, GLdouble R, GLuint m, GLuint p) {
 		GLdouble alpha = radians(currentAngle);
 
 		GLdouble x = cx + r * glm::cos(alpha) + R;
-		GLdouble y = cy + r * glm::sin(alpha) + R;
+		GLdouble y = cy + r * glm::sin(alpha);
 		perfil[i] = { x, y, 0.0 };
 	}
 
