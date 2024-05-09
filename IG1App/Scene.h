@@ -45,11 +45,12 @@ public:
 	void orbit();
 	void setShip(ShipOrbit* _ship) { ship = _ship; };
 
-	// APARTADO 73
-	DirLight* dirLight;
+	// APARTADO 76
+	static DirLight* dirLight;
+	static void initDirLight();
 
-	// APARTADO 73
-	void initDirLight();
+	// Apartado 77
+	static PosLight* posLight;
 
 protected:
 	void free();

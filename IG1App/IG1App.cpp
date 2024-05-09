@@ -43,6 +43,11 @@ IG1App::init()
 	
 	for (Viewport* vp : mViewPorts) mCameras.push_back(new Camera(vp));
 
+	// Set Lights
+	glEnable(GL_LIGHTING);
+
+	Scene::initDirLight();
+
 	// Granjero Opcional
 
 	Scene* sP4Opt = new Scene();
