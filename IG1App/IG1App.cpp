@@ -43,9 +43,6 @@ IG1App::init()
 	
 	for (Viewport* vp : mViewPorts) mCameras.push_back(new Camera(vp));
 
-	// Init Lights
-	Scene::initDirLight();
-
 	// Granjero Opcional
 
 	Scene* sP4Opt = new Scene();
@@ -296,6 +293,12 @@ IG1App::key(unsigned char key, int x, int y)
 			break;
 		case 'k':
 			m2Vistas = !m2Vistas;
+			break;
+		case 'q':
+			current_scene()->dirLight->enable();
+			break;
+		case 'w':
+			current_scene()->dirLight->disable();
 			break;
 		default:
 			need_redisplay = false;

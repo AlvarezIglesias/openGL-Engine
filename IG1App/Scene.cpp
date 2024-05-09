@@ -25,6 +25,8 @@ Scene::init(std::vector<Abs_Entity*> _gObjects) {
 	setGL(); // OpenGL settings
 	glEnable(GL_DEPTH_TEST);
 
+	initDirLight();
+
 	gObjects = _gObjects;
 }
 
@@ -32,6 +34,8 @@ void
 Scene::initPr2(std::vector<Abs_Entity*> _gObjects) {
 	setGL(); // OpenGL settings
 	glEnable(GL_DEPTH_TEST);
+
+	initDirLight();
 
 	gObjects = _gObjects;
 
@@ -82,6 +86,8 @@ void
 Scene::initPr3(std::vector<Abs_Entity*> && _gObjects) {
 	setGL(); // OpenGL settings
 	glEnable(GL_DEPTH_TEST);
+
+	initDirLight();
 
 	gObjects = _gObjects;
 
@@ -136,7 +142,9 @@ Scene::resetGL()
 void
 Scene::render(Camera const& cam) const
 {
-	// sceneDirLight(cam); // APARTADO 56
+	//sceneDirLight(cam); // APARTADO 56
+	
+	Scene::dirLight->upload(cam.viewMat()); // APARTADO 76
 
 	cam.upload();
 
@@ -171,15 +179,17 @@ void Scene::sceneDirLight(Camera const& cam) const {
 	glLightfv(GL_LIGHT0, GL_SPECULAR, value_ptr(specular));
 }
 
-// APARTADO 73
+// APARTADO 76
 void Scene::initDirLight() {
 	Scene::dirLight = new DirLight();
-	Scene::dirLight->setPosDir(glm::fvec4{ 1, 1, 1, 0 });
+
+	glEnable(GL_LIGHTING);
+	Scene::dirLight->enable();
+
+	Scene::dirLight->setPosDir(glm::fvec3{ 1, 1, 1 });
 	Scene::dirLight->setAmb(glm::fvec4{ 0, 0, 0, 1 });
 	Scene::dirLight->setDiff(glm::fvec4{ 1, 1, 1, 1 });
 	Scene::dirLight->setSpec(glm::fvec4{ 0.5, 0.5, 0.5, 1 });
-
-	Scene::dirLight->enable();
 }
 
 

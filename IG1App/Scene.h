@@ -46,7 +46,10 @@ public:
 	void setShip(ShipOrbit* _ship) { ship = _ship; };
 
 	// APARTADO 73
-	static void initDirLight();
+	DirLight* dirLight;
+
+	// APARTADO 73
+	void initDirLight();
 
 protected:
 	void free();
@@ -57,9 +60,6 @@ protected:
 
 	std::vector<Abs_Entity*> gObjects; // Entities (graphic objects) of the scene
 	std::vector<Texture*> gTextures; // APARTADO 19
-
-	// APARTADO 73
-	static DirLight* dirLight;
 };
 
 #endif //_H_Scene_H_
