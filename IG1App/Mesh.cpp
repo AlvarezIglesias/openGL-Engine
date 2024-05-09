@@ -583,8 +583,8 @@ IndexMesh* IndexMesh::generateIndexedBox(GLdouble length) {
 MbR* MbR::generaIndexMbR(GLuint mm, GLuint nn, glm::dvec3* perfil)
 {
 	MbR* mesh = new MbR();
-	mesh->mNumVertices = 8;
-	mesh->nNumIndices = 36;
+	mesh->mNumVertices = mm * nn;
+	
 	mesh->mPrimitive = GL_TRIANGLES;
 
 	// Definir la primitiva como GL_TRIANGLES
@@ -597,11 +597,11 @@ MbR* MbR::generaIndexMbR(GLuint mm, GLuint nn, glm::dvec3* perfil)
 		GLdouble c = cos(radians(theta));
 		GLdouble s = sin(radians(theta));
 
-
-
 		for (int j = 0; j < mm; j++) {
 			GLdouble z = -s * perfil[j].x + c * perfil[j].z;
-			vs[i] = dvec3(cos(theta), perfil[j].y, z);
+			GLdouble x = c * perfil[j].x + s * perfil[j].z;
+			vs[i] = dvec3(perfil[j].x, perfil[j].y, z);
+			mesh->vVertices.push_back(dvec3(x, perfil[j].y, z));
 		}
 	}
 
@@ -616,22 +616,17 @@ MbR* MbR::generaIndexMbR(GLuint mm, GLuint nn, glm::dvec3* perfil)
 			// de los índices generados hasta ahora . Se recorre
 			// la cara desde la esquina inferior izquierda
 			int indice = i * mm + j;
-			mesh->vIndexes[indiceMayor] = indice;
-			indiceMayor++;
-			mesh->vIndexes[indiceMayor] = (indice + mm) % (nn * mm);
-			indiceMayor++;
-			mesh->vIndexes[indiceMayor] = (indice + mm + 1) % (nn * mm);
-			indiceMayor++;
-			mesh->vIndexes[indiceMayor] = (indice + mm + 1) % (nn * mm);
-			indiceMayor++;
-			mesh->vIndexes[indiceMayor] = indice + 1;
-			indiceMayor++;
-			mesh->vIndexes[indiceMayor] = indice;
-			indiceMayor++;
+			mesh->vIndexes.push_back(indice);
+			mesh->vIndexes.push_back((indice + mm) % (nn * mm));
+			mesh->vIndexes.push_back((indice + mm + 1) % (nn * mm));
+			mesh->vIndexes.push_back((indice + mm + 1) % (nn * mm));
+			mesh->vIndexes.push_back(indice + 1);
+			mesh->vIndexes.push_back(indice);
+
 		}
 	}
 
-
+	mesh->nNumIndices = mesh->vIndexes.size();
 	return mesh;
 
 

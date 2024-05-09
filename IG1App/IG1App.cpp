@@ -45,6 +45,10 @@ IG1App::init()
 
 	// Granjero Opcional
 
+	Scene* sP5 = new Scene();
+	sP5->initPr3({ new Toroid(12, 50, 20, 20) , new EjesRGB(200)}); // , new Ground(400,400), new AdvancedTIE() new IndexedBox()
+	mScenes.push_back(sP5);
+
 	Scene* sP4Opt = new Scene();
 	CompoundEntity* granjero = new CompoundEntity();
 
@@ -84,9 +88,7 @@ IG1App::init()
 	sP4Opt->initPr3({ granjero });
 	mScenes.push_back(sP4Opt);
 
-	Scene* sP5 = new Scene();
-	sP5->initPr3({new Cone(50,50,5)}); // , new Ground(400,400), new AdvancedTIE() new IndexedBox()
-	mScenes.push_back(sP5);
+
 
 	// Pr4
 

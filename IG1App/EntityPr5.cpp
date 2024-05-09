@@ -44,3 +44,98 @@ void Cone::render(glm::dmat4 const& modelViewMat) const {
 		glPolygonMode(GL_FRONT, GL_FILL);
 	}
 }
+
+
+RevSphere::RevSphere(GLdouble r, GLuint m, GLuint n) {
+	
+	dvec3* perfil = new dvec3[m+1];
+
+	GLdouble cx = 0.0;
+	GLdouble cy = 0.0;
+
+	GLdouble step = 180.0 / GLdouble(m);
+	GLdouble initialAngle = 90.0;
+	for (int i = 0; i < m+1; i++)
+	{
+		GLdouble currentAngle = initialAngle + step * i;
+		GLdouble alpha = radians(currentAngle);
+
+		GLdouble x = cx + r * glm::cos(alpha);
+		GLdouble y = cy + r * glm::sin(alpha);
+		perfil[i] = { x, y, 0.0 };
+	}
+
+	this->mMesh = MbR::generaIndexMbR(m+1, n, perfil);
+}
+
+
+void RevSphere::render(glm::dmat4 const& modelViewMat) const {
+	if (mMesh != nullptr) {
+
+		dmat4 aMat = complete_transform(modelViewMat);
+
+		upload(aMat);
+
+		glColor4d(1.0, 1.0, 1.0, 0.5);
+
+		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+
+		mMesh->render();
+
+
+		glPointSize(1);
+		glLineWidth(1);
+		glColor4d(1.0, 1.0, 1.0, 1.0);
+		glEnable(GL_DEPTH_TEST);
+		glDisable(GL_BLEND);
+		glPolygonMode(GL_FRONT, GL_FILL);
+	}
+}
+
+
+
+Toroid::Toroid(GLdouble r, GLdouble R, GLuint m, GLuint p) {
+
+	dvec3* perfil = new dvec3[m + 1];
+
+	GLdouble cx = 0.0;
+	GLdouble cy = 0.0;
+
+	GLdouble step = 360.0 / GLdouble(m);
+	GLdouble initialAngle = 90.0;
+	for (int i = 0; i < m + 1; i++)
+	{
+		GLdouble currentAngle = initialAngle + step * i;
+		GLdouble alpha = radians(currentAngle);
+
+		GLdouble x = cx + r * glm::cos(alpha) + R;
+		GLdouble y = cy + r * glm::sin(alpha) + R;
+		perfil[i] = { x, y, 0.0 };
+	}
+
+	this->mMesh = MbR::generaIndexMbR(m + 1, p, perfil);
+}
+
+
+void Toroid::render(glm::dmat4 const& modelViewMat) const {
+	if (mMesh != nullptr) {
+
+		dmat4 aMat = complete_transform(modelViewMat);
+
+		upload(aMat);
+
+		glColor4d(1.0, 1.0, 1.0, 0.5);
+
+		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+
+		mMesh->render();
+
+
+		glPointSize(1);
+		glLineWidth(1);
+		glColor4d(1.0, 1.0, 1.0, 1.0);
+		glEnable(GL_DEPTH_TEST);
+		glDisable(GL_BLEND);
+		glPolygonMode(GL_FRONT, GL_FILL);
+	}
+}
