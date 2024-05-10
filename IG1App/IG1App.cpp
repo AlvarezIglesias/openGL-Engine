@@ -52,7 +52,7 @@ IG1App::init()
 
 	// Granjero Opcional
 
-	Scene* sP4Opt = new Scene();
+	/*Scene* sP4Opt = new Scene();
 	CompoundEntity* granjero = new CompoundEntity();
 
 	Abs_Entity* cabeza = new Sphere(150);
@@ -89,7 +89,7 @@ IG1App::init()
 	granjero->addEntity(ojoI);
 
 	sP4Opt->initPr3({ granjero });
-	mScenes.push_back(sP4Opt);
+	mScenes.push_back(sP4Opt);*/
 
 	// Pr4
 
@@ -106,7 +106,7 @@ IG1App::init()
 	sP4->initPr3({ planet, ship , new EjesRGB(2000) }); // , new Ground(400,400), new AdvancedTIE() new IndexedBox()
 	mScenes.push_back(sP4);
 
-	Scene* sP4_2 = new Scene();
+	/*Scene* sP4_2 = new Scene();
 	sP4_2->initPr3({ new TrianguloFicticio() , new AdvancedTIE() , new EjesRGB(400)}); // , new Ground(400,400), new AdvancedTIE() new IndexedBox()
 	mScenes.push_back(sP4_2);
 
@@ -129,7 +129,7 @@ IG1App::init()
 		, photo
 		});
 
-	mScenes.push_back(sPr2);
+	mScenes.push_back(sPr2);*/
 /*	mCameras[0]->set3D();
 	mCameras[1]->set3D();
 	//mCameras[1]->setCenital();*/
