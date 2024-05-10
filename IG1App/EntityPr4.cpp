@@ -120,6 +120,8 @@ void CompoundEntity::initTextures(std::vector<Texture*>& sceneTextures) {
 // Wing Advanced TIE
 //----------------------------------------------------------------------------------------------
 
+SpotLight* AdvancedTIE::spotLight = new SpotLight();
+
 WingAdvancedTIE::WingAdvancedTIE(GLdouble w, GLdouble h)
 			: Abs_Entity() {
 	mMesh = Mesh::generateWingAdvancedTIE(w, h);
@@ -249,6 +251,10 @@ IndexedBox::render(glm::dmat4 const& modelViewMat) const {
 }
 
 
+//----------------------------------------------------------------------------------------------
+// Triángulo Ficticio
+//----------------------------------------------------------------------------------------------
+
 TrianguloFicticio::TrianguloFicticio() {
 	Abs_Entity* triangle = new RGBTriangle(50);
 	triangle->mPosition.x = 300;
@@ -265,13 +271,16 @@ TrianguloFicticio::update() {
 }
 
 
-
+//----------------------------------------------------------------------------------------------
+// ShipOrbit
+//----------------------------------------------------------------------------------------------
 
 ShipOrbit::ShipOrbit(GLdouble orbitRaidus) {
 	Abs_Entity* ship = new AdvancedTIE();
 	ship->mPosition.x = orbitRaidus;
 	ship->mRotation.z = 90;
 	addEntity(ship);
+
 	Abs_Entity* circle = new RegularPolygon(100, orbitRaidus);
 	addEntity(circle);
 

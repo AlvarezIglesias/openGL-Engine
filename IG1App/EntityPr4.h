@@ -80,7 +80,7 @@ public:
 	~AdvancedTIE() {}
 
 	// APARTADO 79
-	SpotLight* spotLight = new SpotLight();
+	static SpotLight* spotLight;
 	virtual void render(glm::dmat4 const& modelViewMat) const;
 };
 
@@ -108,5 +108,5 @@ public:
 	~ShipOrbit() {};
 	void update();
 	GLdouble directionY = 0;
-
+	Abs_Entity* getAdvancedTie() { return gObjects[0]; };
 };

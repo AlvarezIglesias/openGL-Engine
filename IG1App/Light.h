@@ -2,8 +2,6 @@
 
 #include <GL/freeglut.h>
 #include <glm/glm.hpp>
-#include "Entity.h"
-#include "Mesh.h"
 
 // Apartado 73
 class Material {

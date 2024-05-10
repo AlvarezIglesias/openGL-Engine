@@ -59,6 +59,7 @@ IG1App::init()
 
 	ShipOrbit* ship = new ShipOrbit(800);
 	sP4->setShip(ship);
+	sP4->setAdvancedTIE((AdvancedTIE*)ship->getAdvancedTie());
 
 	current_camera()->setEye(ship->mPosition);
 
@@ -106,8 +107,10 @@ IG1App::init()
 	sP4Opt->initPr3({ granjero });
 	mScenes.push_back(sP4Opt);
 
-	/*Scene* sP4_2 = new Scene();
-	sP4_2->initPr3({ new TrianguloFicticio() , new AdvancedTIE() , new EjesRGB(400)}); // , new Ground(400,400), new AdvancedTIE() new IndexedBox()
+	Scene* sP4_2 = new Scene();
+	AdvancedTIE* tie = new AdvancedTIE();
+	sP4_2->setAdvancedTIE(tie); // APARTADO 79
+	sP4_2->initPr3({ new TrianguloFicticio() , tie , new EjesRGB(400)}); // , new Ground(400,400), new AdvancedTIE() new IndexedBox()
 	mScenes.push_back(sP4_2);
 
 	Scene* s2D = new Scene();
@@ -129,7 +132,7 @@ IG1App::init()
 		, photo
 		});
 
-	mScenes.push_back(sPr2);*/
+	mScenes.push_back(sPr2);
 /*	mCameras[0]->set3D();
 	mCameras[1]->set3D();
 	//mCameras[1]->setCenital();*/
@@ -264,9 +267,11 @@ IG1App::key(unsigned char key, int x, int y)
 			current_camera()->set2D();
 			break;
 		case '0':
+			if (current_scene()->hasAdvandcedTIE()) current_scene()->disableTieLight();
 			setScene(--mId);
 			break;
 		case '1':
+			if (current_scene()->hasAdvandcedTIE()) current_scene()->disableTieLight();
 			setScene(++mId);
 			break;
 		//case '2':
@@ -324,6 +329,14 @@ IG1App::key(unsigned char key, int x, int y)
 		case 'x':
 			// APARTADO 78
 			current_scene()->spotLight->disable();
+			break;
+		case 'v':
+			// APARTADO 79
+			if (current_scene()->hasAdvandcedTIE()) current_scene()->enableTieLight();
+			break;
+		case 'b':
+			// APARTADO 79
+			if (current_scene()->hasAdvandcedTIE()) current_scene()->disableTieLight();
 			break;
 		default:
 			need_redisplay = false;

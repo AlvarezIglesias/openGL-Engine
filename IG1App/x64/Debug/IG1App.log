@@ -59,4 +59,8 @@ C:\Users\alvar\Documents\GitHub\openGL-Engine\IG1App\EntityPr4.cpp(71,20): warni
           [
               T=glm::f64
           ]
+  IG1App.cpp
+  main.cpp
+  Scene.cpp
+  Generando código...
   IG1App.vcxproj -> C:\Users\alvar\Documents\GitHub\openGL-Engine\bin\IG1AppDebug.exe

@@ -5,8 +5,6 @@
 #include <glm/glm.hpp>
 
 #include "Camera.h"
-#include "Light.h"
-#include "Entity.h"
 #include "EntityPr4.h"
 
 #include <vector>
@@ -17,6 +15,8 @@ public:
 	Scene() = default;
 	~Scene()
 	{
+		delete at;
+		delete ship;
 		free();
 		resetGL();
 	};
@@ -57,12 +57,19 @@ public:
 	static SpotLight* spotLight;
 	static void initSpotLight();
 
+	// APARTADO 79
+	void setAdvancedTIE(AdvancedTIE* _at) { at = _at; };
+	bool hasAdvandcedTIE() { return at != nullptr; };
+	void enableTieLight() { at->spotLight->enable(); };
+	void disableTieLight() { at->spotLight->disable(); };
+
 protected:
 	void free();
 	void setGL();
 	void resetGL();
 
 	ShipOrbit * ship = nullptr;
+	AdvancedTIE * at = nullptr;
 
 	std::vector<Abs_Entity*> gObjects; // Entities (graphic objects) of the scene
 	std::vector<Texture*> gTextures; // APARTADO 19
