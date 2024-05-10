@@ -1,10 +1,16 @@
 #include "Scene.h"
 #include "CheckML.h"
+#include "Light.h"
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include "EntityPr1.h"
 
 using namespace glm;
+
+// Init Lights in order
+DirLight* Scene::dirLight = new DirLight(); // GL_LIGHT0
+PosLight* Scene::posLight = new PosLight(); // GL_LIGHT1
+SpotLight* Scene::spotLight = new SpotLight(); // GL_LIGHT2
 
 void
 Scene::init()
@@ -104,6 +110,9 @@ Scene::free()
 		delete t;
 		t = nullptr;
 	}
+
+	delete dirLight;
+	delete posLight;
 }
 void
 Scene::setGL()
@@ -135,7 +144,10 @@ Scene::resetGL()
 void
 Scene::render(Camera const& cam) const
 {
-	sceneDirLight(cam); // APARTADO 56
+	//sceneDirLight(cam); // APARTADO 56
+	dirLight->upload(cam.viewMat()); // APARTADO 76
+	posLight->upload(cam.viewMat()); // APARTADO 77
+	spotLight->upload(cam.viewMat()); // APARTADO 78
 
 	cam.upload();
 
@@ -168,6 +180,38 @@ void Scene::sceneDirLight(Camera const& cam) const {
 	glLightfv(GL_LIGHT0, GL_AMBIENT, value_ptr(ambient));
 	glLightfv(GL_LIGHT0, GL_DIFFUSE, value_ptr(diffuse));
 	glLightfv(GL_LIGHT0, GL_SPECULAR, value_ptr(specular));
+}
+
+// APARTADO 76
+void Scene::initDirLight() {
+	Scene::dirLight->setPosDir(glm::fvec3{ 1, 1, 1 });
+	Scene::dirLight->setAmb(glm::fvec4{ 0, 0, 0, 1 });
+	Scene::dirLight->setDiff(glm::fvec4{ 1, 1, 1, 1 });
+	Scene::dirLight->setSpec(glm::fvec4{ 0.5, 0.5, 0.5, 1 });
+	
+	Scene::dirLight->enable();
+}
+
+// APARTADO 77
+void Scene::initPosLight() {
+	Scene::posLight->setAmb(glm::fvec4{ 0, 0, 0, 1 });
+	Scene::posLight->setDiff(glm::fvec4{ 1, 1, 0, 1 });
+	Scene::posLight->setSpec(glm::fvec4{ 0.5, 0.5, 0.5, 1 });
+	Scene::posLight->setPosDir(glm::fvec3{ 100, 100, 0.0});
+
+	Scene::posLight->enable();
+}
+
+// APARTADO 78
+void Scene::initSpotLight() {
+	Scene::spotLight->setAmb(glm::fvec4{ 0, 0, 0, 1 });
+	Scene::spotLight->setDiff(glm::fvec4{ 1, 1, 1, 1 });
+	Scene::spotLight->setSpec(glm::fvec4{ 0.5, 0.5, 0.5, 1 });
+	Scene::spotLight->setPosDir(glm::fvec3{ 0.0, 500, 500});
+
+	// Scene::spotLight->setSpot(glm::vec3{ 0.0, 0.0, -1.0 }, 20, 10);
+
+	Scene::spotLight->enable();
 }
 
 

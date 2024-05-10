@@ -6,6 +6,7 @@
 #include <vector>
 #include "Entity.h"
 #include "Mesh.h"
+#include "Light.h"
 
 // APARTADO 57
 class QuadricEntity : public Abs_Entity {
@@ -77,6 +78,10 @@ class AdvancedTIE : public CompoundEntity {
 public:
 	AdvancedTIE();
 	~AdvancedTIE() {}
+
+	// APARTADO 79
+	static SpotLight* spotLight;
+	virtual void render(glm::dmat4 const& modelViewMat) const;
 };
 
 // APARTADO 64
@@ -103,5 +108,5 @@ public:
 	~ShipOrbit() {};
 	void update();
 	GLdouble directionY = 0;
-
+	Abs_Entity* getAdvancedTie() { return gObjects[0]; };
 };

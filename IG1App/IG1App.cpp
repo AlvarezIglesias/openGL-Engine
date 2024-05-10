@@ -43,6 +43,29 @@ IG1App::init()
 	
 	for (Viewport* vp : mViewPorts) mCameras.push_back(new Camera(vp));
 
+	// Set Lights
+	glEnable(GL_LIGHTING);
+
+	Scene::initDirLight(); // APARTADO 76
+	Scene::initPosLight(); // APARTADO 77
+	Scene::initSpotLight(); // APARTADO 78
+
+	// Pr4
+
+	Scene* sP4 = new Scene();
+
+	Abs_Entity* planet = new Sphere(500);
+	planet->mColor = { 255.0 / 255.0, 233.0 / 255.0, 0.0 , 1.0};
+
+	ShipOrbit* ship = new ShipOrbit(800);
+	sP4->setShip(ship);
+	sP4->setAdvancedTIE((AdvancedTIE*)ship->getAdvancedTie());
+
+	current_camera()->setEye(ship->mPosition);
+
+	sP4->initPr3({ planet, ship , new EjesRGB(2000) }); // , new Ground(400,400), new AdvancedTIE() new IndexedBox()
+	mScenes.push_back(sP4);
+
 	// Granjero Opcional
 
 	Scene* sP4Opt = new Scene();
@@ -84,23 +107,10 @@ IG1App::init()
 	sP4Opt->initPr3({ granjero });
 	mScenes.push_back(sP4Opt);
 
-	// Pr4
-
-	Scene* sP4 = new Scene();
-
-	Abs_Entity* planet = new Sphere(500);
-	planet->mColor = { 255.0 / 255.0, 233.0 / 255.0, 0.0 , 1.0};
-
-	ShipOrbit* ship = new ShipOrbit(800);
-	sP4->setShip(ship);
-
-	current_camera()->setEye(ship->mPosition);
-
-	sP4->initPr3({ planet, ship , new EjesRGB(2000) }); // , new Ground(400,400), new AdvancedTIE() new IndexedBox()
-	mScenes.push_back(sP4);
-
 	Scene* sP4_2 = new Scene();
-	sP4_2->initPr3({ new TrianguloFicticio() , new AdvancedTIE() , new EjesRGB(400)}); // , new Ground(400,400), new AdvancedTIE() new IndexedBox()
+	AdvancedTIE* tie = new AdvancedTIE();
+	sP4_2->setAdvancedTIE(tie); // APARTADO 79
+	sP4_2->initPr3({ new TrianguloFicticio() , tie , new EjesRGB(400)}); // , new Ground(400,400), new AdvancedTIE() new IndexedBox()
 	mScenes.push_back(sP4_2);
 
 	Scene* s2D = new Scene();
@@ -257,9 +267,11 @@ IG1App::key(unsigned char key, int x, int y)
 			current_camera()->set2D();
 			break;
 		case '0':
+			if (current_scene()->hasAdvandcedTIE()) current_scene()->disableTieLight();
 			setScene(--mId);
 			break;
 		case '1':
+			if (current_scene()->hasAdvandcedTIE()) current_scene()->disableTieLight();
 			setScene(++mId);
 			break;
 		//case '2':
@@ -293,6 +305,38 @@ IG1App::key(unsigned char key, int x, int y)
 			break;
 		case 'k':
 			m2Vistas = !m2Vistas;
+			break;
+		case 'q':
+			// APARTADO 76
+			current_scene()->dirLight->enable();
+			break;
+		case 'w':
+			// APARTADO 76
+			current_scene()->dirLight->disable();
+			break;
+		case 'a':
+			// APARTADO 77
+			current_scene()->posLight->enable();
+			break;
+		case 's':
+			// APARTADO 77
+			current_scene()->posLight->disable();
+			break;
+		case 'z':
+			// APARTADO 78
+			current_scene()->spotLight->enable();
+			break;
+		case 'x':
+			// APARTADO 78
+			current_scene()->spotLight->disable();
+			break;
+		case 'v':
+			// APARTADO 79
+			if (current_scene()->hasAdvandcedTIE()) current_scene()->enableTieLight();
+			break;
+		case 'b':
+			// APARTADO 79
+			if (current_scene()->hasAdvandcedTIE()) current_scene()->disableTieLight();
 			break;
 		default:
 			need_redisplay = false;

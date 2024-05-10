@@ -120,6 +120,8 @@ void CompoundEntity::initTextures(std::vector<Texture*>& sceneTextures) {
 // Wing Advanced TIE
 //----------------------------------------------------------------------------------------------
 
+SpotLight* AdvancedTIE::spotLight = new SpotLight();
+
 WingAdvancedTIE::WingAdvancedTIE(GLdouble w, GLdouble h)
 			: Abs_Entity() {
 	mMesh = Mesh::generateWingAdvancedTIE(w, h);
@@ -188,7 +190,7 @@ AdvancedTIE::AdvancedTIE()
 
 	// 0 65 106 / 255
 
-	// Front
+	// Frontfff
 	Abs_Entity* front = new Cylinder(10, 10, 100);
 	front->mRotation.y += 90;
 	front->mColor = dvec4(0.0, 65.0 / 255.0, 106.0 / 255.0, 1.0);
@@ -201,6 +203,29 @@ AdvancedTIE::AdvancedTIE()
 	disk->mColor = dvec4(0.0, 65.0 / 255.0, 106.0 / 255.0, 1.0);
 	addEntity(disk);
 
+	// APARTADO 79 FOCO
+	spotLight->setAmb(glm::fvec4{ 0, 0, 0, 1 });
+	spotLight->setDiff(glm::fvec4{ 1, 1, 1, 1 });
+	spotLight->setSpec(glm::fvec4{ 0.5, 0.5, 0.5, 1 });
+	spotLight->setPosDir(glm::fvec3{ mPosition.x, mPosition.y, mPosition.z });
+
+	// spotLight->setSpot(glm::vec3{ 0.0, 0.0, -1.0 }, 95, 0); // No consigo hacerlo más pequeño
+
+	spotLight->enable();
+
+}
+
+void AdvancedTIE::render(glm::dmat4 const& modelViewMat) const {
+
+	glm::dmat4 modelViewMatComp = complete_transform(modelViewMat) * mModelMat;
+	upload(modelViewMatComp);
+
+	for (Abs_Entity* ent : gObjects) {
+		ent->render(modelViewMatComp);
+	}
+
+	spotLight->setPosDir(glm::fvec3{ mPosition.x, mPosition.y, mPosition.z });
+	spotLight->upload(modelViewMat);
 }
 
 //----------------------------------------------------------------------------------------------
@@ -226,6 +251,10 @@ IndexedBox::render(glm::dmat4 const& modelViewMat) const {
 }
 
 
+//----------------------------------------------------------------------------------------------
+// Triángulo Ficticio
+//----------------------------------------------------------------------------------------------
+
 TrianguloFicticio::TrianguloFicticio() {
 	Abs_Entity* triangle = new RGBTriangle(50);
 	triangle->mPosition.x = 300;
@@ -242,13 +271,16 @@ TrianguloFicticio::update() {
 }
 
 
-
+//----------------------------------------------------------------------------------------------
+// ShipOrbit
+//----------------------------------------------------------------------------------------------
 
 ShipOrbit::ShipOrbit(GLdouble orbitRaidus) {
 	Abs_Entity* ship = new AdvancedTIE();
 	ship->mPosition.x = orbitRaidus;
 	ship->mRotation.z = 90;
 	addEntity(ship);
+
 	Abs_Entity* circle = new RegularPolygon(100, orbitRaidus);
 	addEntity(circle);
 
