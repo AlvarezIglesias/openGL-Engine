@@ -157,7 +157,6 @@ Scene::render(Camera const& cam) const
 }
 
 // Apartado 13
-
 void 
 Scene::update() const
 {
@@ -199,7 +198,7 @@ void Scene::initPosLight() {
 	Scene::posLight->setSpec(glm::fvec4{ 0.5, 0.5, 0.5, 1 });
 	Scene::posLight->setPosDir(glm::fvec3{ 100, 100, 0.0});
 
-	Scene::posLight->enable();
+	Scene::posLight->disable();
 }
 
 // APARTADO 78
@@ -211,9 +210,8 @@ void Scene::initSpotLight() {
 
 	// Scene::spotLight->setSpot(glm::vec3{ 0.0, 0.0, -1.0 }, 20, 10);
 
-	Scene::spotLight->enable();
+	Scene::spotLight->disable();
 }
-
 
 void 
 Scene::registerTexture(Texture* texture) {

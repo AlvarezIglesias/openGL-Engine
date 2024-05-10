@@ -474,8 +474,8 @@ Mesh::generateWingAdvancedTIE(GLdouble w, GLdouble h) {
 
 glm::dvec3
 IndexMesh::buildNormalVectors(int init) {
-	/*dvec3 n = dvec3(0, 0, 0);
-	dvec3 vertActual;
+	dvec3 n = dvec3(0, 0, 0);
+	/*dvec3 vertActual;
 	dvec3 vertSiguiente;
 	for (int i = 0; i < 3; i++) {
 		vertActual = vVertices[vIndexes[init +i]];
@@ -486,7 +486,8 @@ IndexMesh::buildNormalVectors(int init) {
 	}*/
 
 
-	return glm::normalize(cross((vVertices[vIndexes[init + 2]] - vVertices[vIndexes[init + 1]]), (vVertices[vIndexes[init + 0]] - vVertices[vIndexes[init + 1]])));
+	//return -normalize(n);
+	return cross((vVertices[vIndexes[init + 1]] - vVertices[vIndexes[init + 0]]), (vVertices[vIndexes[init + 2]] - vVertices[vIndexes[init + 0]]));
 }
 
 void
@@ -497,8 +498,33 @@ IndexMesh::draw() const {
 void 
 IndexMesh::buildNormalVectors() {
 
-	for (int i = 0; i < nNumIndices/3; i++) {
-		vNormals.push_back(buildNormalVectors(i * 3));
+
+	/*for (int i = 0; i < nNumIndices / 3; i++) {
+		glm::dvec3 tmp = dvec3(0);
+		tmp += buildNormalVectors(i * 3);
+		vNormals.push_back(normalize(tmp));
+		vNormals.push_back(normalize(tmp));
+		vNormals.push_back(normalize(tmp));
+	}*/
+
+	vNormals.clear();
+	vNormals.resize(mNumVertices, dvec3(0.0, 0.0, 0.0));
+	
+	for (int i = 0; i < nNumIndices; i+=3)
+	{
+		glm::dvec3 a = vVertices[vIndexes[i]];
+		glm::dvec3 b = vVertices[vIndexes[i+1]];
+		glm::dvec3 c = vVertices[vIndexes[i+2]];
+
+		glm::dvec3 normal = cross(b - a, c - a);
+
+		vNormals[vIndexes[i]] += normal;
+		vNormals[vIndexes[i+1]] += normal;
+		vNormals[vIndexes[i+2]] += normal;
+	}
+	
+	for (int i = 0;  i < vNormals.size(); i++) {
+		vNormals[i] = normalize(vNormals[i]);
 	}
 }
 
@@ -559,7 +585,7 @@ IndexMesh* IndexMesh::generateIndexedBox(GLdouble length) {
 		4,3,7,
 		//right
 		5,6,2,
-		1,5,2
+		5,2,1 //1,5,2
 	};
 
 	mesh->buildNormalVectors();
@@ -614,8 +640,7 @@ MbR* MbR::generaIndexMbR(GLuint mm, GLuint nn, glm::dvec3* perfil)
 	}
 
 	mesh->nNumIndices = mesh->vIndexes.size();
+	mesh->buildNormalVectors();
 	return mesh;
-
-
 }
 

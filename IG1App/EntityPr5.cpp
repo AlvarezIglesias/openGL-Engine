@@ -1,9 +1,4 @@
-#include "Entity.h"
-#include "EntityPr4.h"
 #include "EntityPr5.h"
-#include "EntityPr1.h"
-#include "Texture.h"
-#include "Light.h"
 
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
@@ -76,19 +71,30 @@ void RevSphere::render(glm::dmat4 const& modelViewMat) const {
 
 		upload(aMat);
 
-		glColor4d(1.0, 1.0, 1.0, 0.5);
+		if (material != nullptr) {
+			glDisable(GL_COLOR_MATERIAL);
+			glColor4d(1.0, 1.0, 1.0, 1.0);
+			material->upload();
+			//glColorMaterial(GL_NONE, GL_AMBIENT);
+		}
 
-		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+		else {
+			//glEnable(GL_COLOR_MATERIAL);
+			glColor4d(mColor[0], mColor[1], mColor[2], mColor[3]);
+		}
+
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
 		mMesh->render();
 
 
+		glEnable(GL_COLOR_MATERIAL);
 		glPointSize(1);
 		glLineWidth(1);
 		glColor4d(1.0, 1.0, 1.0, 1.0);
 		glEnable(GL_DEPTH_TEST);
 		glDisable(GL_BLEND);
-		glPolygonMode(GL_FRONT, GL_FILL);
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	}
 }
 
@@ -124,27 +130,17 @@ void Toroid::render(glm::dmat4 const& modelViewMat) const {
 
 		upload(aMat);
 
-		glColor4d(1.0, 1.0, 1.0, 0.5);
+		glColor4d(mColor[0], mColor[1], mColor[2], mColor[3]);
 
-		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
 		mMesh->render();
-
 
 		glPointSize(1);
 		glLineWidth(1);
 		glColor4d(1.0, 1.0, 1.0, 1.0);
 		glEnable(GL_DEPTH_TEST);
 		glDisable(GL_BLEND);
-		glPolygonMode(GL_FRONT, GL_FILL);
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	}
 }
-// Apartado 73
-class EntityWithMaterial : public Abs_Entity {
-public:
-	EntityWithMaterial() : Abs_Entity() { };
-	virtual ~EntityWithMaterial() { };
-	void setMaterial(Material* matl) { material = matl; };
-protected:
-	Material* material = nullptr;
-};

@@ -209,7 +209,7 @@ AdvancedTIE::AdvancedTIE()
 	spotLight->setSpec(glm::fvec4{ 0.5, 0.5, 0.5, 1 });
 	spotLight->setPosDir(glm::fvec3{ mPosition.x, mPosition.y, mPosition.z });
 
-	// spotLight->setSpot(glm::vec3{ 0.0, 0.0, -1.0 }, 95, 0); // No consigo hacerlo más pequeño
+	// spotLight->setSpot(glm::vec3{ 0.0, 0.0, -1.0 }, 95, 0);
 
 	spotLight->enable();
 
