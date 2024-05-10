@@ -3,16 +3,16 @@
 #include "EntityPr5.h"
 #include "EntityPr1.h"
 #include "Texture.h"
+#include "Light.h"
 
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
 using namespace glm;
 
-
 Cone::Cone(GLdouble h, GLdouble r, GLuint n) {
 	// h= altura del cono , r= radio de la base
-	// n= número de muestras , m= número de puntos del perfil
+	// n= nï¿½mero de muestras , m= nï¿½mero de puntos del perfil
 	int m = 3;
 	dvec3* perfil = new dvec3[m];
 	perfil[0] = dvec3(0.5, 0.0, 0.0);
@@ -139,3 +139,12 @@ void Toroid::render(glm::dmat4 const& modelViewMat) const {
 		glPolygonMode(GL_FRONT, GL_FILL);
 	}
 }
+// Apartado 73
+class EntityWithMaterial : public Abs_Entity {
+public:
+	EntityWithMaterial() : Abs_Entity() { };
+	virtual ~EntityWithMaterial() { };
+	void setMaterial(Material* matl) { material = matl; };
+protected:
+	Material* material = nullptr;
+};

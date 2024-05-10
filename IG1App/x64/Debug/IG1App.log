@@ -8,3 +8,69 @@ C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\Mesh.cpp(595,20): warning C4
 C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\Mesh.cpp(599,21): warning C4018: '<': no coinciden signed/unsigned
 C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\Mesh.cpp(614,41): warning C4267: '=': conversión de 'size_t' a 'GLuint'; posible pérdida de datos
   IG1App.vcxproj -> C:\MisCosas\Programacion\Clase\openGL-Engine\bin\IG1AppDebug.exe
+﻿  EntityPr4.cpp
+C:\Users\alvar\Documents\GitHub\openGL-Engine\IG1App\EntityPr4.cpp(20,42): warning C4244: 'argumento': conversión de 'const T' a 'GLfloat'; posible pérdida de datos
+          with
+          [
+              T=glm::f64
+          ]
+C:\Users\alvar\Documents\GitHub\openGL-Engine\IG1App\EntityPr4.cpp(20,31): warning C4244: 'argumento': conversión de 'const T' a 'GLfloat'; posible pérdida de datos
+          with
+          [
+              T=glm::f64
+          ]
+C:\Users\alvar\Documents\GitHub\openGL-Engine\IG1App\EntityPr4.cpp(20,20): warning C4244: 'argumento': conversión de 'const T' a 'GLfloat'; posible pérdida de datos
+          with
+          [
+              T=glm::f64
+          ]
+C:\Users\alvar\Documents\GitHub\openGL-Engine\IG1App\EntityPr4.cpp(37,42): warning C4244: 'argumento': conversión de 'const T' a 'GLfloat'; posible pérdida de datos
+          with
+          [
+              T=glm::f64
+          ]
+C:\Users\alvar\Documents\GitHub\openGL-Engine\IG1App\EntityPr4.cpp(37,31): warning C4244: 'argumento': conversión de 'const T' a 'GLfloat'; posible pérdida de datos
+          with
+          [
+              T=glm::f64
+          ]
+C:\Users\alvar\Documents\GitHub\openGL-Engine\IG1App\EntityPr4.cpp(37,20): warning C4244: 'argumento': conversión de 'const T' a 'GLfloat'; posible pérdida de datos
+          with
+          [
+              T=glm::f64
+          ]
+C:\Users\alvar\Documents\GitHub\openGL-Engine\IG1App\EntityPr4.cpp(54,42): warning C4244: 'argumento': conversión de 'const T' a 'GLfloat'; posible pérdida de datos
+          with
+          [
+              T=glm::f64
+          ]
+C:\Users\alvar\Documents\GitHub\openGL-Engine\IG1App\EntityPr4.cpp(54,31): warning C4244: 'argumento': conversión de 'const T' a 'GLfloat'; posible pérdida de datos
+          with
+          [
+              T=glm::f64
+          ]
+C:\Users\alvar\Documents\GitHub\openGL-Engine\IG1App\EntityPr4.cpp(54,20): warning C4244: 'argumento': conversión de 'const T' a 'GLfloat'; posible pérdida de datos
+          with
+          [
+              T=glm::f64
+          ]
+C:\Users\alvar\Documents\GitHub\openGL-Engine\IG1App\EntityPr4.cpp(71,42): warning C4244: 'argumento': conversión de 'const T' a 'GLfloat'; posible pérdida de datos
+          with
+          [
+              T=glm::f64
+          ]
+C:\Users\alvar\Documents\GitHub\openGL-Engine\IG1App\EntityPr4.cpp(71,31): warning C4244: 'argumento': conversión de 'const T' a 'GLfloat'; posible pérdida de datos
+          with
+          [
+              T=glm::f64
+          ]
+C:\Users\alvar\Documents\GitHub\openGL-Engine\IG1App\EntityPr4.cpp(71,20): warning C4244: 'argumento': conversión de 'const T' a 'GLfloat'; posible pérdida de datos
+          with
+          [
+              T=glm::f64
+          ]
+  IG1App.cpp
+  main.cpp
+  Scene.cpp
+  Generando código...
+  IG1App.vcxproj -> C:\Users\alvar\Documents\GitHub\openGL-Engine\bin\IG1AppDebug.exe

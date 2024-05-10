@@ -5,7 +5,6 @@
 #include <glm/glm.hpp>
 
 #include "Camera.h"
-#include "Entity.h"
 #include "EntityPr4.h"
 
 #include <vector>
@@ -16,6 +15,8 @@ public:
 	Scene() = default;
 	~Scene()
 	{
+		delete at;
+		delete ship;
 		free();
 		resetGL();
 	};
@@ -47,7 +48,23 @@ public:
 	glm::dvec4 backgroundColor = { 0.6, 0.7, 0.8, 1.0 };
 	void setBackground() { glClearColor(backgroundColor.x, backgroundColor.y, backgroundColor.z, backgroundColor.a); };
 
+	// APARTADO 76
+	static DirLight* dirLight;
+	static void initDirLight();
 
+	// APARTADO 77
+	static PosLight* posLight;
+	static void initPosLight();
+
+	// APARTADO 78
+	static SpotLight* spotLight;
+	static void initSpotLight();
+
+	// APARTADO 79
+	void setAdvancedTIE(AdvancedTIE* _at) { at = _at; };
+	bool hasAdvandcedTIE() { return at != nullptr; };
+	void enableTieLight() { at->spotLight->enable(); };
+	void disableTieLight() { at->spotLight->disable(); };
 
 protected:
 	void free();
@@ -55,6 +72,7 @@ protected:
 	void resetGL();
 
 	ShipOrbit * ship = nullptr;
+	AdvancedTIE * at = nullptr;
 
 	std::vector<Abs_Entity*> gObjects; // Entities (graphic objects) of the scene
 	std::vector<Texture*> gTextures; // APARTADO 19
