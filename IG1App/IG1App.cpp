@@ -50,9 +50,24 @@ IG1App::init()
 	Scene::initPosLight(); // APARTADO 77
 	Scene::initSpotLight(); // APARTADO 78
 
+	// Pr4
+
+	Scene* sP4 = new Scene();
+
+	Abs_Entity* planet = new Sphere(500);
+	planet->mColor = { 255.0 / 255.0, 233.0 / 255.0, 0.0 , 1.0};
+
+	ShipOrbit* ship = new ShipOrbit(800);
+	sP4->setShip(ship);
+
+	current_camera()->setEye(ship->mPosition);
+
+	sP4->initPr3({ planet, ship , new EjesRGB(2000) }); // , new Ground(400,400), new AdvancedTIE() new IndexedBox()
+	mScenes.push_back(sP4);
+
 	// Granjero Opcional
 
-	/*Scene* sP4Opt = new Scene();
+	Scene* sP4Opt = new Scene();
 	CompoundEntity* granjero = new CompoundEntity();
 
 	Abs_Entity* cabeza = new Sphere(150);
@@ -89,22 +104,7 @@ IG1App::init()
 	granjero->addEntity(ojoI);
 
 	sP4Opt->initPr3({ granjero });
-	mScenes.push_back(sP4Opt);*/
-
-	// Pr4
-
-	Scene* sP4 = new Scene();
-
-	Abs_Entity* planet = new Sphere(500);
-	planet->mColor = { 255.0 / 255.0, 233.0 / 255.0, 0.0 , 1.0};
-
-	ShipOrbit* ship = new ShipOrbit(800);
-	sP4->setShip(ship);
-
-	current_camera()->setEye(ship->mPosition);
-
-	sP4->initPr3({ planet, ship , new EjesRGB(2000) }); // , new Ground(400,400), new AdvancedTIE() new IndexedBox()
-	mScenes.push_back(sP4);
+	mScenes.push_back(sP4Opt);
 
 	/*Scene* sP4_2 = new Scene();
 	sP4_2->initPr3({ new TrianguloFicticio() , new AdvancedTIE() , new EjesRGB(400)}); // , new Ground(400,400), new AdvancedTIE() new IndexedBox()

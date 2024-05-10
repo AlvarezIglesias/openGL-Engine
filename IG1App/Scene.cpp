@@ -199,7 +199,7 @@ void Scene::initPosLight() {
 	Scene::posLight->setSpec(glm::fvec4{ 0.5, 0.5, 0.5, 1 });
 	Scene::posLight->setPosDir(glm::fvec3{ 100, 100, 0.0});
 
-	Scene::spotLight->enable();
+	Scene::posLight->enable();
 }
 
 // APARTADO 78
