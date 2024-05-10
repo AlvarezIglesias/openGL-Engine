@@ -46,8 +46,9 @@ IG1App::init()
 	// Set Lights
 	glEnable(GL_LIGHTING);
 
-	Scene::initDirLight();
-	Scene::initPosLight();
+	Scene::initDirLight(); // APARTADO 76
+	Scene::initPosLight(); // APARTADO 77
+	Scene::initSpotLight(); // APARTADO 78
 
 	// Granjero Opcional
 
@@ -301,16 +302,28 @@ IG1App::key(unsigned char key, int x, int y)
 			m2Vistas = !m2Vistas;
 			break;
 		case 'q':
+			// APARTADO 76
 			current_scene()->dirLight->enable();
 			break;
 		case 'w':
+			// APARTADO 76
 			current_scene()->dirLight->disable();
 			break;
 		case 'a':
+			// APARTADO 77
 			current_scene()->posLight->enable();
 			break;
 		case 's':
+			// APARTADO 77
 			current_scene()->posLight->disable();
+			break;
+		case 'z':
+			// APARTADO 78
+			current_scene()->spotLight->enable();
+			break;
+		case 'x':
+			// APARTADO 78
+			current_scene()->spotLight->disable();
 			break;
 		default:
 			need_redisplay = false;

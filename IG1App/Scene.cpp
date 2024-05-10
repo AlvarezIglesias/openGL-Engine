@@ -7,8 +7,10 @@
 
 using namespace glm;
 
-DirLight* Scene::dirLight = new DirLight();
-PosLight* Scene::posLight = new PosLight();
+// Init Lights in order
+DirLight* Scene::dirLight = new DirLight(); // GL_LIGHT0
+PosLight* Scene::posLight = new PosLight(); // GL_LIGHT1
+SpotLight* Scene::spotLight = new SpotLight(); // GL_LIGHT2
 
 void
 Scene::init()
@@ -144,6 +146,8 @@ Scene::render(Camera const& cam) const
 {
 	//sceneDirLight(cam); // APARTADO 56
 	dirLight->upload(cam.viewMat()); // APARTADO 76
+	posLight->upload(cam.viewMat()); // APARTADO 77
+	spotLight->upload(cam.viewMat()); // APARTADO 78
 
 	cam.upload();
 
@@ -195,7 +199,19 @@ void Scene::initPosLight() {
 	Scene::posLight->setSpec(glm::fvec4{ 0.5, 0.5, 0.5, 1 });
 	Scene::posLight->setPosDir(glm::fvec3{ 100, 100, 0.0});
 
-	Scene::posLight->enable();
+	Scene::spotLight->enable();
+}
+
+// APARTADO 78
+void Scene::initSpotLight() {
+	Scene::spotLight->setAmb(glm::fvec4{ 0, 0, 0, 1 });
+	Scene::spotLight->setDiff(glm::fvec4{ 1, 1, 1, 1 });
+	Scene::spotLight->setSpec(glm::fvec4{ 0.5, 0.5, 0.5, 1 });
+	Scene::spotLight->setPosDir(glm::fvec3{ 0.0, 200, 200});
+
+	Scene::spotLight->setSpot(glm::vec3(0.0, -1.0, -1.0), 45.0, 10.0); // No sé si necesario, pero si no no veo el foco (?)
+
+	Scene::spotLight->enable();
 }
 
 

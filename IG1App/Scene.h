@@ -49,9 +49,13 @@ public:
 	static DirLight* dirLight;
 	static void initDirLight();
 
-	// Apartado 77
+	// APARTADO 77
 	static PosLight* posLight;
 	static void initPosLight();
+
+	// APARTADO 78
+	static SpotLight* spotLight;
+	static void initSpotLight();
 
 protected:
 	void free();
