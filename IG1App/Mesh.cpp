@@ -474,17 +474,19 @@ Mesh::generateWingAdvancedTIE(GLdouble w, GLdouble h) {
 
 glm::dvec3
 IndexMesh::buildNormalVectors(int init) {
-	dvec3 n = dvec3(0, 0, 0);
+	/*dvec3 n = dvec3(0, 0, 0);
 	dvec3 vertActual;
 	dvec3 vertSiguiente;
-	for (int i = init; i < init + 3; i++) {
-		vertActual = vVertices[vIndexes[i]];
-		vertSiguiente = vVertices[vIndexes[(i + 1) % vIndexes.size()]];
+	for (int i = 0; i < 3; i++) {
+		vertActual = vVertices[vIndexes[init +i]];
+		vertSiguiente = vVertices[vIndexes[ init + ((i + 1) % 3)]];
 		n.x += (vertActual.y - vertSiguiente.y) * (vertActual.z + vertSiguiente.z);
 		n.y += (vertActual.z - vertSiguiente.z) * (vertActual.x + vertSiguiente.x);
 		n.z += (vertActual.x - vertSiguiente.x) * (vertActual.y + vertSiguiente.y);
-	}
-	return glm::normalize(n);
+	}*/
+
+
+	return glm::normalize(cross((vVertices[vIndexes[init + 2]] - vVertices[vIndexes[init + 1]]), (vVertices[vIndexes[init + 0]] - vVertices[vIndexes[init + 1]])));
 }
 
 void
