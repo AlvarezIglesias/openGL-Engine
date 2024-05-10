@@ -68,6 +68,10 @@ IG1App::init()
 
 	// Granjero Opcional
 
+	Scene* sP5 = new Scene();
+	sP5->initPr3({ new Toroid(12, 50, 20, 20) , new EjesRGB(200)}); // , new Ground(400,400), new AdvancedTIE() new IndexedBox()
+	mScenes.push_back(sP5);
+
 	Scene* sP4Opt = new Scene();
 	CompoundEntity* granjero = new CompoundEntity();
 
@@ -107,11 +111,33 @@ IG1App::init()
 	sP4Opt->initPr3({ granjero });
 	mScenes.push_back(sP4Opt);
 
+
+
+	// Pr4
+
+	Scene* sP4 = new Scene();
+	sP4->backgroundColor = { 0.0,0.0,0.0,1.0 };
+
+	Abs_Entity* planet = new Sphere(500);
+	planet->mColor = { 255.0 / 255.0, 233.0 / 255.0, 0.0 , 1.0};
+
+	ShipOrbit* ship = new ShipOrbit(800);
+	sP4->setShip(ship);
+
+	current_camera()->setEye(ship->mPosition);
+
+	sP4->initPr3({ planet, ship , new EjesRGB(2000) }); // , new Ground(400,400), new AdvancedTIE() new IndexedBox()
+	mScenes.push_back(sP4);
+
 	Scene* sP4_2 = new Scene();
 	AdvancedTIE* tie = new AdvancedTIE();
 	sP4_2->setAdvancedTIE(tie); // APARTADO 79
 	sP4_2->initPr3({ new TrianguloFicticio() , tie , new EjesRGB(400)}); // , new Ground(400,400), new AdvancedTIE() new IndexedBox()
 	mScenes.push_back(sP4_2);
+
+	Scene* sP4_3 = new Scene();
+	sP4_3->initPr3({ new TrianguloFicticio() , new AdvancedTIE() , new EjesRGB(400)}); // , new Ground(400,400), new AdvancedTIE() new IndexedBox()
+	mScenes.push_back(sP4_3);
 
 	Scene* s2D = new Scene();
 	s2D->init({ new RGBRectangle(400,200) , new RegularPolygon(40, 200), new RGBTriangle(50), new EjesRGB(300) });
@@ -133,11 +159,13 @@ IG1App::init()
 		});
 
 	mScenes.push_back(sPr2);
-/*	mCameras[0]->set3D();
-	mCameras[1]->set3D();
+	current_camera()->set3D();
+	current_camera()->changePrj();
+/*	mCameras[1]->set3D();
 	//mCameras[1]->setCenital();*/
 
-	setScene(0);
+	setScene(3);
+	current_scene()->setBackground();
 
 	/*if (mId == 0) {
 		mCameras[0]->setOnTriangle();
@@ -269,10 +297,12 @@ IG1App::key(unsigned char key, int x, int y)
 		case '0':
 			if (current_scene()->hasAdvandcedTIE()) current_scene()->disableTieLight();
 			setScene(--mId);
+			current_scene()->setBackground();
 			break;
 		case '1':
 			if (current_scene()->hasAdvandcedTIE()) current_scene()->disableTieLight();
 			setScene(++mId);
+			current_scene()->setBackground();
 			break;
 		//case '2':
 		//	setScene(2);

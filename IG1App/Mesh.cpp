@@ -474,17 +474,19 @@ Mesh::generateWingAdvancedTIE(GLdouble w, GLdouble h) {
 
 glm::dvec3
 IndexMesh::buildNormalVectors(int init) {
-	dvec3 n = dvec3(0, 0, 0);
+	/*dvec3 n = dvec3(0, 0, 0);
 	dvec3 vertActual;
 	dvec3 vertSiguiente;
-	for (int i = init; i < init + 3; i++) {
-		vertActual = vVertices[vIndexes[i]];
-		vertSiguiente = vVertices[vIndexes[(i + 1) % vIndexes.size()]];
+	for (int i = 0; i < 3; i++) {
+		vertActual = vVertices[vIndexes[init +i]];
+		vertSiguiente = vVertices[vIndexes[ init + ((i + 1) % 3)]];
 		n.x += (vertActual.y - vertSiguiente.y) * (vertActual.z + vertSiguiente.z);
 		n.y += (vertActual.z - vertSiguiente.z) * (vertActual.x + vertSiguiente.x);
 		n.z += (vertActual.x - vertSiguiente.x) * (vertActual.y + vertSiguiente.y);
-	}
-	return glm::normalize(n);
+	}*/
+
+
+	return glm::normalize(cross((vVertices[vIndexes[init + 2]] - vVertices[vIndexes[init + 1]]), (vVertices[vIndexes[init + 0]] - vVertices[vIndexes[init + 1]])));
 }
 
 void
@@ -561,22 +563,59 @@ IndexMesh* IndexMesh::generateIndexedBox(GLdouble length) {
 	};
 
 	mesh->buildNormalVectors();
-	/*mesh->vNormals = {
-		mesh->buildNormalVectors(0),
-		mesh->buildNormalVectors(3),
-		mesh->buildNormalVectors(6),
-		mesh->buildNormalVectors(9),
-		mesh->buildNormalVectors(12),
-		mesh->buildNormalVectors(15),
-		mesh->buildNormalVectors(18),
-		mesh->buildNormalVectors(21),
-		mesh->buildNormalVectors(24),
-		mesh->buildNormalVectors(27),
-		mesh->buildNormalVectors(30),
-		mesh->buildNormalVectors(33)
-	};*/
-
 	return mesh;
 }
 
+
+MbR* MbR::generaIndexMbR(GLuint mm, GLuint nn, glm::dvec3* perfil)
+{
+	MbR* mesh = new MbR();
+	mesh->mNumVertices = mm * nn;
+	
+	mesh->mPrimitive = GL_TRIANGLES;
+
+	// Definir la primitiva como GL_TRIANGLES
+	// Definir el número de vértices como nn*mm
+	// Usar un vector auxiliar de vértices
+	dvec3* vs = new dvec3[mesh->mNumVertices];
+	for (int i = 0; i < nn; i++) {
+		// Generar la muestra i- ésima de vértices
+		GLdouble theta = i * 360 / nn;
+		GLdouble c = cos(radians(theta));
+		GLdouble s = sin(radians(theta));
+
+		for (int j = 0; j < mm; j++) {
+			GLdouble z = -s * perfil[j].x + c * perfil[j].z;
+			GLdouble x = c * perfil[j].x + s * perfil[j].z;
+			vs[i] = dvec3(perfil[j].x, perfil[j].y, z);
+			mesh->vVertices.push_back(dvec3(x, perfil[j].y, z));
+		}
+	}
+
+	int indiceMayor = 0;
+	// El contador i recorre las muestras alrededor del eje Y
+	for (int i = 0; i < nn; i++){
+		// El contador j recorre los vértices del perfil ,
+		// de abajo arriba . Las caras cuadrangulares resultan
+		// al unir la muestra i- ésima con la (i +1)% nn - ésima
+		for (int j = 0; j < mm - 1; j++){
+			// El contador indice sirve para llevar cuenta
+			// de los índices generados hasta ahora . Se recorre
+			// la cara desde la esquina inferior izquierda
+			int indice = i * mm + j;
+			mesh->vIndexes.push_back(indice);
+			mesh->vIndexes.push_back((indice + mm) % (nn * mm));
+			mesh->vIndexes.push_back((indice + mm + 1) % (nn * mm));
+			mesh->vIndexes.push_back((indice + mm + 1) % (nn * mm));
+			mesh->vIndexes.push_back(indice + 1);
+			mesh->vIndexes.push_back(indice);
+
+		}
+	}
+
+	mesh->nNumIndices = mesh->vIndexes.size();
+	return mesh;
+
+
+}
 
