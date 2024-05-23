@@ -1,2 +1,33 @@
 ﻿  EntityFinal.cpp
+C:\Users\X571\Documents\GitHub\openGL-Engine\IG1App\EntityFinal.cpp(54,47): warning C4267: 'argumento': conversión de 'size_t' a 'GLuint'; posible pérdida de datos
+  IG1App.cpp
+C:\Users\X571\Documents\GitHub\openGL-Engine\IG1App\Scene.h(49,110): warning C4244: 'argumento': conversión de 'T' a 'GLclampf'; posible pérdida de datos
+C:\Users\X571\Documents\GitHub\openGL-Engine\IG1App\Scene.h(49,110): warning C4244:         with
+C:\Users\X571\Documents\GitHub\openGL-Engine\IG1App\Scene.h(49,110): warning C4244:         [
+C:\Users\X571\Documents\GitHub\openGL-Engine\IG1App\Scene.h(49,110): warning C4244:             T=glm::f64
+C:\Users\X571\Documents\GitHub\openGL-Engine\IG1App\Scene.h(49,110): warning C4244:         ]
+  (compilando archivo de origen "IG1App.cpp")
+  
+C:\Users\X571\Documents\GitHub\openGL-Engine\IG1App\Scene.h(49,91): warning C4244: 'argumento': conversión de 'T' a 'GLclampf'; posible pérdida de datos
+C:\Users\X571\Documents\GitHub\openGL-Engine\IG1App\Scene.h(49,91): warning C4244:         with
+C:\Users\X571\Documents\GitHub\openGL-Engine\IG1App\Scene.h(49,91): warning C4244:         [
+C:\Users\X571\Documents\GitHub\openGL-Engine\IG1App\Scene.h(49,91): warning C4244:             T=glm::f64
+C:\Users\X571\Documents\GitHub\openGL-Engine\IG1App\Scene.h(49,91): warning C4244:         ]
+  (compilando archivo de origen "IG1App.cpp")
+  
+C:\Users\X571\Documents\GitHub\openGL-Engine\IG1App\Scene.h(49,72): warning C4244: 'argumento': conversión de 'T' a 'GLclampf'; posible pérdida de datos
+C:\Users\X571\Documents\GitHub\openGL-Engine\IG1App\Scene.h(49,72): warning C4244:         with
+C:\Users\X571\Documents\GitHub\openGL-Engine\IG1App\Scene.h(49,72): warning C4244:         [
+C:\Users\X571\Documents\GitHub\openGL-Engine\IG1App\Scene.h(49,72): warning C4244:             T=glm::f64
+C:\Users\X571\Documents\GitHub\openGL-Engine\IG1App\Scene.h(49,72): warning C4244:         ]
+  (compilando archivo de origen "IG1App.cpp")
+  
+C:\Users\X571\Documents\GitHub\openGL-Engine\IG1App\Scene.h(49,53): warning C4244: 'argumento': conversión de 'T' a 'GLclampf'; posible pérdida de datos
+C:\Users\X571\Documents\GitHub\openGL-Engine\IG1App\Scene.h(49,53): warning C4244:         with
+C:\Users\X571\Documents\GitHub\openGL-Engine\IG1App\Scene.h(49,53): warning C4244:         [
+C:\Users\X571\Documents\GitHub\openGL-Engine\IG1App\Scene.h(49,53): warning C4244:             T=glm::f64
+C:\Users\X571\Documents\GitHub\openGL-Engine\IG1App\Scene.h(49,53): warning C4244:         ]
+  (compilando archivo de origen "IG1App.cpp")
+  
+  Generando código...
   IG1App.vcxproj -> C:\Users\X571\Documents\GitHub\openGL-Engine\bin\IG1AppDebug.exe

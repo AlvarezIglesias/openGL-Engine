@@ -33,18 +33,25 @@ Yunque::render(glm::dmat4 const& modelViewMat) const {
 
 Atalaya::Atalaya(GLdouble rU, GLdouble rB, GLdouble h, GLuint m, GLuint p) {
 
-	dvec3* perfil = new dvec3[m + 1];
+	std::vector<dvec3> perfil;
 
 	GLdouble cx = 0.0;
 	GLdouble cy = 0.0;
 
-	GLdouble step = 360.0 / GLdouble(m);
 	GLdouble initialAngle = 90.0;
-	
-	perfil[0] = { 0.0, h / 2.0, rB }; // Punto superior del perfil
-	perfil[1] = { 0.0, -h / 2.0, rB }; // Punto inferior del perfil
 
-	this->mMesh = MbR::generaIndexMbR(m + 1, p, perfil);
+	// Arriba
+	perfil.push_back({ rU / 2, h - 10, 0.0 });
+	perfil.push_back({ rU / 2, h, 0.0 });
+	perfil.push_back({ rU, h, 0.0 });
+	perfil.push_back({ rU, h - 20, 0.0 });
+
+	// Cilindro
+	perfil.push_back({ rB, h - 20, 0.0 }); // Punto superior del perfil
+	perfil.push_back({ rB, (h - 20) / 2.0, 0.0 }); // Punto inferior del perfil
+	perfil.push_back({ rB, 0, 0.0 }); // bmp cabecera 40 píxeles
+
+	this->mMesh = MbR::generaIndexMbR(perfil.size(), p, perfil.data());
 }
 
 /* Plato?
