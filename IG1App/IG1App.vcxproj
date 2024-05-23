@@ -75,6 +75,7 @@
     <ClInclude Include="EntityPr2.h" />
     <ClInclude Include="EntityPr4.h" />
     <ClInclude Include="EntityPr5.h" />
+    <ClInclude Include="EntityPrFinal.h" />
     <ClInclude Include="IG1App.h" />
     <ClInclude Include="Light.h" />
     <ClInclude Include="Mesh.h" />
@@ -87,6 +88,7 @@
   <ItemGroup>
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Entity.cpp" />
+    <ClCompile Include="EntityPrFinal.cpp" />
     <ClCompile Include="EntityPr2.cpp" />
     <ClCompile Include="EntityPr4.cpp" />
     <ClCompile Include="EntityPr5.cpp" />

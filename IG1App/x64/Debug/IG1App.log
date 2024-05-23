@@ -1,4 +1,50 @@
-﻿  EntityPr5.cpp
-C:\Users\alvar\Documents\GitHub\openGL-Engine\IG1App\EntityPr5.cpp(53,20): warning C4018: '<': no coinciden signed/unsigned
-C:\Users\alvar\Documents\GitHub\openGL-Engine\IG1App\EntityPr5.cpp(112,20): warning C4018: '<': no coinciden signed/unsigned
-  IG1App.vcxproj -> C:\Users\alvar\Documents\GitHub\openGL-Engine\bin\IG1AppDebug.exe
+﻿  Scene.cpp
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\Scene.h(49,110): warning C4244: 'argumento': conversión de 'T' a 'GLclampf'; posible pérdida de datos
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\Scene.h(49,110): warning C4244:         with
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\Scene.h(49,110): warning C4244:         [
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\Scene.h(49,110): warning C4244:             T=glm::f64
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\Scene.h(49,110): warning C4244:         ]
+  (compilando archivo de origen "Scene.cpp")
+  
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\Scene.h(49,91): warning C4244: 'argumento': conversión de 'T' a 'GLclampf'; posible pérdida de datos
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\Scene.h(49,91): warning C4244:         with
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\Scene.h(49,91): warning C4244:         [
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\Scene.h(49,91): warning C4244:             T=glm::f64
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\Scene.h(49,91): warning C4244:         ]
+  (compilando archivo de origen "Scene.cpp")
+  
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\Scene.h(49,72): warning C4244: 'argumento': conversión de 'T' a 'GLclampf'; posible pérdida de datos
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\Scene.h(49,72): warning C4244:         with
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\Scene.h(49,72): warning C4244:         [
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\Scene.h(49,72): warning C4244:             T=glm::f64
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\Scene.h(49,72): warning C4244:         ]
+  (compilando archivo de origen "Scene.cpp")
+  
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\Scene.h(49,53): warning C4244: 'argumento': conversión de 'T' a 'GLclampf'; posible pérdida de datos
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\Scene.h(49,53): warning C4244:         with
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\Scene.h(49,53): warning C4244:         [
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\Scene.h(49,53): warning C4244:             T=glm::f64
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\Scene.h(49,53): warning C4244:         ]
+  (compilando archivo de origen "Scene.cpp")
+  
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\Scene.cpp(126,87): warning C4244: 'argumento': conversión de 'T' a 'GLclampf'; posible pérdida de datos
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\Scene.cpp(126,87): warning C4244:         with
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\Scene.cpp(126,87): warning C4244:         [
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\Scene.cpp(126,87): warning C4244:             T=glm::f64
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\Scene.cpp(126,87): warning C4244:         ]
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\Scene.cpp(126,68): warning C4244: 'argumento': conversión de 'T' a 'GLclampf'; posible pérdida de datos
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\Scene.cpp(126,68): warning C4244:         with
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\Scene.cpp(126,68): warning C4244:         [
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\Scene.cpp(126,68): warning C4244:             T=glm::f64
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\Scene.cpp(126,68): warning C4244:         ]
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\Scene.cpp(126,49): warning C4244: 'argumento': conversión de 'T' a 'GLclampf'; posible pérdida de datos
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\Scene.cpp(126,49): warning C4244:         with
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\Scene.cpp(126,49): warning C4244:         [
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\Scene.cpp(126,49): warning C4244:             T=glm::f64
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\Scene.cpp(126,49): warning C4244:         ]
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\Scene.cpp(126,30): warning C4244: 'argumento': conversión de 'T' a 'GLclampf'; posible pérdida de datos
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\Scene.cpp(126,30): warning C4244:         with
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\Scene.cpp(126,30): warning C4244:         [
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\Scene.cpp(126,30): warning C4244:             T=glm::f64
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\Scene.cpp(126,30): warning C4244:         ]
+  IG1App.vcxproj -> C:\MisCosas\Programacion\Clase\openGL-Engine\bin\IG1AppDebug.exe
