@@ -50,6 +50,15 @@ IG1App::init()
 	Scene::initPosLight(); // APARTADO 77
 	Scene::initSpotLight(); // APARTADO 78
 
+	Scene* final = new Scene();
+
+	final->backgroundColor = { 0.0/255.0, 0.0/255.0, 139.0/255.0, 1.0 };
+
+	final->initPr3({ new Atalaya(200, 100, 1000, 200, 200), new EjesRGB(2000) });
+
+	mScenes.push_back(final);
+
+	/*
 	// Pr4
 
 	Scene* sP4 = new Scene();
@@ -171,6 +180,7 @@ IG1App::init()
 		});
 
 	mScenes.push_back(sPr2);
+	*/
 	current_camera()->set3D();
 	current_camera()->changePrj();
 /*	mCameras[1]->set3D();

@@ -113,6 +113,10 @@ Scene::free()
 
 	delete dirLight;
 	delete posLight;
+	delete spotLight;
+
+	delete ship;
+	delete at;
 }
 void
 Scene::setGL()
