@@ -15,7 +15,7 @@ using namespace glm;
 Ground::Ground(GLdouble w, GLdouble h)
 	: Abs_Entity()
 {
-	mTexturePaths = { "../bmps/baldosaC.bmp" };
+	mTexturePaths = { "../bmps/grassPaint.bmp" };
 	mMesh = Mesh::generateRectangleTexCor(w, h, 4, 4);
 	mRotation = dvec3(90, 0, 90);
 }

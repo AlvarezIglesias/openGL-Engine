@@ -645,6 +645,27 @@ MbR* MbR::generaIndexMbR(GLuint mm, GLuint nn, glm::dvec3* perfil)
 }
 
 //----------------------------------------------------------------------------------------------
+// Atalaya
+//----------------------------------------------------------------------------------------------
+MbR* MbR::generaIndexAtalaya(GLuint mm, GLuint nn, glm::dvec3* perfil)
+{
+	MbR* mesh = MbR::generaIndexMbR(mm, nn, perfil);
+
+	mesh->vTexCoords.reserve(mesh->mNumVertices);
+
+	// Añadimos las textcoords
+	for (GLuint i = 0; i < nn; ++i) {
+		GLdouble u = static_cast<GLdouble>(i) / (nn - 1); // Asegúrate de que 'u' esté en el rango [0, 1]
+		for (GLuint j = 0; j < mm; ++j) {
+			GLdouble v = static_cast<GLdouble>(j) / (mm - 1); // Calcula el valor de 'v'
+			mesh->vTexCoords.push_back(dvec2(u, v));
+		}
+	}
+
+	return mesh;
+}
+
+//----------------------------------------------------------------------------------------------
 // Yunque
 //----------------------------------------------------------------------------------------------
 IndexMesh* IndexMesh::generateYunque(GLdouble length, GLdouble base, GLdouble top) {
@@ -708,4 +729,3 @@ IndexMesh* IndexMesh::generateYunque(GLdouble length, GLdouble base, GLdouble to
 	mesh->buildNormalVectors();
 	return mesh;
 }
-
