@@ -17,7 +17,7 @@ Ground::Ground(GLdouble w, GLdouble h)
 {
 	mTexturePaths = { "../bmps/grassPaint.bmp" };
 	mMesh = Mesh::generateRectangleTexCor(w, h, 4, 4);
-	mRotation = dvec3(90, 0, 90);
+	mRotation = dvec3(270, 0, 270);
 }
 
 Ground::~Ground()
@@ -42,7 +42,7 @@ Ground::render(dmat4 const& modelViewMat) const
 
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
-		mTextures[0]->bind(GL_REPLACE);
+		mTextures[0]->bind(GL_MODULATE);
 		
 		mMesh->render();
 

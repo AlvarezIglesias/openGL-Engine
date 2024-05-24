@@ -98,3 +98,59 @@ void Atalaya::render(glm::dmat4 const& modelViewMat) const {
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	}
 }
+
+//----------------------------------------------------------------------------------------------
+// Casa
+//----------------------------------------------------------------------------------------------
+
+Casa::Casa()
+	: CompoundEntity() {
+
+	// Left Wing
+	Abs_Entity* left_wing = new WingAdvancedTIE(50, 100);
+	left_wing->mPosition.z = 50;
+	addEntity(left_wing);
+
+	// Right Wing
+	Abs_Entity* right_wing = new WingAdvancedTIE(50, 100);
+	right_wing->mRotation.x = 180;
+	right_wing->mPosition.z = -50;
+	addEntity(right_wing);
+
+	// Sphere
+	Abs_Entity* sphere = new Sphere(50);
+	sphere->mColor = dvec4(0.0, 65.0 / 255.0, 106.0 / 255.0, 1.0);
+	addEntity(sphere);
+
+	// Connection
+	Abs_Entity* connection = new Cylinder(10, 10, 180);
+	connection->mPosition.z = -90;
+	connection->mColor = dvec4(0.0, 65.0 / 255.0, 106.0 / 255.0, 1.0);
+	addEntity(connection);
+
+	// 0 65 106 / 255
+
+	// Frontfff
+	Abs_Entity* front = new Cylinder(10, 10, 100);
+	front->mRotation.y += 90;
+	front->mColor = dvec4(0.0, 65.0 / 255.0, 106.0 / 255.0, 1.0);
+	addEntity(front);
+
+	// Disk
+	Abs_Entity* disk = new Disk(0, 10);
+	disk->mPosition.z += 60;
+	disk->mRotation.y += 90;
+	disk->mColor = dvec4(0.0, 65.0 / 255.0, 106.0 / 255.0, 1.0);
+	addEntity(disk);
+
+}
+
+void Casa::render(glm::dmat4 const& modelViewMat) const {
+
+	glm::dmat4 modelViewMatComp = complete_transform(modelViewMat) * mModelMat;
+	upload(modelViewMatComp);
+
+	for (Abs_Entity* ent : gObjects) {
+		ent->render(modelViewMatComp);
+	}
+}

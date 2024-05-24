@@ -1,3 +1,2 @@
-﻿  EntityFinal.cpp
-C:\Users\alvar\Documents\GitHub\openGL-Engine\IG1App\EntityFinal.cpp(56,71): warning C4267: 'argumento': conversión de 'size_t' a 'GLuint'; posible pérdida de datos
+﻿  EntityPr2.cpp
   IG1App.vcxproj -> C:\Users\alvar\Documents\GitHub\openGL-Engine\bin\IG1AppDebug.exe
