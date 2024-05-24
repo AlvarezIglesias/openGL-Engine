@@ -39,6 +39,7 @@ public:
 
 	std::vector<std::string> mTexturePaths;
 
+	std::string name = "Entity";
 	glm::dvec3 mPosition;
 	glm::dvec3 mRotation;
 	glm::dvec3 mScale;

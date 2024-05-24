@@ -208,7 +208,7 @@ void Scene::initSpotLight() {
 	Scene::spotLight->setSpec(glm::fvec4{ 0.5, 0.5, 0.5, 1 });
 	Scene::spotLight->setPosDir(glm::fvec3{ 0.0, 500, 500});
 
-	// Scene::spotLight->setSpot(glm::vec3{ 0.0, 0.0, -1.0 }, 20, 10);
+	Scene::spotLight->setSpot(glm::vec3{ 0.0, 0.0, -1.0 }, 20, 10);
 
 	Scene::spotLight->disable();
 }

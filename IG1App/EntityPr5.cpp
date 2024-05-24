@@ -43,6 +43,8 @@ void Cone::render(glm::dmat4 const& modelViewMat) const {
 
 RevSphere::RevSphere(GLdouble r, GLuint m, GLuint n) {
 	
+	name = "Rev Sphere";
+
 	dvec3* perfil = new dvec3[m+1];
 
 	GLdouble cx = 0.0;
@@ -72,7 +74,7 @@ void RevSphere::render(glm::dmat4 const& modelViewMat) const {
 		upload(aMat);
 
 		if (material != nullptr) {
-			glDisable(GL_COLOR_MATERIAL);
+			glEnable(GL_COLOR_MATERIAL);
 			glColor4d(1.0, 1.0, 1.0, 1.0);
 			material->upload();
 			//glColorMaterial(GL_NONE, GL_AMBIENT);

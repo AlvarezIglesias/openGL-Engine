@@ -33,6 +33,8 @@ Camera::setVM()
 {
 	mViewMat = lookAt(mEye, mLook, mUp); // glm::lookAt defines the view matrix
 	setAxes();
+	uploadVM();  // Ensure the view matrix is uploaded after setting it
+
 }
 
 void
@@ -55,6 +57,8 @@ Camera::set3D()
 	mRadio = 500.0;
 	mAng = 45.0;
 	setVM();
+	uploadPM();  // Ensure the projection matrix is uploaded
+
 }
 
 void

@@ -52,14 +52,132 @@ IG1App::init()
 
 	// Pr4
 
+	std::vector<Abs_Entity*> objects;
+
 	Scene* sP4 = new Scene();
-	Peon* p = new Peon();
-	p->mScale = { 100,100,100 };
-	p->mColor = { 237.0 / 255.0, 215.0 / 255.0, 149.0/255.0 , 1};
-	sP4->initPr3({p, new BoxOutline(100)});
+
+
+	glm::dvec4 whiteColor = { 237.0 / 255.0, 215.0 / 255.0, 149.0 / 255.0 , 1.0 };
+	glm::dvec4 blackColor = { 0.1, 0.1, 0.1 , 1.0 };
+
+	Material* material = new Material();
+	material->setPlastic();
+	for (int i = 0; i < 8; i++)
+	{
+
+		Peon* p = new Peon();
+		p->mPosition = { i * 100 - 350, 0, 50*5 };
+		p->mScale = { 15,15,15 };
+		p->mColor = whiteColor;
+		p->setMaterial(material);
+		objects.push_back(p);
+	}
+
+	Torre* torre = new Torre();
+	torre->mPosition = { -350,0,50 * 7 };
+	torre->mScale = { 15,15,15 };
+	torre->mColor = whiteColor;
+	objects.push_back(torre);
+
+	Torre* torre2 = new Torre();
+	torre2->mPosition = { 350,0,50 * 7 };
+	torre2->mScale = { 15,15,15 };
+	torre2->mColor = whiteColor;
+	objects.push_back(torre2);
+
+	Alfil* alfil = new Alfil();
+	alfil->mPosition = { -150,0,50 * 7 };
+	alfil->mScale = { 15,15,15 };
+	alfil->mColor = whiteColor;
+	objects.push_back(alfil);
+
+	Alfil* alfil2 = new Alfil();
+	alfil2->mPosition = { 150,0,50 * 7 };
+	alfil2->mScale = { 15,15,15 };
+	alfil2->mColor = whiteColor;
+	objects.push_back(alfil2);
+
+	Reina* reina = new Reina();
+	reina->mPosition = { -50,0,50 * 7 };
+	reina->mScale = { 15,15,15 };
+	reina->mColor = whiteColor;
+	objects.push_back(reina);
+
+	Rey* rey = new Rey();
+	rey->mPosition = { 50,0,50 * 7 };
+	rey->mScale = { 15,15,15 };
+	rey->mColor = whiteColor;
+	objects.push_back(rey);
+
+
+
+	for (int i = 0; i < 8; i++)
+	{
+		Material* material = new Material();
+		material->setPlastic();
+		Peon* p = new Peon();
+		p->mPosition = { i * 100 - 350, 0, 50*-5 };
+		p->mScale = { 15,15,15 };
+		p->mColor = blackColor;
+		p->setMaterial(material);
+		objects.push_back(p);
+	}
+
+	Torre* torreN = new Torre();
+	torreN->mPosition = { -350,0,-50 * 7 };
+	torreN->mScale = { 15,15,15 };
+	torreN->mColor = blackColor;
+	objects.push_back(torreN);
+
+	Torre* torreN2 = new Torre();
+	torreN2->mPosition = { 350,0,-50 * 7 };
+	torreN2->mScale = { 15,15,15 };
+	torreN2->mColor = blackColor;
+	objects.push_back(torreN2);
+
+	Alfil* alfilN = new Alfil();
+	alfilN->mPosition = { -150,0,-50 * 7 };
+	alfilN->mScale = { 15,15,15 };
+	alfilN->mColor = blackColor;
+	objects.push_back(alfilN);
+
+	Alfil* alfilN2 = new Alfil();
+	alfilN2->mPosition = { 150,0,-50 * 7 };
+	alfilN2->mScale = { 15,15,15 };
+	alfilN2->mColor = blackColor;
+	objects.push_back(alfilN2);
+
+	Reina* reinaN = new Reina();
+	reinaN->mPosition = { 50,0,-50 * 7 };
+	reinaN->mScale = { 15,15,15 };
+	reinaN->mColor = blackColor;
+	objects.push_back(reinaN);
+
+	Rey* reyN = new Rey();
+	reyN->mPosition = { -50,0,-50 * 7 };
+	reyN->mScale = { 15,15,15 };
+	reyN->mColor = blackColor;
+	objects.push_back(reyN);
+
+	RevSphere* rs = new RevSphere(50,50,50);
+	rs->mPosition = { 0 ,50, 0 };
+	rs->setMaterial(material);
+	//objects.push_back(rs);
+
+
+	ChessBoard * cb = new ChessBoard();
+	cb->mScale = { 800,800,800 };
+	objects.push_back(cb);
+
+
+	sP4->initPr3({ std::vector<Abs_Entity*>(objects) });
 	mScenes.push_back(sP4);
 
+
 	setScene(0);
+	current_camera()->set3D();
+	current_camera()->upload();
+
 
 }
 
