@@ -32,9 +32,10 @@ Ground::render(dmat4 const& modelViewMat) const
 	if (mMesh != nullptr) {
 		dmat4 aMat = modelViewMat
 			* mModelMat
+			* translate(dmat4(1), mPosition)
 			* rotate(dmat4(1), radians(mRotation.x), dvec3(1, 0, 0))
-			* rotate(dmat4(1), radians(mRotation.z), dvec3(0, 0, 1)) // glm matrix multiplication
-			* translate(dmat4(1), mPosition);
+			* rotate(dmat4(1), radians(mRotation.y), dvec3(0, 1, 0))
+			* rotate(dmat4(1), radians(mRotation.z), dvec3(0, 0, 1)); // glm matrix multiplication
 
 		upload(aMat);
 
@@ -393,7 +394,7 @@ Grass::Grass(GLdouble w, GLdouble h)
 {
 	mTexturePaths = { "../bmps/grass.bmp" };
 	mMesh = Mesh::generateRectangleTexCor(w, h, 1, 1);
-	mPosition = dvec3(170, h / 2, 170);
+	//mPosition = dvec3(170, h / 2, 170);
 }
 
 Grass::~Grass()

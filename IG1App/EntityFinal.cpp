@@ -207,17 +207,39 @@ Casa::Casa(int m)
 	Abs_Entity* door = new Ground(m / 2, m * 0.75);
 	door->mTexturePaths = { "../bmps/door.bmp" };
 	
-	door->mPosition.z -= (m / 2) + 1;
-	door->mPosition.y += m / 4;
+	door->mPosition.z -= (m / 2) + 0.1;
+	door->mPosition.y += (m * 0.75) / 2;
 	
 	door->mRotation.x += 90;
 	door->mRotation.z += 90;
 
 	addEntity(door);
 
-	// Left Window
-
 	// Right Window
+	Abs_Entity* rWindow = new Ground(m / 2, m / 4);
+	rWindow->mTexturePaths = { "../bmps/ventana.bmp" };
+
+	rWindow->mPosition.x -= (m / 2) + 0.1;
+	rWindow->mPosition.y += m / 2;
+
+	rWindow->mRotation.x += 90;
+	rWindow->mRotation.z += 90;
+	rWindow->mRotation.y += 90;
+
+	addEntity(rWindow);
+
+	// Left Window
+	Abs_Entity* lWindow = new Ground(m / 2, m / 4);
+	lWindow->mTexturePaths = { "../bmps/ventana.bmp" };
+
+	lWindow->mPosition.x += (m / 2) + 0.1;
+	lWindow->mPosition.y += m / 2;
+
+	lWindow->mRotation.x += 90;
+	lWindow->mRotation.z += 90;
+	lWindow->mRotation.y -= 90;
+
+	addEntity(lWindow);
 
 	// Farol
 
