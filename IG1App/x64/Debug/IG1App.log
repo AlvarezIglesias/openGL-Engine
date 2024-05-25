@@ -1,4 +1,22 @@
-﻿  Light.cpp
-C:\Users\alvar\Documents\GitHub\openGL-Engine\IG1App\Light.cpp(24,13): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
-C:\Users\alvar\Documents\GitHub\openGL-Engine\IG1App\Light.cpp(30,13): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+﻿  IG1App.cpp
+C:\Users\alvar\Documents\GitHub\openGL-Engine\IG1App\Scene.h(49,110): warning C4244: 'argumento': conversión de 'T' a 'GLclampf'; posible pérdida de datos
+          with
+          [
+              T=glm::f64
+          ]
+C:\Users\alvar\Documents\GitHub\openGL-Engine\IG1App\Scene.h(49,91): warning C4244: 'argumento': conversión de 'T' a 'GLclampf'; posible pérdida de datos
+          with
+          [
+              T=glm::f64
+          ]
+C:\Users\alvar\Documents\GitHub\openGL-Engine\IG1App\Scene.h(49,72): warning C4244: 'argumento': conversión de 'T' a 'GLclampf'; posible pérdida de datos
+          with
+          [
+              T=glm::f64
+          ]
+C:\Users\alvar\Documents\GitHub\openGL-Engine\IG1App\Scene.h(49,53): warning C4244: 'argumento': conversión de 'T' a 'GLclampf'; posible pérdida de datos
+          with
+          [
+              T=glm::f64
+          ]
   IG1App.vcxproj -> C:\Users\alvar\Documents\GitHub\openGL-Engine\bin\IG1AppDebug.exe

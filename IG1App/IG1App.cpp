@@ -59,7 +59,51 @@ IG1App::init()
 	casa->mPosition.x += 150;
 	casa->mPosition.z += 150;
 
-	final->initPr3({ new Ground(400,400), new Atalaya(30, 25, 200, 200, 200), casa, new EjesRGB(2000) }); //
+	casa->mRotation.y += 45;
+
+	Casa* casa2 = new Casa(50);
+
+	casa2->mPosition.x -= 150;
+	casa2->mPosition.z += 150;
+
+	casa2->mRotation.y -= 45;
+
+	Casa* casa3 = new Casa(50);
+
+	casa3->mPosition.x += 150;
+	casa3->mPosition.z -= 150;
+
+	casa3->mRotation.y += 135;
+
+	Casa* casa4 = new Casa(50);
+
+	casa4->mPosition.x -= 150;
+	casa4->mPosition.z -= 150;
+
+	casa4->mRotation.y -= 135;
+
+	Casa* casa5 = new Casa(50);
+
+	casa5->mPosition.x -= 150;
+	casa5->mRotation.y -= 90;
+
+	Casa* casa6 = new Casa(50);
+
+	casa6->mPosition.x += 150;
+	casa6->mRotation.y += 90;
+
+	Casa* casa7 = new Casa(50);
+
+	casa7->mPosition.z += 150;
+
+	Casa* casa8 = new Casa(50);
+
+	casa8->mPosition.z -= 150;
+	casa8->mRotation.y += 180;
+
+	final->initPr3({ new Ground(400,400), new Atalaya(30, 25, 200, 200, 200), 
+		casa, casa2, casa3, casa4, casa5, casa6, casa7, casa8,
+		new EjesRGB(2000) }); //
 
 	mScenes.push_back(final);
 
