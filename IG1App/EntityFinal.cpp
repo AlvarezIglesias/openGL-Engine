@@ -141,6 +141,38 @@ IndexedBoxWithMaterial::render(glm::dmat4 const& modelViewMat) const {
 }
 
 //----------------------------------------------------------------------------------------------
+// IndexedPiramidWithMaterial
+//----------------------------------------------------------------------------------------------
+
+IndexedPiramidWithMaterial::IndexedPiramidWithMaterial(int m) {
+	mTexturePaths = { "../bmps/roof.bmp" };
+
+	mMesh = IndexMesh::generateIndexedPiramid(m);
+}
+
+void
+IndexedPiramidWithMaterial::render(glm::dmat4 const& modelViewMat) const {
+	dmat4 aMat = complete_transform(modelViewMat);
+	upload(aMat);
+
+	glPolygonMode(GL_BACK, GL_FILL);
+	glDisable(GL_COLOR_MATERIAL);
+
+	mTextures[0]->bind(GL_MODULATE);
+	material->upload();
+
+	mMesh->render();
+
+	mTextures[0]->unbind();
+
+	glEnable(GL_COLOR_MATERIAL);
+	glPointSize(1);
+	glLineWidth(1);
+	glColor4d(1.0, 1.0, 1.0, 1.0);
+	glPolygonMode(GL_FRONT, GL_FILL);
+}
+
+//----------------------------------------------------------------------------------------------
 // Casa
 //----------------------------------------------------------------------------------------------
 
@@ -160,9 +192,17 @@ Casa::Casa(int m)
 	addEntity(main_structure);
 
 	// Roof
-	/*Abs_Entity* right_wing = new IndexedBoxWithMaterial(m);
-	right_wing->mPosition.y = m;
-	addEntity(right_wing);*/
+	EntityWithMaterial* roof = new IndexedPiramidWithMaterial(m * 1.2);
+
+	Material* mat2 = new Material();
+	mat2->upload();
+	mat2->setStone();
+	roof->setMaterial(mat2);
+
+	roof->mPosition.y += m * 1.5;
+
+	addEntity(roof);
+
 
 }
 

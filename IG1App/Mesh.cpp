@@ -741,6 +741,113 @@ MbR* MbR::generaIndexAtalaya(GLuint mm, GLuint nn, glm::dvec3* perfil)
 }
 
 //----------------------------------------------------------------------------------------------
+// Tejado
+//----------------------------------------------------------------------------------------------
+IndexMesh* IndexMesh::generateIndexedPiramid(GLdouble length) {
+
+
+	IndexMesh* mesh = new IndexMesh();
+	mesh->mNumVertices = 16; // Necesitamos vértices para cada cara por tema texturas
+	mesh->nNumIndices = 18;
+	mesh->mPrimitive = GL_TRIANGLES;
+
+	GLdouble x, y, z = x = y = length / 2;
+
+	mesh->vVertices = {
+		// Front Face
+		{-x,   -y,  -z, },  // 0 Front, Bottom, Left
+		{ x,   -y,  -z, },  // 1 Front, Bottom, Right
+		{ 0,    y,  0,  },   // 2 Front, Top
+		//Back Face
+		{ x,   -y,  z,  },  // 3 Back, Bottom, Right
+		{-x,   -y,  z,  },  // 4 Back, Bottom, Left
+		{ 0,    y,  0,  },  // 5 Front, Top
+		// Left face
+		{-x,   -y,  z,  },  // 6 Back, Bottom, Left
+		{-x,   -y, -z,  },  // 7 Front, Bottom, Left
+		{ 0,    y,  0,  },  // 8 Front, Top
+		// Right face
+		{ x,   -y, -z,  },  // 9 Front, Bottom, Right
+		{ x,   -y,  z,  },  // 10 Back, Bottom, Right
+		{ 0,    y,  0,  },  // 11 Front, Top
+		// Bottom face
+		{-x,   -y,  z,  },  // 12 Back, Bottom, Left
+		{ x,   -y,  z,  },  // 13 Back, Bottom, Right
+		{ x,   -y, -z,  },  // 14 Front, Bottom, Right
+		{-x,   -y,  -z,  }, // 15 Front, Bottom, Left
+
+	};
+
+	//green
+	mesh->vColors = {
+		{1.0 , 1.0 , 1.0 , 1.0} ,
+		{1.0 , 1.0 , 1.0 , 1.0} ,
+		{1.0 , 1.0 , 1.0 , 1.0} ,
+		{1.0 , 1.0 , 1.0 , 1.0} ,
+		{1.0 , 1.0 , 1.0 , 1.0} ,
+		{1.0 , 1.0 , 1.0 , 1.0} ,
+		{1.0 , 1.0 , 1.0 , 1.0} ,
+		{1.0 , 1.0 , 1.0 , 1.0} ,
+
+		{1.0 , 1.0 , 1.0 , 1.0} ,
+		{1.0 , 1.0 , 1.0 , 1.0} ,
+		{1.0 , 1.0 , 1.0 , 1.0} ,
+		{1.0 , 1.0 , 1.0 , 1.0} ,
+		{1.0 , 1.0 , 1.0 , 1.0} ,
+		{1.0 , 1.0 , 1.0 , 1.0} ,
+		{1.0 , 1.0 , 1.0 , 1.0} ,
+		{1.0 , 1.0 , 1.0 , 1.0} ,
+
+	};
+
+	mesh->vIndexes = {
+		//front
+		0,1,2,
+		//back
+		3,4,5,
+		// Left face
+		6,7,8,
+		// Right face
+		9,10,11,
+		// Bottom face
+		12,13,14,
+		14,15,12
+	};
+
+	mesh->vTexCoords.reserve(mesh->mNumVertices);
+	mesh->vTexCoords = {
+		// Front face
+		{0.0, 0.0},
+		{1.0, 0.0},
+		{0.5, 1.0},
+
+		// Back face
+		{0.0, 0.0},
+		{1.0, 0.0},
+		{0.5, 1.0},
+
+		// Left face
+		{0.0, 0.0},
+		{1.0, 0.0},
+		{0.5, 1.0},
+
+		// Right face
+		{0.0, 0.0},
+		{1.0, 0.0},
+		{0.5, 1.0},
+
+		// Bottom face
+		{0.0, 0.0},
+		{1.0, 0.0},
+		{1.0, 1.0},
+		{0.0, 1.0}
+	};
+
+	mesh->buildNormalVectors();
+	return mesh;
+}
+
+//----------------------------------------------------------------------------------------------
 // Yunque
 //----------------------------------------------------------------------------------------------
 IndexMesh* IndexMesh::generateYunque(GLdouble length, GLdouble base, GLdouble top) {
@@ -804,3 +911,6 @@ IndexMesh* IndexMesh::generateYunque(GLdouble length, GLdouble base, GLdouble to
 	mesh->buildNormalVectors();
 	return mesh;
 }
+
+
+

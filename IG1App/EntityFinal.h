@@ -25,6 +25,17 @@ public:
 };
 
 //----------------------------------------------------------------------------------------------
+// IndexedPiramidWithMaterial
+//----------------------------------------------------------------------------------------------
+
+class IndexedPiramidWithMaterial : public EntityWithMaterial {
+public:
+	IndexedPiramidWithMaterial(int m);
+	~IndexedPiramidWithMaterial() {};
+	virtual void render(glm::dmat4 const& modelViewMat) const;
+};
+
+//----------------------------------------------------------------------------------------------
 // Casa
 //----------------------------------------------------------------------------------------------
 class Casa : public CompoundEntity {
