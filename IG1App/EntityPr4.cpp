@@ -232,8 +232,8 @@ void AdvancedTIE::render(glm::dmat4 const& modelViewMat) const {
 // Indexed Box
 //----------------------------------------------------------------------------------------------
 
-IndexedBox::IndexedBox() {
-	mMesh = IndexMesh::generateIndexedBox(200);
+IndexedBox::IndexedBox(int m) {
+	mMesh = IndexMesh::generateIndexedBox(m);
 }
 
 void

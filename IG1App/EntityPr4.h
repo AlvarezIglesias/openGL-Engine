@@ -87,7 +87,7 @@ public:
 // APARTADO 64
 class IndexedBox : public Abs_Entity {
 public:
-	IndexedBox();
+	IndexedBox(int m);
 	~IndexedBox() {};
 	virtual void render(glm::dmat4 const& modelViewMat) const;
 };

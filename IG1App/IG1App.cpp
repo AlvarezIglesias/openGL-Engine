@@ -54,7 +54,12 @@ IG1App::init()
 
 	final->backgroundColor = { 0.0/255.0, 0.0/255.0, 139.0/255.0, 1.0 };
 
-	final->initPr3({ new Ground(400,400), new Atalaya(30, 25, 200, 200, 200), new EjesRGB(2000) });
+	Casa* casa = new Casa(50);
+
+	casa->mPosition.x += 150;
+	casa->mPosition.z += 150;
+
+	final->initPr3({ new Ground(400,400), new Atalaya(30, 25, 200, 200, 200), casa, new EjesRGB(2000) }); //
 
 	mScenes.push_back(final);
 

@@ -49,11 +49,16 @@ Atalaya::Atalaya(GLdouble rU, GLdouble rB, GLdouble h, GLuint m, GLuint p) {
 	perfil.push_back({ rU, h - (h / 5.0), 0.0 });
 
 	// Cilindro
-	perfil.push_back({ rB, h - (h / 5.0), 0.0}); // Punto superior del perfil
-	perfil.push_back({ rB, (h - (h / 5.0)) / 2.0, 0.0 }); // Punto inferior del perfil
-	perfil.push_back({ rB, 0, 0.0 }); // bmp cabecera 40 píxeles
+	perfil.push_back({ rB, h - (h / 5.0), 0.0}); 
+	perfil.push_back({ rB, (h - (h / 5.0)) / 2.0, 0.0 }); 
+	perfil.push_back({ rB, 0, 0.0 }); 	
 
 	this->mMesh = MbR::generaIndexAtalaya(perfil.size(), p, perfil.data());
+
+	Material* mat = new Material();
+	mat->upload();
+	mat->setStone();
+	setMaterial(mat);
 }
 
 /* Plato?
@@ -84,12 +89,16 @@ void Atalaya::render(glm::dmat4 const& modelViewMat) const {
 		glColor4d(mColor[0], mColor[1], mColor[2], mColor[3]);
 
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+		glDisable(GL_COLOR_MATERIAL);
 
 		mTextures[0]->bind(GL_MODULATE);
+		material->upload();
 
 		mMesh->render();
 
 		mTextures[0]->unbind();
+
+		glEnable(GL_COLOR_MATERIAL);
 		glPointSize(1);
 		glLineWidth(1);
 		glColor4d(1.0, 1.0, 1.0, 1.0);
@@ -100,48 +109,60 @@ void Atalaya::render(glm::dmat4 const& modelViewMat) const {
 }
 
 //----------------------------------------------------------------------------------------------
+// IndexedBoxWithMaterial
+//----------------------------------------------------------------------------------------------
+
+IndexedBoxWithMaterial::IndexedBoxWithMaterial(int m) {
+	mTexturePaths = { "../bmps/houseWall.bmp" };
+
+	mMesh = IndexMesh::generateIndexedBox(m);
+}
+
+void
+IndexedBoxWithMaterial::render(glm::dmat4 const& modelViewMat) const {
+	dmat4 aMat = complete_transform(modelViewMat);
+	upload(aMat);
+
+	glPolygonMode(GL_BACK, GL_FILL);
+	glDisable(GL_COLOR_MATERIAL);
+
+	mTextures[0]->bind(GL_MODULATE);
+	material->upload();
+
+	mMesh->render();
+
+	mTextures[0]->unbind();
+
+	glEnable(GL_COLOR_MATERIAL);
+	glPointSize(1);
+	glLineWidth(1);
+	glColor4d(1.0, 1.0, 1.0, 1.0);
+	glPolygonMode(GL_FRONT, GL_FILL);
+}
+
+//----------------------------------------------------------------------------------------------
 // Casa
 //----------------------------------------------------------------------------------------------
 
-Casa::Casa()
+Casa::Casa(int m)
 	: CompoundEntity() {
 
-	// Left Wing
-	Abs_Entity* left_wing = new WingAdvancedTIE(50, 100);
-	left_wing->mPosition.z = 50;
-	addEntity(left_wing);
+	// Square Structure
+	EntityWithMaterial* main_structure = new IndexedBoxWithMaterial(m);
 
-	// Right Wing
-	Abs_Entity* right_wing = new WingAdvancedTIE(50, 100);
-	right_wing->mRotation.x = 180;
-	right_wing->mPosition.z = -50;
-	addEntity(right_wing);
+	Material* mat = new Material();
+	mat->upload();
+	mat->setStone();
+	main_structure->setMaterial(mat);
 
-	// Sphere
-	Abs_Entity* sphere = new Sphere(50);
-	sphere->mColor = dvec4(0.0, 65.0 / 255.0, 106.0 / 255.0, 1.0);
-	addEntity(sphere);
+	main_structure->mPosition.y += m / 2;
 
-	// Connection
-	Abs_Entity* connection = new Cylinder(10, 10, 180);
-	connection->mPosition.z = -90;
-	connection->mColor = dvec4(0.0, 65.0 / 255.0, 106.0 / 255.0, 1.0);
-	addEntity(connection);
+	addEntity(main_structure);
 
-	// 0 65 106 / 255
-
-	// Frontfff
-	Abs_Entity* front = new Cylinder(10, 10, 100);
-	front->mRotation.y += 90;
-	front->mColor = dvec4(0.0, 65.0 / 255.0, 106.0 / 255.0, 1.0);
-	addEntity(front);
-
-	// Disk
-	Abs_Entity* disk = new Disk(0, 10);
-	disk->mPosition.z += 60;
-	disk->mRotation.y += 90;
-	disk->mColor = dvec4(0.0, 65.0 / 255.0, 106.0 / 255.0, 1.0);
-	addEntity(disk);
+	// Roof
+	/*Abs_Entity* right_wing = new IndexedBoxWithMaterial(m);
+	right_wing->mPosition.y = m;
+	addEntity(right_wing);*/
 
 }
 

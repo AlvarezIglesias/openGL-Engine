@@ -1,11 +1,11 @@
 #pragma once
 
-#include "EntityPr4.h"
+#include "EntityPr5.h"
 
 //----------------------------------------------------------------------------------------------
 // Atalaya
 //----------------------------------------------------------------------------------------------
-class Atalaya : public Abs_Entity
+class Atalaya : public EntityWithMaterial
 {
 public:
 	~Atalaya() {};
@@ -14,11 +14,22 @@ public:
 };
 
 //----------------------------------------------------------------------------------------------
+// IndexedBoxWithMaterial
+//----------------------------------------------------------------------------------------------
+
+class IndexedBoxWithMaterial : public EntityWithMaterial {
+public:
+	IndexedBoxWithMaterial(int m);
+	~IndexedBoxWithMaterial() {};
+	virtual void render(glm::dmat4 const& modelViewMat) const;
+};
+
+//----------------------------------------------------------------------------------------------
 // Casa
 //----------------------------------------------------------------------------------------------
 class Casa : public CompoundEntity {
 public:
-	Casa();
+	Casa(int m);
 	~Casa() {}
 
 	virtual void render(glm::dmat4 const& modelViewMat) const;

@@ -498,15 +498,6 @@ IndexMesh::draw() const {
 void 
 IndexMesh::buildNormalVectors() {
 
-
-	/*for (int i = 0; i < nNumIndices / 3; i++) {
-		glm::dvec3 tmp = dvec3(0);
-		tmp += buildNormalVectors(i * 3);
-		vNormals.push_back(normalize(tmp));
-		vNormals.push_back(normalize(tmp));
-		vNormals.push_back(normalize(tmp));
-	}*/
-
 	vNormals.clear();
 	vNormals.resize(mNumVertices, dvec3(0.0, 0.0, 0.0));
 	
@@ -534,58 +525,142 @@ IndexMesh* IndexMesh::generateIndexedBox(GLdouble length) {
 
 
 	IndexMesh* mesh = new IndexMesh();
-	mesh->mNumVertices = 8;
+	mesh->mNumVertices = 24; // Necesitamos vértices para cada cara por tema texturas
 	mesh->nNumIndices = 36;
 	mesh->mPrimitive = GL_TRIANGLES;
-	//mesh->vColors.reserve(mesh->mNumVertices);
-	//mesh->vVertices.reserve(mesh->mNumVertices);
-	//mesh->vNormals.reserve(mesh->mNumVertices);
-	//mesh->vIndexes.reserve(mesh->mNumVertices);
 
 	GLdouble x, y, z = x = y = length / 2;
 
 	mesh->vVertices = {
+		// Front Face
 		{-x, -y, -z,},  // 0 Front, Bottom, Left
 		{ x, -y, -z,},  // 1 Front, Bottom, Right
 		{ x,  y, -z,},  // 2 Front, Top, Right
 		{-x,  y, -z,},  // 3 Front, Top, Left
+		//Back Face
 		{-x, -y,  z,},  // 4 Back, Bottom, Left
 		{ x, -y,  z,},  // 5 Back, Bottom, Right
 		{ x,  y,  z,},  // 6 Back, Top, Right
 		{-x,  y,  z },  // 7 Back, Top, Left
+		// Left face
+		{-x, -y,  z,},  // 4 Back, Bottom, Left
+		{-x, -y, -z,},  // 0 Front, Bottom, Left
+		{-x,  y, -z,},  // 3 Front, Top, Left
+		{-x,  y,  z },  // 7 Back, Top, Left
+		// Right face
+		{ x, -y, -z,},  // 1 Front, Bottom, Right
+		{ x, -y,  z,},  // 5 Back, Bottom, Right
+		{ x,  y,  z,},  // 6 Back, Top, Right
+		{ x,  y, -z,},  // 2 Front, Top, Right
+		// Top face
+		{-x,  y, -z,},  // 3 Front, Top, Left
+		{ x,  y, -z,},  // 2 Front, Top, Right
+		{ x,  y,  z,},  // 6 Back, Top, Right
+		{-x,  y,  z },  // 7 Back, Top, Left
+		// Bottom face
+		{-x, -y,  z,},  // 4 Back, Bottom, Left
+		{ x, -y,  z,},  // 5 Back, Bottom, Right
+		{ x, -y, -z,},  // 1 Front, Bottom, Right
+		{-x, -y, -z,},  // 0 Front, Bottom, Left
 	};
 
 	//green
 	mesh->vColors = {
-		{0.0 , 1.0 , 0.0 , 1.0} ,
-		{0.0 , 1.0 , 0.0 , 1.0} ,
-		{0.0 , 1.0 , 0.0 , 1.0} ,
-		{0.0 , 1.0 , 0.0 , 1.0} ,
-		{0.0 , 1.0 , 0.0 , 1.0} ,
-		{0.0 , 1.0 , 0.0 , 1.0} ,
-		{0.0 , 1.0 , 0.0 , 1.0} ,
-		{0.0 , 1.0 , 0.0 , 1.0}
+		{1.0 , 1.0 , 1.0 , 1.0} ,
+		{1.0 , 1.0 , 1.0 , 1.0} ,
+		{1.0 , 1.0 , 1.0 , 1.0} ,
+		{1.0 , 1.0 , 1.0 , 1.0} ,
+		{1.0 , 1.0 , 1.0 , 1.0} ,
+		{1.0 , 1.0 , 1.0 , 1.0} ,
+		{1.0 , 1.0 , 1.0 , 1.0} ,
+		{1.0 , 1.0 , 1.0 , 1.0} ,
+
+		{1.0 , 1.0 , 1.0 , 1.0} ,
+		{1.0 , 1.0 , 1.0 , 1.0} ,
+		{1.0 , 1.0 , 1.0 , 1.0} ,
+		{1.0 , 1.0 , 1.0 , 1.0} ,
+		{1.0 , 1.0 , 1.0 , 1.0} ,
+		{1.0 , 1.0 , 1.0 , 1.0} ,
+		{1.0 , 1.0 , 1.0 , 1.0} ,
+		{1.0 , 1.0 , 1.0 , 1.0} ,
+
+		{1.0 , 1.0 , 1.0 , 1.0} ,
+		{1.0 , 1.0 , 1.0 , 1.0} ,
+		{1.0 , 1.0 , 1.0 , 1.0} ,
+		{1.0 , 1.0 , 1.0 , 1.0} ,
+		{1.0 , 1.0 , 1.0 , 1.0} ,
+		{1.0 , 1.0 , 1.0 , 1.0} ,
+		{1.0 , 1.0 , 1.0 , 1.0} ,
+		{1.0 , 1.0 , 1.0 , 1.0} ,
+
+		{1.0 , 1.0 , 1.0 , 1.0} ,
+		{1.0 , 1.0 , 1.0 , 1.0} ,
+		{1.0 , 1.0 , 1.0 , 1.0} ,
+		{1.0 , 1.0 , 1.0 , 1.0} ,
+		{1.0 , 1.0 , 1.0 , 1.0} ,
+		{1.0 , 1.0 , 1.0 , 1.0} ,
+		{1.0 , 1.0 , 1.0 , 1.0} ,
+		{1.0 , 1.0 , 1.0 , 1.0} ,
 	};
 
 	mesh->vIndexes = {
-		//front
-		0,1,2,
-		2,3,0,
-		//back
-		6,5,4,
-		6,4,7,
-		//bottom
-		0,4,1,
-		1,4,5,
-		//top
-		6,7,3,
-		6,3,2,
-		//left
-		4,0,3,
-		4,3,7,
-		//right
-		5,6,2,
-		5,2,1 //1,5,2
+			//front
+			0,1,2,
+			2,3,0,
+			//back
+			6,5,4,
+			6,4,7,
+			// Left face
+			8,9,10,
+			10,11,8,
+			// Right face
+			12,13,14,
+			14,15,12,
+			// Top face
+			16,17,18,
+			18,19,16,
+			// Bottom face
+			20,21,22,
+			22,23,20
+	};
+
+	mesh->vTexCoords.reserve(mesh->mNumVertices);
+	mesh->vTexCoords = {
+		// Front face
+		{0.0, 0.0},
+		{1.0, 0.0},
+		{1.0, 1.0},
+		{0.0, 1.0},
+
+		// Back face
+		{0.0, 0.0}, 
+		{1.0, 0.0}, 
+		{1.0, 1.0}, 
+		{0.0, 1.0}, 
+
+		// Bottom face
+		{0.0, 1.0},
+		{1.0, 1.0},
+		{1.0, 0.0},
+		{0.0, 0.0},
+
+		// Top face
+		{0.0, 0.0},
+		{1.0, 0.0},
+		{1.0, 1.0},
+		{0.0, 1.0},
+
+		// Left face
+		{0.0, 0.0},
+		{1.0, 0.0},
+		{1.0, 1.0},
+		{0.0, 1.0},
+
+		// Right face
+		{0.0, 0.0},
+		{1.0, 0.0},
+		{1.0, 1.0},
+		{0.0, 1.0}
 	};
 
 	mesh->buildNormalVectors();

@@ -18,6 +18,8 @@ public:
 	virtual ~Material() {};
 	virtual void upload();
 	void setCopper();
+	void setGold();
+	void setStone();
 };
 
 // Apartado 75
