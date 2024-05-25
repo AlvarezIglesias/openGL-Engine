@@ -203,6 +203,24 @@ Casa::Casa(int m)
 
 	addEntity(roof);
 
+	// Door
+	Abs_Entity* door = new Ground(m / 2, m * 0.75);
+	door->mTexturePaths = { "../bmps/door.bmp" };
+	
+	door->mPosition.z -= (m / 2) + 1;
+	door->mPosition.y += m / 4;
+	
+	door->mRotation.x += 90;
+	door->mRotation.z += 90;
+
+	addEntity(door);
+
+	// Left Window
+
+	// Right Window
+
+	// Farol
+
 
 }
 

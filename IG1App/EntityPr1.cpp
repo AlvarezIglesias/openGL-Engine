@@ -115,7 +115,7 @@ RGBRectangle::render(dmat4 const& modelViewMat) const
 		upload(aMat);
 
 		glPolygonMode(GL_BACK, GL_FILL);
-		glPointSize(5); // No lo pide pero si no, no se ve.
+		//glPointSize(5); // No lo pide pero si no, no se ve.
 
 		glPolygonMode(GL_FRONT, GL_LINE);
 		mMesh->render();

@@ -3,7 +3,7 @@
 
 #include <GL/freeglut.h>
 #include <glm/glm.hpp>
-#include "Entity.h"
+#include "EntityPr1.h"
 #include "Mesh.h"
 
 // APARTADO 18

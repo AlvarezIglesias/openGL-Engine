@@ -4,7 +4,7 @@
 #include <GL/freeglut.h>
 #include <glm/glm.hpp>
 #include <vector>
-#include "Entity.h"
+#include "EntityPr2.h"
 #include "Mesh.h"
 #include "Light.h"
 
