@@ -173,6 +173,56 @@ IndexedPiramidWithMaterial::render(glm::dmat4 const& modelViewMat) const {
 }
 
 //----------------------------------------------------------------------------------------------
+// GroundWithMaterial
+//----------------------------------------------------------------------------------------------
+
+GroundWithMaterial::GroundWithMaterial(GLdouble w, GLdouble h)
+	: EntityWithMaterial()
+{
+	mTexturePaths = { "../bmps/grassPaint.bmp" };
+	mMesh = Mesh::generateRectangleTexCor(w, h, 4, 4);
+	mRotation = dvec3(270, 0, 270);
+}
+
+GroundWithMaterial::~GroundWithMaterial()
+{
+	delete mMesh;
+	mMesh = nullptr;
+};
+
+void
+GroundWithMaterial::render(dmat4 const& modelViewMat) const
+{
+	if (mMesh != nullptr) {
+		dmat4 aMat = modelViewMat
+			* mModelMat
+			* translate(dmat4(1), mPosition)
+			* rotate(dmat4(1), radians(mRotation.x), dvec3(1, 0, 0))
+			* rotate(dmat4(1), radians(mRotation.y), dvec3(0, 1, 0))
+			* rotate(dmat4(1), radians(mRotation.z), dvec3(0, 0, 1)); // glm matrix multiplication
+
+		upload(aMat);
+
+		glColor4d(1.0, 1.0, 1.0, 1.0);
+
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+		glDisable(GL_COLOR_MATERIAL);
+
+		mTextures[0]->bind(GL_MODULATE);
+		material->upload();
+
+		mMesh->render();
+
+		mTextures[0]->unbind();
+		glEnable(GL_COLOR_MATERIAL);
+		glPointSize(1);
+		glLineWidth(1);
+		glColor4d(1.0, 1.0, 1.0, 1.0);
+		glPolygonMode(GL_FRONT, GL_FILL);
+	}
+}
+
+//----------------------------------------------------------------------------------------------
 // Casa
 //----------------------------------------------------------------------------------------------
 
@@ -204,8 +254,13 @@ Casa::Casa(int m)
 	addEntity(roof);
 
 	// Door
-	Abs_Entity* door = new Ground(m / 2, m * 0.75);
+	EntityWithMaterial* door = new GroundWithMaterial(m / 2, m * 0.75);
 	door->mTexturePaths = { "../bmps/door.bmp" };
+
+	Material* mat3 = new Material();
+	mat3->upload();
+	mat3->setWood();
+	door->setMaterial(mat3);
 	
 	door->mPosition.z -= (m / 2) + 0.1;
 	door->mPosition.y += (m * 0.75) / 2;
@@ -216,8 +271,13 @@ Casa::Casa(int m)
 	addEntity(door);
 
 	// Right Window
-	Abs_Entity* rWindow = new Ground(m / 2, m / 4);
+	EntityWithMaterial* rWindow = new GroundWithMaterial(m / 2, m / 4);
 	rWindow->mTexturePaths = { "../bmps/ventana.bmp" };
+
+	Material* mat4 = new Material();
+	mat4->upload();
+	mat4->setGlass();
+	rWindow->setMaterial(mat4);
 
 	rWindow->mPosition.x -= (m / 2) + 0.1;
 	rWindow->mPosition.y += m / 2;
@@ -229,8 +289,10 @@ Casa::Casa(int m)
 	addEntity(rWindow);
 
 	// Left Window
-	Abs_Entity* lWindow = new Ground(m / 2, m / 4);
+	EntityWithMaterial* lWindow = new GroundWithMaterial(m / 2, m / 4);
 	lWindow->mTexturePaths = { "../bmps/ventana.bmp" };
+
+	lWindow->setMaterial(mat4);
 
 	lWindow->mPosition.x += (m / 2) + 0.1;
 	lWindow->mPosition.y += m / 2;

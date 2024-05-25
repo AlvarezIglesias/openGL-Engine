@@ -20,6 +20,8 @@ public:
 	void setCopper();
 	void setGold();
 	void setStone();
+	void setGlass();
+	void setWood();
 };
 
 // Apartado 75

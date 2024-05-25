@@ -16,7 +16,6 @@ public:
 //----------------------------------------------------------------------------------------------
 // IndexedBoxWithMaterial
 //----------------------------------------------------------------------------------------------
-
 class IndexedBoxWithMaterial : public EntityWithMaterial {
 public:
 	IndexedBoxWithMaterial(int m);
@@ -27,11 +26,21 @@ public:
 //----------------------------------------------------------------------------------------------
 // IndexedPiramidWithMaterial
 //----------------------------------------------------------------------------------------------
-
 class IndexedPiramidWithMaterial : public EntityWithMaterial {
 public:
 	IndexedPiramidWithMaterial(int m);
 	~IndexedPiramidWithMaterial() {};
+	virtual void render(glm::dmat4 const& modelViewMat) const;
+};
+
+//----------------------------------------------------------------------------------------------
+// GroundWithMaterial
+//----------------------------------------------------------------------------------------------
+class GroundWithMaterial : public EntityWithMaterial
+{
+public:
+	~GroundWithMaterial();
+	explicit GroundWithMaterial(GLdouble w, GLdouble h);
 	virtual void render(glm::dmat4 const& modelViewMat) const;
 };
 
