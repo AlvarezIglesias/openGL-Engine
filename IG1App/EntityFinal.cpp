@@ -306,7 +306,7 @@ Farolillo::Farolillo(int m)
 	EntityWithMaterial* soporteApoyo = new RevCilinder(m/18.75, m/2.5, 200, 200);
 	soporteApoyo->mTexturePaths = { "../bmps/wood.bmp" };
 
-	soporteApoyo->mRotation.x += 45;
+	soporteApoyo->mRotation.x += 40;
 	soporteApoyo->mPosition.y -= m / 3.25;
 
 	soporteApoyo->setMaterial(mat);
@@ -318,13 +318,14 @@ Farolillo::Farolillo(int m)
 	mat2->upload();
 	mat2->setWood();
 
-	EntityWithMaterial* cierre = new DiskWithMaterial(0, m / 18.75);
+	/*EntityWithMaterial* cierre = new DiskWithMaterial(0, m / 18.75);
 
 	cierre->setMaterial(mat2);
 
 	cierre->mTexturePaths = { "../bmps/wood2.bmp" };
 
 	addEntity(cierre);
+	*/
 
 	EntityWithMaterial* cierre2 = new DiskWithMaterial(0, m / 18.75);
 	cierre2->mPosition.z += m / 2.5;
@@ -341,7 +342,7 @@ Farolillo::Farolillo(int m)
 	mat3->setBrass();
 	
 	// Cadena
-	EntityWithMaterial* cadena = new Toroid(m / 400, m / 18.75, 200, 200);
+	EntityWithMaterial* cadena = new Toroid(0.1, m / 18.75, 200, 200);
 	cadena->setMaterial(mat3);
 
 	cadena->mRotation.x += 90;
@@ -350,11 +351,11 @@ Farolillo::Farolillo(int m)
 	addEntity(cadena);
 
 	// Arriba
-	EntityWithMaterial* arriba = new IndexedPiramidWithMaterial(m / 18.75);
+	EntityWithMaterial* arriba = new IndexedPiramidWithMaterial(m / 13);
 	arriba->setMaterial(mat3);
 
 	arriba->mPosition.z += m / 2.75;
-	arriba->mPosition.y -= m / 15;
+	arriba->mPosition.y -= (m / 37.5 + m / 13) - 0.1;
 
 	addEntity(arriba);
 
@@ -368,7 +369,7 @@ Farolillo::Farolillo(int m)
 	rGlass->setMaterial(mat4);
 
 	rGlass->mPosition.z += m / 2.75;
-	rGlass->mPosition.y -= (m / 19.75) + (m / 15);
+	rGlass->mPosition.y -= (m / 19.75) + (m / 13) + (m / 26);
 	rGlass->mPosition.x += (m / 19.75) / 2;
 
 	rGlass->mRotation.x += 90;
@@ -382,7 +383,7 @@ Farolillo::Farolillo(int m)
 	lGlass->setMaterial(mat4);
 
 	lGlass->mPosition.z += m / 2.75;
-	lGlass->mPosition.y -= (m / 19.75) + (m / 15);
+	lGlass->mPosition.y -= (m / 19.75) + (m / 13) + (m / 26);
 	lGlass->mPosition.x -= (m / 19.75) / 2;
 
 	lGlass->mRotation.x += 90;
@@ -396,12 +397,12 @@ Farolillo::Farolillo(int m)
 	fGlass->setMaterial(mat4);
 
 	fGlass->mPosition.z += m / 2.75 + (m / 19.75) / 2;
-	fGlass->mPosition.y -= (m / 19.75) + (m / 15);
+	fGlass->mPosition.y -= (m / 19.75) + (m / 13) + (m / 26);
 	//bGlass->mPosition.x -= (m / 19.75) / 2;
 
 	fGlass->mRotation.x += 90;
 	fGlass->mRotation.z += 90;
-	//bGlass->mRotation.y -= 90;
+	fGlass->mRotation.y -= 180;
 
 	addEntity(fGlass);
 
@@ -410,12 +411,12 @@ Farolillo::Farolillo(int m)
 	bGlass->setMaterial(mat4);
 
 	bGlass->mPosition.z += m / 2.75 - (m / 19.75) / 2;
-	bGlass->mPosition.y -= (m / 19.75) + (m / 15);
+	bGlass->mPosition.y -= (m / 19.75) + (m / 13) + (m / 26);
 	//bGlass->mPosition.x -= (m / 19.75) / 2;
 
 	bGlass->mRotation.x += 90;
 	bGlass->mRotation.z += 90;
-	bGlass->mRotation.y -= 180;
+	//bGlass->mRotation.y -= 180;
 
 	addEntity(bGlass);
 
@@ -425,7 +426,7 @@ Farolillo::Farolillo(int m)
 	base->setMaterial(mat3);
 
 	base->mPosition.z += m / 2.75;
-	base->mPosition.y -= m / 15 + ((m / 19.75) * 1.5);
+	base->mPosition.y -= m / 13 + (m / 26) + ((m / 19.75) * 1.5);
 	//bGlass->mPosition.x -= (m / 19.75) / 2;
 
 	base->mRotation.x += 180;
@@ -436,10 +437,10 @@ Farolillo::Farolillo(int m)
 
 	// Soportes del farol
 	// Left Back
-	EntityWithMaterial* sbl = new RevCilinder(m / 400, m / 19.75, 200, 200);
+	EntityWithMaterial* sbl = new RevCilinder(0.1, m / 18.75, 200, 200);
 
 	sbl->mPosition.z += m / 2.75 - (m / 19.75) / 2;
-	sbl->mPosition.y -= m / 15 + ((m / 19.75) * 1.5);
+	sbl->mPosition.y -= m / 13 + (m / 26) + ((m / 19.75) * 1.5);
 	sbl->mPosition.x -= (m / 19.75) / 2;
 
 	//sbl->mRotation.x += 90;
@@ -449,10 +450,10 @@ Farolillo::Farolillo(int m)
 	addEntity(sbl);
 
 	// Right Back
-	EntityWithMaterial* sbr = new RevCilinder(m / 400, m / 19.75, 200, 200);
+	EntityWithMaterial* sbr = new RevCilinder(0.1, m / 18.75, 200, 200);
 
 	sbr->mPosition.z += m / 2.75 - (m / 19.75) / 2;
-	sbr->mPosition.y -= m / 15 + ((m / 19.75) * 1.5);
+	sbr->mPosition.y -= m / 13 + (m / 26) + ((m / 19.75) * 1.5);
 	sbr->mPosition.x += (m / 19.75) / 2;
 
 	//sbl->mRotation.x += 90;
@@ -462,10 +463,10 @@ Farolillo::Farolillo(int m)
 	addEntity(sbr);
 
 	// Right Front
-	EntityWithMaterial* sfr = new RevCilinder(m / 400, m / 19.75, 200, 200);
+	EntityWithMaterial* sfr = new RevCilinder(0.1, m / 18.75, 200, 200);
 
 	sfr->mPosition.z += m / 2.75 + (m / 19.75) / 2;
-	sfr->mPosition.y -= m / 15 + ((m / 19.75) * 1.5);
+	sfr->mPosition.y -= m / 13 + (m / 26) + ((m / 19.75) * 1.5);
 	sfr->mPosition.x += (m / 19.75) / 2;
 
 	//sbl->mRotation.x += 90;
@@ -475,10 +476,10 @@ Farolillo::Farolillo(int m)
 	addEntity(sfr);
 
 	// Left Front
-	EntityWithMaterial* sfl = new RevCilinder(m / 400, m / 19.75, 200, 200);
+	EntityWithMaterial* sfl = new RevCilinder(0.1, m / 18.75, 200, 200);
 
 	sfl->mPosition.z += m / 2.75 + (m / 19.75) / 2;
-	sfl->mPosition.y -= m / 15 + ((m / 19.75) * 1.5);
+	sfl->mPosition.y -= m / 13 + (m / 26) + ((m / 19.75) * 1.5);
 	sfl->mPosition.x -= (m / 19.75) / 2;
 
 	//sbl->mRotation.x += 90;
@@ -491,11 +492,11 @@ Farolillo::Farolillo(int m)
 
 	// Left Front
 	// Bottom
-	EntityWithMaterial* tapa = new DiskWithMaterial(0, m / 400);
+	EntityWithMaterial* tapa = new DiskWithMaterial(0, 0.1);
 	tapa->setMaterial(mat3);
 
 	tapa->mPosition.z += m / 2.75 + (m / 19.75) / 2;
-	tapa->mPosition.y -= m / 15 + ((m / 19.75) * 1.5);
+	tapa->mPosition.y -= m / 13 + (m / 26) + ((m / 19.75) * 1.5);
 	tapa->mPosition.x -= (m / 19.75) / 2;
 
 	tapa->mRotation.x += 90;
@@ -503,11 +504,11 @@ Farolillo::Farolillo(int m)
 	addEntity(tapa);
 
 	// Up
-	EntityWithMaterial* tapa2 = new DiskWithMaterial(0, m / 400);
+	EntityWithMaterial* tapa2 = new DiskWithMaterial(0, 0.1);
 	tapa2->setMaterial(mat3);
 
 	tapa2->mPosition.z += m / 2.75 + (m / 19.75) / 2;
-	tapa2->mPosition.y -= m / 15 + m / 39.5;
+	tapa2->mPosition.y -= m / 13 + (m / 26) + m / 39.5;
 	tapa2->mPosition.x -= (m / 19.75) / 2;
 
 	tapa2->mRotation.x += 90;
@@ -516,11 +517,11 @@ Farolillo::Farolillo(int m)
 
 	// Right Front
 	// Bottom
-	EntityWithMaterial* tapa3 = new DiskWithMaterial(0, m / 400);
+	EntityWithMaterial* tapa3 = new DiskWithMaterial(0, 0.1);
 	tapa3->setMaterial(mat3);
 
 	tapa3->mPosition.z += m / 2.75 + (m / 19.75) / 2;
-	tapa3->mPosition.y -= m / 15 + ((m / 19.75) * 1.5);
+	tapa3->mPosition.y -= m / 13 + (m / 26) + ((m / 19.75) * 1.5);
 	tapa3->mPosition.x += (m / 19.75) / 2;
 
 	tapa3->mRotation.x += 90;
@@ -528,11 +529,11 @@ Farolillo::Farolillo(int m)
 	addEntity(tapa3);
 
 	// Up
-	EntityWithMaterial* tapa4 = new DiskWithMaterial(0, m / 400);
+	EntityWithMaterial* tapa4 = new DiskWithMaterial(0, 0.1);
 	tapa4->setMaterial(mat3);
 
 	tapa4->mPosition.z += m / 2.75 + (m / 19.75) / 2;
-	tapa4->mPosition.y -= m / 15 + m / 39.5;
+	tapa4->mPosition.y -= m / 13 + (m / 26) + m / 39.5;
 	tapa4->mPosition.x += (m / 19.75) / 2;
 
 	tapa4->mRotation.x += 90;
@@ -541,11 +542,11 @@ Farolillo::Farolillo(int m)
 
 	// Right Back
 	// Bottom
-	EntityWithMaterial* tapa5 = new DiskWithMaterial(0, m / 400);
+	EntityWithMaterial* tapa5 = new DiskWithMaterial(0, 0.1);
 	tapa5->setMaterial(mat3);
 
 	tapa5->mPosition.z += m / 2.75 - (m / 19.75) / 2;
-	tapa5->mPosition.y -= m / 15 + ((m / 19.75) * 1.5);
+	tapa5->mPosition.y -= m / 13 + (m / 26) + ((m / 19.75) * 1.5);
 	tapa5->mPosition.x += (m / 19.75) / 2;
 
 	tapa5->mRotation.x += 90;
@@ -553,11 +554,11 @@ Farolillo::Farolillo(int m)
 	addEntity(tapa5);
 
 	// Up
-	EntityWithMaterial* tapa6 = new DiskWithMaterial(0, m / 400);
+	EntityWithMaterial* tapa6 = new DiskWithMaterial(0, 0.1);
 	tapa6->setMaterial(mat3);
 
 	tapa6->mPosition.z += m / 2.75 - (m / 19.75) / 2;
-	tapa6->mPosition.y -= m / 15 + m / 39.5;
+	tapa6->mPosition.y -= m / 13 + (m / 26) + m / 39.5;
 	tapa6->mPosition.x += (m / 19.75) / 2;
 
 	tapa6->mRotation.x += 90;
@@ -566,11 +567,11 @@ Farolillo::Farolillo(int m)
 
 	// Left Back
 	// Bottom
-	EntityWithMaterial* tapa7 = new DiskWithMaterial(0, m / 400);
+	EntityWithMaterial* tapa7 = new DiskWithMaterial(0, 0.1);
 	tapa7->setMaterial(mat3);
 
 	tapa7->mPosition.z += m / 2.75 - (m / 19.75) / 2;
-	tapa7->mPosition.y -= m / 15 + ((m / 19.75) * 1.5);
+	tapa7->mPosition.y -= m / 13 + (m / 26) + ((m / 19.75) * 1.5);
 	tapa7->mPosition.x -= (m / 19.75) / 2;
 
 	tapa7->mRotation.x += 90;
@@ -578,16 +579,40 @@ Farolillo::Farolillo(int m)
 	addEntity(tapa7);
 
 	// Up
-	EntityWithMaterial* tapa8 = new DiskWithMaterial(0, m / 400);
+	EntityWithMaterial* tapa8 = new DiskWithMaterial(0, 0.1);
 	tapa8->setMaterial(mat3);
 
 	tapa8->mPosition.z += m / 2.75 - (m / 19.75) / 2;
-	tapa8->mPosition.y -= m / 15 + m / 39.5;
+	tapa8->mPosition.y -= m / 13 + (m / 26) + m / 39.5;
 	tapa8->mPosition.x -= (m / 19.75) / 2;
 
 	tapa8->mRotation.x += 90;
 
 	addEntity(tapa8);
+
+	// Poslight
+	light = new PosLight();
+
+	light->setAmb(glm::fvec4{ 0.0, 0.0, 0.0, 1.0 });
+	light->setDiff(glm::fvec4{ 0.5, 0.2, 0.0, 1.0 });
+	light->setSpec(glm::fvec4{ 0.5, 0.5, 0.5, 1.0 });
+
+	light->setAtte(1.0, 0.00001, 0.00001);
+	
+	light->setPosDir(glm::fvec3{ mPosition.x, -((m / 18.75) + (m / 26) + (m / 13)), m / 2.75 });
+
+	light->enable();
+
+	
+	EntityWithMaterial* tapa9 = new DiskWithMaterial(0, m / 25);
+	tapa9->setMaterial(mat3);
+
+	tapa9->mPosition = glm::fvec3{ mPosition.x, -((m / 18.75) + (m / 26) + (m / 13)), m / 2.75 };
+
+	tapa9->mRotation.x += 90;
+
+	addEntity(tapa9);
+	
 
 }
 
@@ -599,6 +624,8 @@ void Farolillo::render(glm::dmat4 const& modelViewMat) const {
 	for (Abs_Entity* ent : gObjects) {
 		ent->render(modelViewMatComp);
 	}
+
+	light->upload(modelViewMatComp);
 }
 
 //----------------------------------------------------------------------------------------------
@@ -684,7 +711,16 @@ Casa::Casa(int m)
 	addEntity(lWindow);
 
 	// Farol
+	Abs_Entity* farol = new Farolillo(m);
 
+	farol->mPosition.z -= (m / 2) + 0.1;
+	farol->mPosition.x -= (m * 0.35);
+	farol->mPosition.y += (m * 0.75);
+
+	farol->mRotation.y += 180;
+
+	addEntity(farol);
+	
 
 }
 

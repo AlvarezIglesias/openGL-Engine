@@ -99,6 +99,8 @@ public:
 	~Farolillo() {}
 
 	virtual void render(glm::dmat4 const& modelViewMat) const;
+protected:
+	PosLight* light;
 };
 
 //----------------------------------------------------------------------------------------------
