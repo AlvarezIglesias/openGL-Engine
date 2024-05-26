@@ -41,6 +41,51 @@ void ChessBoard::render(glm::dmat4 const& modelViewMat) const
 }
 
 
+
+void ChessPiece::render(glm::dmat4 const& modelViewMat) const
+{
+
+	if (mMesh != nullptr) {
+
+		dmat4 aMat = complete_transform(modelViewMat);
+
+		upload(aMat);
+
+		glColor4d(mColor[0], mColor[1], mColor[2], mColor[3]);
+
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+		glEnable(GL_NORMALIZE);
+		glEnable(GL_COLOR_MATERIAL);
+
+
+		if(material != nullptr) material->upload();
+
+		mMesh->render();
+
+		glDisable(GL_NORMALIZE);
+		glDisable(GL_COLOR_MATERIAL);
+		glPointSize(1);
+		glLineWidth(1);
+		glColor4d(1.0, 1.0, 1.0, 1.0);
+		glEnable(GL_DEPTH_TEST);
+		glDisable(GL_BLEND);
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+	}
+}
+
+void ChessPiece::update()
+{
+	if (!shouldUpdate) return;
+
+
+	counter += 0.5;
+	float hight = abs(
+		sin(glm::radians(counter+phase) * glm::pi<float>() ) +
+		sin(0.5 * glm::radians(counter+ phase) * glm::pi<float>() + 3.9 )) * 40;
+
+	mPosition = { mPosition.x, hight, mPosition.z };
+}
+
 Peon::Peon()
 {
 	std::vector<dvec3> perfil;
@@ -94,36 +139,6 @@ Peon::Peon()
 	this->mMesh = MbR::generaIndexMbR(perfil.size(), 100, perfil.data());
 }
 
-void Peon::render(glm::dmat4 const& modelViewMat) const
-{
-
-	if (mMesh != nullptr) {
-
-		dmat4 aMat = complete_transform(modelViewMat);
-
-		upload(aMat);
-
-		glColor4d(mColor[0], mColor[1], mColor[2], mColor[3]);
-
-		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-		glEnable(GL_NORMALIZE);
-		glEnable(GL_COLOR_MATERIAL);
-
-
-		material->upload();
-
-		mMesh->render();
-		
-		glDisable(GL_NORMALIZE);
-		glDisable(GL_COLOR_MATERIAL);
-		glPointSize(1);
-		glLineWidth(1);
-		glColor4d(1.0, 1.0, 1.0, 1.0);
-		glEnable(GL_DEPTH_TEST);
-		glDisable(GL_BLEND);
-		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-	}
-}
 
 Torre::Torre()
 {
@@ -154,38 +169,6 @@ Torre::Torre()
 
 	this->mMesh = MbR::generaIndexMbR(perfil.size(), 100, perfil.data());
 }
-
-void Torre::render(glm::dmat4 const& modelViewMat) const
-{
-
-	if (mMesh != nullptr) {
-
-		dmat4 aMat = complete_transform(modelViewMat);
-
-		upload(aMat);
-
-		glColor4d(mColor[0], mColor[1], mColor[2], mColor[3]);
-
-		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-		glEnable(GL_NORMALIZE);
-		glEnable(GL_COLOR_MATERIAL);
-
-
-		//material->upload();
-
-		mMesh->render();
-
-		glDisable(GL_NORMALIZE);
-		glDisable(GL_COLOR_MATERIAL);
-		glPointSize(1);
-		glLineWidth(1);
-		glColor4d(1.0, 1.0, 1.0, 1.0);
-		glEnable(GL_DEPTH_TEST);
-		glDisable(GL_BLEND);
-		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-	}
-}
-
 
 Alfil::Alfil()
 {
@@ -225,38 +208,6 @@ Alfil::Alfil()
 
 	this->mMesh = MbR::generaIndexMbR(perfil.size(), 100, perfil.data());
 }
-
-void Alfil::render(glm::dmat4 const& modelViewMat) const
-{
-
-	if (mMesh != nullptr) {
-
-		dmat4 aMat = complete_transform(modelViewMat);
-
-		upload(aMat);
-
-		glColor4d(mColor[0], mColor[1], mColor[2], mColor[3]);
-
-		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-		glEnable(GL_NORMALIZE);
-		glEnable(GL_COLOR_MATERIAL);
-
-
-		//material->upload();
-
-		mMesh->render();
-
-		glDisable(GL_NORMALIZE);
-		glDisable(GL_COLOR_MATERIAL);
-		glPointSize(1);
-		glLineWidth(1);
-		glColor4d(1.0, 1.0, 1.0, 1.0);
-		glEnable(GL_DEPTH_TEST);
-		glDisable(GL_BLEND);
-		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-	}
-}
-
 
 Reina::Reina()
 {
@@ -299,37 +250,6 @@ Reina::Reina()
 
 
 	this->mMesh = MbR::generaIndexMbR(perfil.size(), 100, perfil.data());
-}
-
-void Reina::render(glm::dmat4 const& modelViewMat) const
-{
-
-	if (mMesh != nullptr) {
-
-		dmat4 aMat = complete_transform(modelViewMat);
-
-		upload(aMat);
-
-		glColor4d(mColor[0], mColor[1], mColor[2], mColor[3]);
-
-		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-		glEnable(GL_NORMALIZE);
-		glEnable(GL_COLOR_MATERIAL);
-
-
-		//material->upload();
-
-		mMesh->render();
-
-		glDisable(GL_NORMALIZE);
-		glDisable(GL_COLOR_MATERIAL);
-		glPointSize(1);
-		glLineWidth(1);
-		glColor4d(1.0, 1.0, 1.0, 1.0);
-		glEnable(GL_DEPTH_TEST);
-		glDisable(GL_BLEND);
-		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-	}
 }
 
 
@@ -376,38 +296,6 @@ Rey::Rey()
 
 	this->mMesh = MbR::generaIndexMbR(perfil.size(), 100, perfil.data());
 }
-
-void Rey::render(glm::dmat4 const& modelViewMat) const
-{
-
-	if (mMesh != nullptr) {
-
-		dmat4 aMat = complete_transform(modelViewMat);
-
-		upload(aMat);
-
-		glColor4d(mColor[0], mColor[1], mColor[2], mColor[3]);
-
-		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-		glEnable(GL_NORMALIZE);
-		glEnable(GL_COLOR_MATERIAL);
-
-
-		//material->upload();
-
-		mMesh->render();
-
-		glDisable(GL_NORMALIZE);
-		glDisable(GL_COLOR_MATERIAL);
-		glPointSize(1);
-		glLineWidth(1);
-		glColor4d(1.0, 1.0, 1.0, 1.0);
-		glEnable(GL_DEPTH_TEST);
-		glDisable(GL_BLEND);
-		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-	}
-}
-
 
 BaseCaballo::BaseCaballo()
 {
@@ -523,19 +411,18 @@ void Luz::render(glm::dmat4 const& modelViewMat) const {
 	glEnable(GL_COLOR_MATERIAL);
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	glDisable(GL_DEPTH_TEST); // Si no, no se transparentan los otros hierbajos renderizados
 
-	//glColor3f(mColor[0], mColor[1], mColor[2]);
+	glColor4f(mColor[0], mColor[1], mColor[2], 1.0f);
 	// Aquí se puede fijar el modo de dibujar la esfera :
 	gluQuadricDrawStyle (q, GLU_FILL);
 	gluQuadricTexture(q, GL_TRUE);
-	mTextures[0]->bind(GL_REPLACE);
+	mTextures[0]->bind(GL_ADD);
 	gluCylinder(q, ru, rd, h, 50, 50);
 	mTextures[0]->unbind();
-	glEnable(GL_DEPTH_TEST); // Si no, no se transparentan los otros hierbajos renderizados
 
 	// Aquí se debe recuperar el color :
-	glColor3f(1.0, 1.0, 1.0);
+	glColor4f(1.0, 1.0, 1.0, 1.0);
+	glDisable(GL_BLEND);
 	glDisable(GL_COLOR_MATERIAL);
 
 }
@@ -610,15 +497,15 @@ void PantallaFlexo::render(glm::dmat4 const& modelViewMat) const
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
 
-		spotLight->setPosDir(glm::fvec3{ mPosition.x, mPosition.y, mPosition.z });
+		spotLight->setPosDir(glm::fvec3{ mPosition.x-90, mPosition.y, mPosition.z });
 		spotLight->setSpot(glm::fvec3{ -1.0, 0, 0}, 40, 3);
-		spotLight->setAtte(1, 0, 0.000002);
+		spotLight->setAtte(0, 0, 0.000002);
 		spotLight->upload(modelViewMat);
 	}
 }
 
 void PantallaFlexo::update() {
-	counter += 0.000001;
+	counter += 0.01;
 	std::cout << counter << std::endl;
 }
 
@@ -637,7 +524,7 @@ void Eje::update()
 
 
 
-DensePlain::DensePlain(int& density, float textCoorRepeat)
+DensePlain::DensePlain(const int& density, float textCoorRepeat)
 {
 
 	this->mMesh = IndexMesh::generateDensePlain(density, textCoorRepeat);
@@ -656,7 +543,8 @@ void DensePlain::render(glm::dmat4 const& modelViewMat) const
 
 		glColor4d(mColor[0], mColor[1], mColor[2], mColor[3]);
 
-		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+		glPolygonMode(GL_FRONT, GL_FILL);
+		glPolygonMode(GL_BACK, GL_POINT);
 		glEnable(GL_NORMALIZE);
 
 

@@ -80,7 +80,7 @@ public:
 	/******************************** PARTE FINAL ******************************/
 
 	static Mesh* generateCaballo();
-	static Mesh* generateDensePlain(int& density, float textCoorRepeat = 1.0);
+	static Mesh* generateDensePlain(const int& density, float textCoorRepeat = 1.0);
 
 
 protected:

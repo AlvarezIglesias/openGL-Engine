@@ -2,7 +2,7 @@
 #include "CheckML.h"
 #include <iostream>
 
-
+#define UPDATE_PERIOD 10
 using namespace std;
 
 // static single instance (singleton pattern)
@@ -202,23 +202,26 @@ IG1App::init()
 
 	Cylinder* baseFlexo = new Cylinder(100, 100, 30);
 	baseFlexo->mRotation = { -90,0,0 };
+	baseFlexo->mColor = blackColor;
 	compoundBaseFlexo->addEntity(baseFlexo);
 
 	Disk* tapaBaseFlexo = new Disk(0,100);
 	tapaBaseFlexo->mRotation = { -90,0,0 };
 	tapaBaseFlexo->mPosition = { 0,30,0 };
+	tapaBaseFlexo->mColor = blackColor;
 	compoundBaseFlexo->addEntity(tapaBaseFlexo);
 
 	Cylinder* primerEjeFlexo = new Cylinder(30, 30, 30);
 	primerEjeFlexo->mRotation = { -90,0,0 };
 	primerEjeFlexo->mPosition = { 60,30,0 };
+	primerEjeFlexo->mColor = blackColor;
 	compoundBaseFlexo->addEntity(primerEjeFlexo);
 
 	Disk* tapaPrimerEjeFlexo = new Disk(0, 30);
 	tapaPrimerEjeFlexo->mRotation = { -90,0,0 };
 	tapaPrimerEjeFlexo->mPosition = { 60,60,0 };
+	tapaPrimerEjeFlexo->mColor = blackColor;
 	compoundBaseFlexo->addEntity(tapaPrimerEjeFlexo);
-	objects.push_back(compoundBaseFlexo);
 
 	// Brazo 1
 
@@ -230,10 +233,12 @@ IG1App::init()
 	Cylinder* brazo1Flexo = new Cylinder(10, 10, 400);
 	brazo1Flexo->mRotation = { -90,0,0 };
 	brazo1Flexo->mPosition = { 0,0,0 };
+	brazo1Flexo->mColor = blackColor;
 	pivotePrimerEje->addEntity(brazo1Flexo);
 
 	Sphere* bolaSegundoEje = new Sphere(30);
 	bolaSegundoEje->mPosition = { 0,385,0 };
+	bolaSegundoEje->mColor = blackColor;
 	pivotePrimerEje->addEntity(bolaSegundoEje);
 
 	//Brazo 2
@@ -246,10 +251,12 @@ IG1App::init()
 	Cylinder* brazo2Flexo = new Cylinder(10, 10, 400);
 	brazo2Flexo->mRotation = { -90,0,0 };
 	brazo2Flexo->mPosition = { 0,0,0 };
+	brazo2Flexo->mColor = blackColor;
 	pivoteSegundoEje->addEntity(brazo2Flexo);
 
 	Sphere* bolaTercerEje = new Sphere(30);
 	bolaTercerEje->mPosition = { 0,385,0 };
+	bolaTercerEje->mColor = blackColor;
 	pivoteSegundoEje->addEntity(bolaTercerEje);
 
 	//Brazo 3
@@ -262,6 +269,7 @@ IG1App::init()
 	Cylinder* brazo3Flexo = new Cylinder(10, 10, 200);
 	brazo3Flexo->mRotation = { -90,0,0 };
 	brazo3Flexo->mPosition = { 0,0,0 };
+	brazo3Flexo->mColor = blackColor;
 	pivoteTercerEje->addEntity(brazo3Flexo);
 
 	PantallaFlexo* pantallaFlexo = new PantallaFlexo();
@@ -280,17 +288,18 @@ IG1App::init()
 
 	Disk* superficieMesa = new Disk(0, 1000);
 	superficieMesa->addTexturePath("../bmps/terciopelo.bmp");
-	superficieMesa->mPosition = { 0,-1,0 };
+	superficieMesa->mPosition = { 0,-30,0 };
 	superficieMesa->mRotation = { -90,0,0 };
 	objects.push_back(superficieMesa);
 
 	Cylinder* faldaMesa = new Cylinder(1000, 1100, 1000);
 	faldaMesa->addTexturePath("../bmps/terciopelo.bmp");
-	faldaMesa->mPosition = { 0,-1,0 };
+	faldaMesa->mPosition = { 0,-30,0 };
 	faldaMesa->mRotation = { 90,0,0 };
 	objects.push_back(faldaMesa);
 
 	Reina* pataMesa = new Reina();
+	pataMesa->shouldUpdate = false;
 	pataMesa->mScale = { 160,200,160 };
 	pataMesa->mRotation = { 0,0,0 };
 	pataMesa->mPosition = { 0,-2000,0 };
@@ -298,35 +307,65 @@ IG1App::init()
 	pataMesa->setMaterial(material);
 	objects.push_back(pataMesa);
 
-	/*Luz* luz = new Luz(30, 200, 300);
+	Luz* luz = new Luz(30, 200, 300);
 	luz->mPosition = { -80,175,0 };
 	luz->mRotation = { 0,-90,0 };
 	luz->mColor = { 1,1,0,1 };
-	pivoteTercerEje->addEntity(luz);*/
+	pivoteTercerEje->addEntity(luz);
 
 	compoundBaseFlexo->mPosition = { 600,0,0 };
 
-	int density = 50;
-	DensePlain * cb = new DensePlain(density);
+	DensePlain * cb = new DensePlain(50);
 	cb->addTexturePath("../bmps/chessBoard.bmp");
 	cb->mScale = { 800,800,800 };
 	cb->mRotation = { -90,0,0 };
-	cb->mPosition = { 0,10,0 };
+	cb->mPosition = { 0,0,0 };
 	cb->setMaterial(material);
 	objects.push_back(cb);
 
+	DensePlain* cbLateral1 = new DensePlain(5);
+	cbLateral1->addTexturePath("../bmps/container.bmp");
+	cbLateral1->mScale = { 800,30,1 };
+	cbLateral1->mRotation = { 0,0,0 };
+	cbLateral1->mPosition = { 0,-15,400 };
+	cbLateral1->setMaterial(material);
+	objects.push_back(cbLateral1);
+
+	DensePlain* cbLateral2 = new DensePlain(5);
+	cbLateral2->addTexturePath("../bmps/container.bmp");
+	cbLateral2->mScale = { 800,30,1 };
+	cbLateral2->mRotation = { 0,180,0 };
+	cbLateral2->mPosition = { 0,-15,-400 };
+	cbLateral2->setMaterial(material);
+	objects.push_back(cbLateral2);
+
+	DensePlain* cbLateral3 = new DensePlain(5);
+	cbLateral3->addTexturePath("../bmps/container.bmp");
+	cbLateral3->mScale = { 1,30,800 };
+	cbLateral3->mRotation = { 0,90,0 };
+	cbLateral3->mPosition = { 400,-15,0 };
+	cbLateral3->setMaterial(material);
+	objects.push_back(cbLateral3);
+
+	DensePlain* cbLateral4 = new DensePlain(5);
+	cbLateral4->addTexturePath("../bmps/container.bmp");
+	cbLateral4->mScale = { 1,30,800 };
+	cbLateral4->mRotation = { 0,270,0 };
+	cbLateral4->mPosition = { -400,-15,0 };
+	cbLateral4->setMaterial(material);
+	objects.push_back(cbLateral4);
 
 
-
-
-	density = 200;
-	DensePlain* suelo = new DensePlain(density, 10);
+	DensePlain* suelo = new DensePlain(200, 5);
 	suelo->addTexturePath("../bmps/baldosa.bmp");
-	suelo->mScale = { 10000,10000,10000 };
+	suelo->mScale = { 5000,5000,5000 };
 	suelo->mRotation = { -90,0,0 };
 	suelo->mPosition = { 0,-2000,0 };
 	objects.push_back(suelo);
 
+
+	compoundBaseFlexo->mScale = { 1.5,1.5,1.5 };
+	objects.push_back(compoundBaseFlexo); //Ultimo en aniadirse para que el cono de luz se renderice bien
 
 	sP4->backgroundColor = { 21.0 / 255.0, 13.0 / 255.0, 41.0 / 255.0, 1.0 };
 	sP4->initPr3({ std::vector<Abs_Entity*>(objects) });
@@ -624,21 +663,28 @@ IG1App::mouseWheel(int n, int d, int x, int y) {
 }
 
 
-void
-IG1App::update() {
-	
-	if (current_camera() == mCameras[1]) {
-		mCameras[1]->update();
-		mScenes[0]->update();
-	}
-	else {
-		//mScenes[2]->update();
-		mScenes[mId]->update();
-	}
+void IG1App::update()
+{
+	int now = glutGet(GLUT_ELAPSED_TIME);
 
-	glutPostRedisplay();
+	if (now - mLastUpdateTime >= UPDATE_PERIOD) {
+
+
+		if (current_camera() == mCameras[1]) {
+			mCameras[1]->update();
+			mScenes[0]->update();
+		}
+		else {
+			//mScenes[2]->update();
+			mScenes[mId]->update();
+		}
+
+		glutPostRedisplay();
+
+
+		mLastUpdateTime = now;
+	}
 }
-
 
 Camera* 
 IG1App::current_camera() const {

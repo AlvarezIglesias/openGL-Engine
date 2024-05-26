@@ -102,6 +102,8 @@ protected:
 	glm::dvec2 mMouseCoord = glm::dvec2(0, 0);
 	int mMouseButt = 0;
 
+	int mLastUpdateTime = 0;
+
 };
 
 #endif //_H_IG1App_H_

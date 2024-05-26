@@ -16,44 +16,52 @@ public:
 	virtual void render(glm::dmat4 const& modelViewMat) const;
 };
 
-class Peon : public EntityWithMaterial
+class ChessPiece : public EntityWithMaterial
+{
+public:
+	~ChessPiece() {};
+	virtual void render(glm::dmat4 const& modelViewMat) const;
+	void update();
+	bool shouldUpdate = true;
+protected:
+	float counter = 0;
+	float phase = rand() % 360;
+
+};
+
+class Peon : public ChessPiece
 {
 public:
 	~Peon() {};
 	explicit Peon();
-	virtual void render(glm::dmat4 const& modelViewMat) const;
 };
 
-class Torre : public EntityWithMaterial
+class Torre : public ChessPiece
 {
 public:
 	~Torre() {};
 	explicit Torre();
-	virtual void render(glm::dmat4 const& modelViewMat) const;
 };
 
-class Alfil : public EntityWithMaterial
+class Alfil : public ChessPiece
 {
 public:
 	~Alfil() {};
 	explicit Alfil();
-	virtual void render(glm::dmat4 const& modelViewMat) const;
 };
 
-class Reina : public EntityWithMaterial
+class Reina : public ChessPiece
 {
 public:
 	~Reina() {};
 	explicit Reina();
-	virtual void render(glm::dmat4 const& modelViewMat) const;
 };
 
-class Rey : public EntityWithMaterial
+class Rey : public ChessPiece
 {
 public:
 	~Rey() {};
 	explicit Rey();
-	virtual void render(glm::dmat4 const& modelViewMat) const;
 };
 
 
@@ -122,6 +130,6 @@ class DensePlain : public EntityWithMaterial
 {
 public:
 	~DensePlain() {};
-	explicit DensePlain(int& density, float textCoorRepeat = 1.0);
+	explicit DensePlain(const int& density, float textCoorRepeat = 1.0);
 	virtual void render(glm::dmat4 const& modelViewMat) const;
 };

@@ -747,15 +747,15 @@ Mesh* IndexMesh::generateCaballo()
 	return mesh;
 }
 
-Mesh* IndexMesh::generateDensePlain(int& density, float textCoorRepeat)
+Mesh* IndexMesh::generateDensePlain(const int& density, float textCoorRepeat)
 {
 	IndexMesh* mesh = new IndexMesh();
 
 	mesh->mPrimitive = GL_TRIANGLES;
 
-	for (int i = 0; i < density; i++)
+	for (int i = 0; i < density+1; i++)
 	{
-		for (int j = 0; j < density; j++)
+		for (int j = 0; j < density+1; j++)
 		{
 			mesh->vVertices.push_back({ float(i) / float(density) - 0.5,float(j) / float(density) - 0.5,0.0 });
 			//mesh->vNormals.push_back({ 0, 1, 0 });
@@ -766,18 +766,18 @@ Mesh* IndexMesh::generateDensePlain(int& density, float textCoorRepeat)
 	mesh->mNumVertices = mesh->vVertices.size();
 
 	// El contador i recorre las muestras alrededor del eje Y
-	for (int i = 0; i < density - 1; i++) {
+	for (int i = 0; i < density ; i++) {
 		// El contador j recorre los vértices del perfil ,
 		// de abajo arriba . Las caras cuadrangulares resultan
 		// al unir la muestra i- ésima con la (i +1)% nn - ésima
-		for (int j = 0; j < density - 1; j++) {
+		for (int j = 0; j < density ; j++) {
 			// El contador indice sirve para llevar cuenta
 			// de los índices generados hasta ahora . Se recorre
 			// la cara desde la esquina inferior izquierda
-			int topLeft = i * density + j;
-			int topRight = (i + 1) * density + j;
-			int bottomLeft = i * density + (j + 1);
-			int bottomRight = (i + 1) * density + (j + 1);
+			int topLeft = i * (density+1) + j;
+			int topRight = (i + 1) * (density + 1) + j;
+			int bottomLeft = i * (density + 1) + (j + 1);
+			int bottomRight = (i + 1) * (density + 1) + (j + 1);
 
 			mesh->vIndexes.push_back(topLeft);
 			mesh->vIndexes.push_back(topRight);
