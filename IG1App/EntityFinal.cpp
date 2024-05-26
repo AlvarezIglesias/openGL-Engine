@@ -306,6 +306,8 @@ Farolillo::Farolillo(int m)
 	EntityWithMaterial* soporteApoyo = new RevCilinder(m/18.75, m/2.5, 200, 200);
 	soporteApoyo->mTexturePaths = { "../bmps/wood.bmp" };
 
+	soporteApoyo->mPosition.z -= 10;
+
 	soporteApoyo->mRotation.x += 40;
 	soporteApoyo->mPosition.y -= m / 3.25;
 
@@ -594,7 +596,7 @@ Farolillo::Farolillo(int m)
 	light = new PosLight();
 
 	light->setAmb(glm::fvec4{ 0.0, 0.0, 0.0, 1.0 });
-	light->setDiff(glm::fvec4{ 0.5, 0.2, 0.0, 1.0 });
+	light->setDiff(glm::fvec4{ 0.9, 0.6, 0.5, 1.0 });
 	light->setSpec(glm::fvec4{ 0.5, 0.5, 0.5, 1.0 });
 
 	light->setAtte(1.0, 0.00005, 0.00005);
@@ -621,11 +623,11 @@ void Farolillo::update() {
 		period = 0;
 
 		if (color) {
-			light->setDiff(glm::fvec4{ 0.7, 0.5, 0.0, 1.0 });
+			light->setDiff(glm::fvec4{ 1.0, 0.7, 0.5, 1.0 });
 			color = false;
 		}
 		else {
-			light->setDiff(glm::fvec4{ 0.5, 0.2, 0.0, 1.0 });
+			light->setDiff(glm::fvec4{ 0.9, 0.6, 0.5, 1.0 });
 			color = true;
 		}
 	}
@@ -719,7 +721,7 @@ Casa::Casa(int m, bool fa)
 	if (fa) {
 		Abs_Entity* farol = new Farolillo(m);
 
-		farol->mPosition.z -= (m / 2) + 0.1;
+		farol->mPosition.z -= (m / 2);
 		farol->mPosition.x -= (m * 0.35);
 		farol->mPosition.y += (m * 0.75);
 
@@ -750,3 +752,5 @@ void Casa::update() {
 //----------------------------------------------------------------------------------------------
 // Luna
 //----------------------------------------------------------------------------------------------
+
+

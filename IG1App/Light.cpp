@@ -39,8 +39,8 @@ void Material::setStone() {
 
 void Material::setGlass() {
 	ambient = { 0.0, 0.0, 0.0, 0.1 };
-	diffuse = { 0.5, 0.5, 0.5, 0.1 };
-	specular = { 0.5, 0.5, 0.5, 0.9 };
+	diffuse = { 0.5, 0.5, 1.0, 0.1 };
+	specular = { 0.8, 0.8, 0.8, 0.3 };
 	expF = 128.0;
 }
 
