@@ -27,4 +27,7 @@ C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\Scene.h(49,53): warning C424
 C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\Scene.h(49,53): warning C4244:         ]
   (compilando archivo de origen "IG1App.cpp")
   
+  Light.cpp
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\Light.cpp(24,9): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+  Generando código...
   IG1App.vcxproj -> C:\MisCosas\Programacion\Clase\openGL-Engine\bin\IG1AppDebug.exe

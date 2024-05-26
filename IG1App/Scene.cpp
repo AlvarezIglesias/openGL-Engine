@@ -145,9 +145,9 @@ void
 Scene::render(Camera const& cam) const
 {
 	//sceneDirLight(cam); // APARTADO 56
-	dirLight->upload(cam.viewMat()); // APARTADO 76
-	posLight->upload(cam.viewMat()); // APARTADO 77
-	spotLight->upload(cam.viewMat()); // APARTADO 78
+	//dirLight->upload(cam.viewMat()); // APARTADO 76
+	//posLight->upload(cam.viewMat()); // APARTADO 77
+	//spotLight->upload(cam.viewMat()); // APARTADO 78
 
 	cam.upload();
 
@@ -198,7 +198,7 @@ void Scene::initPosLight() {
 	Scene::posLight->setSpec(glm::fvec4{ 0.5, 0.5, 0.5, 1 });
 	Scene::posLight->setPosDir(glm::fvec3{ 100, 100, 0.0});
 
-	Scene::posLight->disable();
+	Scene::posLight->enable();
 }
 
 // APARTADO 78
@@ -210,7 +210,7 @@ void Scene::initSpotLight() {
 
 	Scene::spotLight->setSpot(glm::vec3{ 0.0, 0.0, -1.0 }, 20, 10);
 
-	Scene::spotLight->disable();
+	Scene::spotLight->enable();
 }
 
 void 

@@ -60,6 +60,9 @@ IG1App::init()
 	glm::dvec4 whiteColor = { 237.0 / 255.0, 215.0 / 255.0, 149.0 / 255.0 , 1.0 };
 	glm::dvec4 blackColor = { 0.1, 0.1, 0.1 , 1.0 };
 
+	// ********************************************************** Piezas ajedrez
+
+
 	Material* material = new Material();
 	material->setPlastic();
 	for (int i = 0; i < 8; i++)
@@ -84,6 +87,24 @@ IG1App::init()
 	torre2->mScale = { 15,15,15 };
 	torre2->mColor = whiteColor;
 	objects.push_back(torre2);
+
+
+	CompoundEntity* caballo = new Caballo();
+	caballo->mPosition = { -250,0,50 * 7 };
+	caballo->mScale = { 15,15,15 };
+	caballo->mRotation = { 0, -90, 0 };
+	caballo->getChildren(0)->mColor = whiteColor;
+	caballo->getChildren(1)->mColor = whiteColor;
+	objects.push_back(caballo);
+
+
+	CompoundEntity* caballo2 = new Caballo();
+	caballo2->mPosition = { 250,0,50 * 7 };
+	caballo2->mScale = { 15,15,15 };
+	caballo2->mRotation = { 0, -90, 0 };
+	caballo2->getChildren(0)->mColor = whiteColor;
+	caballo2->getChildren(1)->mColor = whiteColor;
+	objects.push_back(caballo2);
 
 	Alfil* alfil = new Alfil();
 	alfil->mPosition = { -150,0,50 * 7 };
@@ -113,8 +134,6 @@ IG1App::init()
 
 	for (int i = 0; i < 8; i++)
 	{
-		Material* material = new Material();
-		material->setPlastic();
 		Peon* p = new Peon();
 		p->mPosition = { i * 100 - 350, 0, 50*-5 };
 		p->mScale = { 15,15,15 };
@@ -134,6 +153,24 @@ IG1App::init()
 	torreN2->mScale = { 15,15,15 };
 	torreN2->mColor = blackColor;
 	objects.push_back(torreN2);
+
+
+	CompoundEntity* caballoN = new Caballo();
+	caballoN->mPosition = { -250,0,-50 * 7 };
+	caballoN->mScale = { 15,15,15 };
+	caballoN->mRotation = { 0, 90, 0 };
+	caballoN->getChildren(0)->mColor = blackColor;
+	caballoN->getChildren(1)->mColor = blackColor;
+	objects.push_back(caballoN);
+
+
+	CompoundEntity* caballoN2 = new Caballo();
+	caballoN2->mPosition = { 250,0,-50 * 7 };
+	caballoN2->mScale = { 15,15,15 };
+	caballoN2->mRotation = { 0, 90, 0 };
+	caballoN2->getChildren(0)->mColor = blackColor;
+	caballoN2->getChildren(1)->mColor = blackColor;
+	objects.push_back(caballoN2);
 
 	Alfil* alfilN = new Alfil();
 	alfilN->mPosition = { -150,0,-50 * 7 };
@@ -159,17 +196,139 @@ IG1App::init()
 	reyN->mColor = blackColor;
 	objects.push_back(reyN);
 
-	RevSphere* rs = new RevSphere(50,50,50);
-	rs->mPosition = { 0 ,50, 0 };
-	rs->setMaterial(material);
-	//objects.push_back(rs);
+	// ********************************************************** Flexo
 
+	CompoundEntity* compoundBaseFlexo = new CompoundEntity();
 
-	ChessBoard * cb = new ChessBoard();
+	Cylinder* baseFlexo = new Cylinder(100, 100, 30);
+	baseFlexo->mRotation = { -90,0,0 };
+	compoundBaseFlexo->addEntity(baseFlexo);
+
+	Disk* tapaBaseFlexo = new Disk(0,100);
+	tapaBaseFlexo->mRotation = { -90,0,0 };
+	tapaBaseFlexo->mPosition = { 0,30,0 };
+	compoundBaseFlexo->addEntity(tapaBaseFlexo);
+
+	Cylinder* primerEjeFlexo = new Cylinder(30, 30, 30);
+	primerEjeFlexo->mRotation = { -90,0,0 };
+	primerEjeFlexo->mPosition = { 60,30,0 };
+	compoundBaseFlexo->addEntity(primerEjeFlexo);
+
+	Disk* tapaPrimerEjeFlexo = new Disk(0, 30);
+	tapaPrimerEjeFlexo->mRotation = { -90,0,0 };
+	tapaPrimerEjeFlexo->mPosition = { 60,60,0 };
+	compoundBaseFlexo->addEntity(tapaPrimerEjeFlexo);
+	objects.push_back(compoundBaseFlexo);
+
+	// Brazo 1
+
+	Eje* pivotePrimerEje = new Eje(7, -30, 30);
+	pivotePrimerEje->mPosition = { 60,30,0 };
+	pivotePrimerEje->mRotation = { 0,0,-30 };
+	compoundBaseFlexo->addEntity(pivotePrimerEje);
+
+	Cylinder* brazo1Flexo = new Cylinder(10, 10, 400);
+	brazo1Flexo->mRotation = { -90,0,0 };
+	brazo1Flexo->mPosition = { 0,0,0 };
+	pivotePrimerEje->addEntity(brazo1Flexo);
+
+	Sphere* bolaSegundoEje = new Sphere(30);
+	bolaSegundoEje->mPosition = { 0,385,0 };
+	pivotePrimerEje->addEntity(bolaSegundoEje);
+
+	//Brazo 2
+
+	Eje* pivoteSegundoEje = new Eje(15, 90, 60);
+	pivoteSegundoEje->mPosition = { 0,385,0 };
+	pivoteSegundoEje->mRotation = { 0,0,60 };
+	pivotePrimerEje->addEntity(pivoteSegundoEje);
+
+	Cylinder* brazo2Flexo = new Cylinder(10, 10, 400);
+	brazo2Flexo->mRotation = { -90,0,0 };
+	brazo2Flexo->mPosition = { 0,0,0 };
+	pivoteSegundoEje->addEntity(brazo2Flexo);
+
+	Sphere* bolaTercerEje = new Sphere(30);
+	bolaTercerEje->mPosition = { 0,385,0 };
+	pivoteSegundoEje->addEntity(bolaTercerEje);
+
+	//Brazo 3
+
+	Eje* pivoteTercerEje = new Eje( - 30, 0, 30);
+	pivoteTercerEje->mPosition = { 0,385,0 };
+	pivoteTercerEje->mRotation = { 0,0,60 };
+	pivoteSegundoEje->addEntity(pivoteTercerEje);
+
+	Cylinder* brazo3Flexo = new Cylinder(10, 10, 200);
+	brazo3Flexo->mRotation = { -90,0,0 };
+	brazo3Flexo->mPosition = { 0,0,0 };
+	pivoteTercerEje->addEntity(brazo3Flexo);
+
+	PantallaFlexo* pantallaFlexo = new PantallaFlexo();
+	pantallaFlexo->mScale = { 30,20,20 };
+	pantallaFlexo->mRotation = { 0,0,90 };
+	pantallaFlexo->mPosition = { +20,175,0 };
+	pantallaFlexo->mColor = blackColor;
+	pivoteTercerEje->addEntity(pantallaFlexo);
+
+	Sphere* bombilla = new Sphere(30);
+	bombilla->mPosition = { -80,175,0 };
+	bombilla->mColor = { 1,1,0,1 };
+	pivoteTercerEje->addEntity(bombilla);
+
+	//*********************************************************** Mesa
+
+	Disk* superficieMesa = new Disk(0, 1000);
+	superficieMesa->addTexturePath("../bmps/terciopelo.bmp");
+	superficieMesa->mPosition = { 0,-1,0 };
+	superficieMesa->mRotation = { -90,0,0 };
+	objects.push_back(superficieMesa);
+
+	Cylinder* faldaMesa = new Cylinder(1000, 1100, 1000);
+	faldaMesa->addTexturePath("../bmps/terciopelo.bmp");
+	faldaMesa->mPosition = { 0,-1,0 };
+	faldaMesa->mRotation = { 90,0,0 };
+	objects.push_back(faldaMesa);
+
+	Reina* pataMesa = new Reina();
+	pataMesa->mScale = { 160,200,160 };
+	pataMesa->mRotation = { 0,0,0 };
+	pataMesa->mPosition = { 0,-2000,0 };
+	pataMesa->mColor = { 56.0 / 255.0, 29.0 / 255.0, 7.0 / 255.0 , 255.0 / 255.0 };
+	pataMesa->setMaterial(material);
+	objects.push_back(pataMesa);
+
+	/*Luz* luz = new Luz(30, 200, 300);
+	luz->mPosition = { -80,175,0 };
+	luz->mRotation = { 0,-90,0 };
+	luz->mColor = { 1,1,0,1 };
+	pivoteTercerEje->addEntity(luz);*/
+
+	compoundBaseFlexo->mPosition = { 600,0,0 };
+
+	int density = 50;
+	DensePlain * cb = new DensePlain(density);
+	cb->addTexturePath("../bmps/chessBoard.bmp");
 	cb->mScale = { 800,800,800 };
+	cb->mRotation = { -90,0,0 };
+	cb->mPosition = { 0,10,0 };
+	cb->setMaterial(material);
 	objects.push_back(cb);
 
 
+
+
+
+	density = 200;
+	DensePlain* suelo = new DensePlain(density, 10);
+	suelo->addTexturePath("../bmps/baldosa.bmp");
+	suelo->mScale = { 10000,10000,10000 };
+	suelo->mRotation = { -90,0,0 };
+	suelo->mPosition = { 0,-2000,0 };
+	objects.push_back(suelo);
+
+
+	sP4->backgroundColor = { 21.0 / 255.0, 13.0 / 255.0, 41.0 / 255.0, 1.0 };
 	sP4->initPr3({ std::vector<Abs_Entity*>(objects) });
 	mScenes.push_back(sP4);
 

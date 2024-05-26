@@ -57,10 +57,12 @@ protected:
 class CompoundEntity : public Abs_Entity {
 public:
 	~CompoundEntity();
+	void update();
 	void addEntity(Abs_Entity* ae);
 	void addEntity(std::vector<Abs_Entity*>& aes);
 	virtual void render(glm::dmat4 const& modelViewMat) const;
 	void initTextures(std::vector<Texture*>& sceneTextures);
+	Abs_Entity* getChildren(int index) { return gObjects[index]; };
 protected:
 	std::vector<Abs_Entity*> gObjects;
 };

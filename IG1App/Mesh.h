@@ -77,6 +77,11 @@ public:
 	static IndexMesh* generateIndexedBox(GLdouble length);
 	glm::dvec3 buildNormalVectors(int init);
 
+	/******************************** PARTE FINAL ******************************/
+
+	static Mesh* generateCaballo();
+	static Mesh* generateDensePlain(int& density, float textCoorRepeat = 1.0);
+
 
 protected:
 	void draw() const;
@@ -95,5 +100,7 @@ protected:
 
 
 };
+
+
 
 #endif //_H_Scene_H_

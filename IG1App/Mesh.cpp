@@ -263,6 +263,12 @@ Mesh::generateRectangleTexCor(GLdouble w, GLdouble h, GLuint rw, GLuint rh)
 	mesh->vTexCoords.emplace_back(rw, rh);
 	mesh->vTexCoords.emplace_back(0, rh);
 
+	mesh->vNormals.reserve(mesh->mNumVertices);
+	mesh->vNormals.push_back({0.0,1.0,0.0});
+	mesh->vNormals.push_back({0.0,1.0,0.0});
+	mesh->vNormals.push_back({0.0,1.0,0.0});
+	mesh->vNormals.push_back({0.0,1.0,0.0});
+
 	return mesh;
 }
 
@@ -475,20 +481,9 @@ Mesh::generateWingAdvancedTIE(GLdouble w, GLdouble h) {
 glm::dvec3
 IndexMesh::buildNormalVectors(int init) {
 	dvec3 n = dvec3(0, 0, 0);
-	/*dvec3 vertActual;
-	dvec3 vertSiguiente;
-	for (int i = 0; i < 3; i++) {
-		vertActual = vVertices[vIndexes[init +i]];
-		vertSiguiente = vVertices[vIndexes[ init + ((i + 1) % 3)]];
-		n.x += (vertActual.y - vertSiguiente.y) * (vertActual.z + vertSiguiente.z);
-		n.y += (vertActual.z - vertSiguiente.z) * (vertActual.x + vertSiguiente.x);
-		n.z += (vertActual.x - vertSiguiente.x) * (vertActual.y + vertSiguiente.y);
-	}*/
-
-
-	//return -normalize(n);
 	return cross((vVertices[vIndexes[init + 1]] - vVertices[vIndexes[init + 0]]), (vVertices[vIndexes[init + 2]] - vVertices[vIndexes[init + 0]]));
 }
+
 
 void
 IndexMesh::draw() const {
@@ -498,14 +493,6 @@ IndexMesh::draw() const {
 void 
 IndexMesh::buildNormalVectors() {
 
-
-	/*for (int i = 0; i < nNumIndices / 3; i++) {
-		glm::dvec3 tmp = dvec3(0);
-		tmp += buildNormalVectors(i * 3);
-		vNormals.push_back(normalize(tmp));
-		vNormals.push_back(normalize(tmp));
-		vNormals.push_back(normalize(tmp));
-	}*/
 
 	vNormals.clear();
 	vNormals.resize(mNumVertices, dvec3(0.0, 0.0, 0.0));
@@ -644,3 +631,167 @@ MbR* MbR::generaIndexMbR(GLuint mm, GLuint nn, glm::dvec3* perfil)
 	return mesh;
 }
 
+
+Mesh* IndexMesh::generateCaballo()
+{
+	IndexMesh* mesh = new IndexMesh();
+
+	mesh->mPrimitive = GL_TRIANGLES;
+
+
+	mesh->vVertices = {
+
+		// Cara A
+
+		{	0.6 ,	0.0 ,	0.3		},  //0
+		{	1.0 ,	0.6 ,	0.3		},  //1
+		{	1.1 ,	0.9 ,	0.3		},  //2
+		{	1.1 ,	1.2 ,	0.3		},  //3
+		{	0.9 ,	1.7 ,	0.3		},  //4
+		{	0.4 ,	2.0 ,	0.3		},  //5
+		{-	0.8 ,	2.0 ,	0.3		}, 	//6
+		{-	0.8 ,	1.1 ,	0.3		}, 	//7
+		{-	0.4 ,	1.1 ,	0.3		}, 	//8
+		{	0.2 ,	1.4 ,	0.3		},  //9
+		{	0.3 ,	1.3 ,	0.3		},  //10
+		{-	0.8 ,	0.4 ,	0.3		}, 	//11
+		{-	0.8 ,	0.3 ,	0.3		}, 	//12
+		{-	0.7 ,	0.0 ,	0.3		}, 	//13
+
+		// Cara B
+
+
+		{	0.6 ,	0.0 ,	-0.3	},	//14
+		{	1.0 ,	0.6 ,	-0.3	},	//15
+		{	1.1 ,	0.9 ,	-0.3	},	//16
+		{	1.1 ,	1.2 ,	-0.3	},	//17
+		{	0.9 ,	1.7 ,	-0.3	},	//18
+		{	0.4 ,	2.0 ,	-0.3	},	//19
+		{-	0.8 ,	2.0 ,	-0.3	},	//20
+		{-	0.8 ,	1.1 ,	-0.3	},	//21
+		{-	0.4 ,	1.1 ,	-0.3	},	//22
+		{	0.2 ,	1.4 ,	-0.3	},	//23
+		{	0.3 ,	1.3 ,	-0.3	},	//24
+		{-	0.8 ,	0.4 ,	-0.3	},	//25
+		{-	0.8 ,	0.3 ,	-0.3	},	//26
+		{-	0.7 ,	0.0 ,	-0.3	},	//27
+	};
+
+	
+
+	mesh->vIndexes = {
+		//Cara A
+		13,0,1,
+		12,13,1,
+		11,12,1,
+		11,1,2,
+		10,11,2,
+		10,2,3,
+		10,3,4,
+		5,9,4,
+		4,10,9,
+		9,5,6,
+		6,7,9,
+		7,8,9,
+
+		//Cara B
+		14,27,26,
+		25,14,26,
+		25,15,14,
+		24,15,25,
+		24,17,16,
+		24,16,15,
+		24,18,17,
+		23,18,24,
+		23,19,18,
+		20,19,23,
+		21,20,23,
+		21,23,22,
+
+		//Puente
+		0,14,15,
+		0,15,1,
+		1,15,16,
+		1,16,2,
+		2,16,17,
+		2,17,3,
+		3,17,18,
+		3,18,4,
+		4,18,19,
+		4,19,5,
+		5,19,20,
+		5,20,6,
+		6,20,21,
+		6,21,7,
+		21,7,8,
+		8,22,21,
+		22,9,8,
+		22,23,9,
+		9,10,24,
+		9,24,23,
+		10,25,24,
+		10,11,25,
+		11,26,25,
+		11,12,26,
+		12,13,26,
+		13,27,26,
+
+
+
+	};
+
+
+	mesh->mNumVertices = mesh->vVertices.size();
+	mesh->nNumIndices = mesh->vIndexes.size();
+	mesh->buildNormalVectors();
+	return mesh;
+}
+
+Mesh* IndexMesh::generateDensePlain(int& density, float textCoorRepeat)
+{
+	IndexMesh* mesh = new IndexMesh();
+
+	mesh->mPrimitive = GL_TRIANGLES;
+
+	for (int i = 0; i < density; i++)
+	{
+		for (int j = 0; j < density; j++)
+		{
+			mesh->vVertices.push_back({ float(i) / float(density) - 0.5,float(j) / float(density) - 0.5,0.0 });
+			//mesh->vNormals.push_back({ 0, 1, 0 });
+			mesh->vTexCoords.push_back({ (float(i) / float(density)) * textCoorRepeat , (float(j) / float(density)) * textCoorRepeat });
+		}
+	}
+
+	mesh->mNumVertices = mesh->vVertices.size();
+
+	// El contador i recorre las muestras alrededor del eje Y
+	for (int i = 0; i < density - 1; i++) {
+		// El contador j recorre los vértices del perfil ,
+		// de abajo arriba . Las caras cuadrangulares resultan
+		// al unir la muestra i- ésima con la (i +1)% nn - ésima
+		for (int j = 0; j < density - 1; j++) {
+			// El contador indice sirve para llevar cuenta
+			// de los índices generados hasta ahora . Se recorre
+			// la cara desde la esquina inferior izquierda
+			int topLeft = i * density + j;
+			int topRight = (i + 1) * density + j;
+			int bottomLeft = i * density + (j + 1);
+			int bottomRight = (i + 1) * density + (j + 1);
+
+			mesh->vIndexes.push_back(topLeft);
+			mesh->vIndexes.push_back(topRight);
+			mesh->vIndexes.push_back(bottomLeft);
+			mesh->vIndexes.push_back(topRight);
+			mesh->vIndexes.push_back(bottomRight);
+			mesh->vIndexes.push_back(bottomLeft);
+
+
+		}
+	}
+
+	mesh->nNumIndices = mesh->vIndexes.size();
+	mesh->buildNormalVectors();
+
+	return mesh;
+}

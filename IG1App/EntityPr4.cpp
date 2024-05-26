@@ -16,13 +16,17 @@ void Sphere::render(glm::dmat4 const& modelViewMat) const {
 	dmat4 aMat = complete_transform(modelViewMat);
 	upload(aMat);
 	// Aquí se puede fijar el color de la esfera así:
-	// glEnable ( GL_COLOR_MATERIAL );
+	glEnable ( GL_COLOR_MATERIAL );
 	glColor3f(mColor[0], mColor[1], mColor[2]);
 	// Aquí se puede fijar el modo de dibujar la esfera :
 	// gluQuadricDrawStyle (q, ...);
+	if (mTexturePaths.size() > 0) { mTextures[0]->bind(GL_MODULATE); gluQuadricTexture(q, GL_TRUE); }
 	gluSphere(q, r, 50, 50);
+	if (mTexturePaths.size() > 0) { mTextures[0]->unbind(); gluQuadricTexture(q, GL_FALSE); }
 	// Aquí se debe recuperar el color :
 	glColor3f (1.0 , 1.0 , 1.0);
+	glDisable(GL_COLOR_MATERIAL);
+
 }
 
 //----------------------------------------------------------------------------------------------
@@ -33,13 +37,17 @@ void Cylinder::render(glm::dmat4 const& modelViewMat) const {
 	dmat4 aMat = complete_transform(modelViewMat);
 	upload(aMat);
 	// Aquí se puede fijar el color de la esfera así:
-	// glEnable ( GL_COLOR_MATERIAL );
+	glEnable ( GL_COLOR_MATERIAL );
 	glColor3f(mColor[0], mColor[1], mColor[2]);
 	// Aquí se puede fijar el modo de dibujar la esfera :
 	// gluQuadricDrawStyle (q, ...);
+	if (mTexturePaths.size() > 0) { mTextures[0]->bind(GL_MODULATE); gluQuadricTexture(q, GL_TRUE); }
 	gluCylinder(q, ru, rd, h, 50, 50);
+	if (mTexturePaths.size() > 0) { mTextures[0]->unbind(); gluQuadricTexture(q, GL_FALSE); }
 	// Aquí se debe recuperar el color :
 	glColor3f (1.0 , 1.0 , 1.0);
+	glDisable(GL_COLOR_MATERIAL);
+
 }
 
 //----------------------------------------------------------------------------------------------
@@ -50,13 +58,17 @@ void Disk::render(glm::dmat4 const& modelViewMat) const {
 	dmat4 aMat = complete_transform(modelViewMat);
 	upload(aMat);
 	// Aquí se puede fijar el color de la esfera así:
-	// glEnable ( GL_COLOR_MATERIAL );
+	glEnable ( GL_COLOR_MATERIAL );
 	glColor3f(mColor[0], mColor[1], mColor[2]);
 	// Aquí se puede fijar el modo de dibujar la esfera :
 	// gluQuadricDrawStyle (q, ...);
+	if (mTexturePaths.size() > 0) { mTextures[0]->bind(GL_MODULATE); gluQuadricTexture(q, GL_TRUE); }
 	gluDisk(q, ri, ro, 50, 50);
+	if (mTexturePaths.size() > 0) { mTextures[0]->unbind(); gluQuadricTexture(q, GL_FALSE); }
 	// Aquí se debe recuperar el color :
 	glColor3f (1.0 , 1.0 , 1.0);
+	glDisable(GL_COLOR_MATERIAL);
+
 }
 
 //----------------------------------------------------------------------------------------------
@@ -67,13 +79,17 @@ void PartialDisk::render(glm::dmat4 const& modelViewMat) const {
 	dmat4 aMat = complete_transform(modelViewMat);
 	upload(aMat);
 	// Aquí se puede fijar el color de la esfera así:
-	// glEnable ( GL_COLOR_MATERIAL );
+	glEnable ( GL_COLOR_MATERIAL );
 	glColor3f(mColor[0], mColor[1], mColor[2]);
 	// Aquí se puede fijar el modo de dibujar la esfera :
 	// gluQuadricDrawStyle (q, ...);
+	if (mTexturePaths.size() > 0) { mTextures[0]->bind(GL_MODULATE); gluQuadricTexture(q, GL_TRUE); }
 	gluPartialDisk(q, ri, ro, 50, 50, 90, 270); // Dos últimos: Ángulos en grados
+	if (mTexturePaths.size() > 0) { mTextures[0]->unbind(); gluQuadricTexture(q, GL_FALSE); }
 	// Aquí se debe recuperar el color :
 	glColor3f (1.0 , 1.0 , 1.0);
+	glDisable(GL_COLOR_MATERIAL);
+
 }
 
 //----------------------------------------------------------------------------------------------
@@ -92,6 +108,13 @@ void CompoundEntity::addEntity(Abs_Entity* ae) {
 
 void CompoundEntity::addEntity(std::vector<Abs_Entity*> & aes) {
 	for (Abs_Entity* ae : aes) gObjects.push_back(ae);
+}
+
+void CompoundEntity::update() {
+
+	for (Abs_Entity* ent : gObjects) {
+		ent->update();
+	}
 }
 
 void CompoundEntity::render(glm::dmat4 const& modelViewMat) const {
