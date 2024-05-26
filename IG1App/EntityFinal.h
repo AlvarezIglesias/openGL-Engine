@@ -49,10 +49,11 @@ public:
 //----------------------------------------------------------------------------------------------
 class Casa : public CompoundEntity {
 public:
-	Casa(int m);
+	Casa(int m, bool fa = false);
 	~Casa() {}
 
 	virtual void render(glm::dmat4 const& modelViewMat) const;
+	virtual void update();
 };
 
 //----------------------------------------------------------------------------------------------
@@ -99,8 +100,12 @@ public:
 	~Farolillo() {}
 
 	virtual void render(glm::dmat4 const& modelViewMat) const;
+	virtual void update();
+
 protected:
 	PosLight* light;
+	int period = 0;
+	bool color = true; // true = red, false = yellow
 };
 
 //----------------------------------------------------------------------------------------------

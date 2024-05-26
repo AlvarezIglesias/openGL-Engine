@@ -192,7 +192,7 @@ void Scene::initDirLight() {
 	Scene::dirLight->setDiff(glm::fvec4{ 1, 1, 1, 1 });
 	Scene::dirLight->setSpec(glm::fvec4{ 0.5, 0.5, 0.5, 1 });
 	
-	Scene::dirLight->enable();
+	Scene::dirLight->disable();
 }
 
 // APARTADO 77

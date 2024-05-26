@@ -2,5 +2,5 @@
 C:\Users\alvar\Documents\GitHub\openGL-Engine\IG1App\EntityFinal.cpp(56,73): warning C4267: 'argumento': conversión de 'size_t' a 'GLuint'; posible pérdida de datos
 C:\Users\alvar\Documents\GitHub\openGL-Engine\IG1App\EntityFinal.cpp(226,73): warning C4267: 'argumento': conversión de 'size_t' a 'GLuint'; posible pérdida de datos
 C:\Users\alvar\Documents\GitHub\openGL-Engine\IG1App\EntityFinal.cpp(600,38): warning C4305: 'argumento': truncamiento de 'double' a 'GLfloat'
-C:\Users\alvar\Documents\GitHub\openGL-Engine\IG1App\EntityFinal.cpp(651,62): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\alvar\Documents\GitHub\openGL-Engine\IG1App\EntityFinal.cpp(657,62): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
   IG1App.vcxproj -> C:\Users\alvar\Documents\GitHub\openGL-Engine\bin\IG1AppDebug.exe

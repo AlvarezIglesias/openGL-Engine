@@ -54,56 +54,56 @@ IG1App::init()
 
 	final->backgroundColor = { 0.0/255.0, 0.0/255.0, 139.0/255.0, 1.0 };
 
-	Casa* casa = new Casa(200);
+	Casa* casa = new Casa(200, true);
 
-	casa->mPosition.x += 300;
-	casa->mPosition.z += 300;
+	casa->mPosition.x += 500;
+	casa->mPosition.z += 500;
 
 	casa->mRotation.y += 45;
 
-	Casa* casa2 = new Casa(200);
+	Casa* casa2 = new Casa(200, true);
 
-	casa2->mPosition.x -= 300;
-	casa2->mPosition.z += 300;
+	casa2->mPosition.x -= 500;
+	casa2->mPosition.z += 500;
 
 	casa2->mRotation.y -= 45;
 
-	Casa* casa3 = new Casa(200);
+	Casa* casa3 = new Casa(200, true);
 
-	casa3->mPosition.x += 300;
-	casa3->mPosition.z -= 300;
+	casa3->mPosition.x += 500;
+	casa3->mPosition.z -= 500;
 
 	casa3->mRotation.y += 135;
 
-	Casa* casa4 = new Casa(200);
+	Casa* casa4 = new Casa(200, true);
 
-	casa4->mPosition.x -= 300;
-	casa4->mPosition.z -= 300;
+	casa4->mPosition.x -= 500;
+	casa4->mPosition.z -= 500;
 
 	casa4->mRotation.y -= 135;
 
 	Casa* casa5 = new Casa(200);
 
-	casa5->mPosition.x -= 300;
+	casa5->mPosition.x -= 500;
 	casa5->mRotation.y -= 90;
 
 	Casa* casa6 = new Casa(200);
 
-	casa6->mPosition.x += 300;
+	casa6->mPosition.x += 500;
 	casa6->mRotation.y += 90;
 
 	Casa* casa7 = new Casa(200);
 
-	casa7->mPosition.z += 300;
+	casa7->mPosition.z += 500;
 
 	Casa* casa8 = new Casa(200);
 
-	casa8->mPosition.z -= 300;
+	casa8->mPosition.z -= 500;
 	casa8->mRotation.y += 180;
 
-	final->initPr3({ new Ground(2000,2000), new Atalaya(90, 75, 750, 200, 200), 
-		casa, casa2, casa3, casa4, //casa5, casa6, casa7, casa8,
-		new Farolillo(50), new EjesRGB(2000) }); //
+	final->initPr3({ new Ground(1300,1300), new Atalaya(90, 75, 750, 200, 200), 
+		casa, casa2, casa3, casa4, casa5, casa6, casa7, casa8,
+		new EjesRGB(2000) }); //
 
 	mScenes.push_back(final);
 
