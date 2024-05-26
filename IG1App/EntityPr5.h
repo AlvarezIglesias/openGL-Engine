@@ -35,7 +35,7 @@ public:
 	virtual void render(glm::dmat4 const& modelViewMat) const;
 };
 
-class Toroid : public Abs_Entity
+class Toroid : public EntityWithMaterial
 {
 public:
 	~Toroid() {};

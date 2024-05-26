@@ -41,7 +41,7 @@ void Cone::render(glm::dmat4 const& modelViewMat) const {
 }
 
 
-RevSphere::RevSphere(GLdouble r, GLuint m, GLuint n) {
+RevSphere::RevSphere(GLdouble r, GLuint m, GLuint n) : EntityWithMaterial() {
 	
 	dvec3* perfil = new dvec3[m+1];
 
@@ -100,7 +100,7 @@ void RevSphere::render(glm::dmat4 const& modelViewMat) const {
 
 
 
-Toroid::Toroid(GLdouble r, GLdouble R, GLuint m, GLuint p) {
+Toroid::Toroid(GLdouble r, GLdouble R, GLuint m, GLuint p) : EntityWithMaterial() {
 
 	dvec3* perfil = new dvec3[m + 1];
 
@@ -130,12 +130,23 @@ void Toroid::render(glm::dmat4 const& modelViewMat) const {
 
 		upload(aMat);
 
-		glColor4d(mColor[0], mColor[1], mColor[2], mColor[3]);
-
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+
+		if (material != nullptr) {
+			glDisable(GL_COLOR_MATERIAL);
+			glColor4d(1.0, 1.0, 1.0, 1.0);
+			material->upload();
+			//glColorMaterial(GL_NONE, GL_AMBIENT);
+		}
+
+		else {
+			//glEnable(GL_COLOR_MATERIAL);
+			glColor4d(mColor[0], mColor[1], mColor[2], mColor[3]);
+		}
 
 		mMesh->render();
 
+		glEnable(GL_COLOR_MATERIAL);
 		glPointSize(1);
 		glLineWidth(1);
 		glColor4d(1.0, 1.0, 1.0, 1.0);

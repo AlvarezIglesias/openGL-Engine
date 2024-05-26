@@ -31,7 +31,7 @@ Yunque::render(glm::dmat4 const& modelViewMat) const {
 // Atalaya
 //----------------------------------------------------------------------------------------------
 
-Atalaya::Atalaya(GLdouble rU, GLdouble rB, GLdouble h, GLuint m, GLuint p) {
+Atalaya::Atalaya(GLdouble rU, GLdouble rB, GLdouble h, GLuint m, GLuint p) : EntityWithMaterial() {
 
 	mTexturePaths = { "../bmps/atalaya.bmp" };
 
@@ -53,31 +53,13 @@ Atalaya::Atalaya(GLdouble rU, GLdouble rB, GLdouble h, GLuint m, GLuint p) {
 	perfil.push_back({ rB, (h - (h / 5.0)) / 2.0, 0.0 }); 
 	perfil.push_back({ rB, 0, 0.0 }); 	
 
-	this->mMesh = MbR::generaIndexAtalaya(perfil.size(), p, perfil.data());
+	this->mMesh = MbR::generaIndexTextCords(perfil.size(), p, perfil.data());
 
 	Material* mat = new Material();
 	mat->upload();
 	mat->setStone();
 	setMaterial(mat);
 }
-
-/* Plato?
-	for (GLuint i = 0; i < m + 1; i++) {
-		GLdouble currentAngle = initialAngle + step * i;
-		GLdouble alpha = glm::radians(currentAngle);
-
-		// Radio en la base y en la cima
-		GLdouble t = (GLdouble)i / (GLdouble)m;
-		GLdouble r = (1.0 - t) * rB + t * rU;
-
-		// Coordenadas x e y
-		GLdouble x = cx + r * glm::cos(alpha);
-		GLdouble y = cy + r * glm::sin(alpha);
-		GLdouble z = t * h;
-
-		perfil[i] = { x, y, z };
-	}
-*/
 
 void Atalaya::render(glm::dmat4 const& modelViewMat) const {
 	if (mMesh != nullptr) {
@@ -112,7 +94,7 @@ void Atalaya::render(glm::dmat4 const& modelViewMat) const {
 // IndexedBoxWithMaterial
 //----------------------------------------------------------------------------------------------
 
-IndexedBoxWithMaterial::IndexedBoxWithMaterial(int m) {
+IndexedBoxWithMaterial::IndexedBoxWithMaterial(int m) : EntityWithMaterial() {
 	mTexturePaths = { "../bmps/houseWall.bmp" };
 
 	mMesh = IndexMesh::generateIndexedBox(m);
@@ -144,8 +126,7 @@ IndexedBoxWithMaterial::render(glm::dmat4 const& modelViewMat) const {
 // IndexedPiramidWithMaterial
 //----------------------------------------------------------------------------------------------
 
-IndexedPiramidWithMaterial::IndexedPiramidWithMaterial(int m) {
-	mTexturePaths = { "../bmps/roof.bmp" };
+IndexedPiramidWithMaterial::IndexedPiramidWithMaterial(int m) : EntityWithMaterial() {
 
 	mMesh = IndexMesh::generateIndexedPiramid(m);
 }
@@ -158,12 +139,12 @@ IndexedPiramidWithMaterial::render(glm::dmat4 const& modelViewMat) const {
 	glPolygonMode(GL_BACK, GL_FILL);
 	glDisable(GL_COLOR_MATERIAL);
 
-	mTextures[0]->bind(GL_MODULATE);
+	if (mTexturePaths.size() > 0) { mTextures[0]->bind(GL_MODULATE); }
 	material->upload();
 
 	mMesh->render();
 
-	mTextures[0]->unbind();
+	if (mTexturePaths.size() > 0) { mTextures[0]->unbind(); }
 
 	glEnable(GL_COLOR_MATERIAL);
 	glPointSize(1);
@@ -223,6 +204,172 @@ GroundWithMaterial::render(dmat4 const& modelViewMat) const
 }
 
 //----------------------------------------------------------------------------------------------
+// RevCilinder
+//----------------------------------------------------------------------------------------------
+
+RevCilinder::RevCilinder(GLdouble r, GLdouble h, GLuint m, GLuint p) 
+	: EntityWithMaterial() 
+{
+
+	mTexturePaths = { "../bmps/wood.bmp" };
+
+	std::vector<dvec3> perfil;
+
+	GLdouble cx = 0.0;
+	GLdouble cy = 0.0;
+
+	GLdouble initialAngle = 90.0;
+
+	// Cilindro
+	perfil.push_back({ r, h, 0.0 });
+	perfil.push_back({ r, h / 2.0, 0.0 });
+	perfil.push_back({ r, 0, 0.0 });
+
+	this->mMesh = MbR::generaIndexTextCords(perfil.size(), p, perfil.data());
+
+	Material* mat = new Material();
+	mat->upload();
+	mat->setStone();
+	setMaterial(mat);
+}
+
+void RevCilinder::render(glm::dmat4 const& modelViewMat) const {
+	if (mMesh != nullptr) {
+
+		dmat4 aMat = complete_transform(modelViewMat);
+
+		upload(aMat);
+
+		glColor4d(mColor[0], mColor[1], mColor[2], mColor[3]);
+
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+		glDisable(GL_COLOR_MATERIAL);
+
+		mTextures[0]->bind(GL_MODULATE);
+		material->upload();
+
+		mMesh->render();
+
+		mTextures[0]->unbind();
+
+		glEnable(GL_COLOR_MATERIAL);
+		glPointSize(1);
+		glLineWidth(1);
+		glColor4d(1.0, 1.0, 1.0, 1.0);
+		glEnable(GL_DEPTH_TEST);
+		glDisable(GL_BLEND);
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+	}
+}
+
+//----------------------------------------------------------------------------------------------
+// DiskWithMaterial
+//----------------------------------------------------------------------------------------------
+DiskWithMaterial::DiskWithMaterial(GLdouble rri, GLdouble rro) : QuadricWithMaterialEntity() { ri = rri; ro = rro; }
+void DiskWithMaterial::render(glm::dmat4 const& modelViewMat) const {
+	dmat4 aMat = complete_transform(modelViewMat);
+	upload(aMat);
+
+	//glColor3f(mColor[0], mColor[1], mColor[2]);
+	glDisable(GL_COLOR_MATERIAL);
+
+	material->upload();
+	if (mTexturePaths.size() > 0) { mTextures[0]->bind(GL_MODULATE); gluQuadricTexture(q, GL_TRUE); }
+
+	gluDisk(q, ri, ro, 50, 50);
+	
+	if (mTexturePaths.size() > 0) { mTextures[0]->unbind(); gluQuadricTexture(q, GL_FALSE); }
+	glEnable(GL_COLOR_MATERIAL);
+	glColor3f(1.0, 1.0, 1.0);
+}
+
+//----------------------------------------------------------------------------------------------
+// Farolillo
+//----------------------------------------------------------------------------------------------
+
+Farolillo::Farolillo(int m)
+	: CompoundEntity() {
+
+	// Soporte
+	Material* mat = new Material();
+	mat->upload();
+	mat->setWood();
+
+	EntityWithMaterial* soporte = new RevCilinder(m/18.75, m/2.5, 200, 200);
+
+	soporte->mRotation.x += 90;
+
+	soporte->setMaterial(mat);
+
+	addEntity(soporte);
+
+	// Soporte de Apoyo
+	EntityWithMaterial* soporteApoyo = new RevCilinder(m/18.75, m/2.5, 200, 200);
+
+	soporteApoyo->mRotation.x += 45;
+	soporteApoyo->mPosition.y -= m / 3.25;
+
+	soporteApoyo->setMaterial(mat);
+
+	addEntity(soporteApoyo);
+
+	// Cierres Soporte
+	Material* mat2 = new Material();
+	mat2->upload();
+	mat2->setWood();
+
+	EntityWithMaterial* cierre = new DiskWithMaterial(0, m / 18.75);
+
+	cierre->setMaterial(mat2);
+
+	cierre->mTexturePaths = { "../bmps/wood2.bmp" };
+
+	addEntity(cierre);
+
+	EntityWithMaterial* cierre2 = new DiskWithMaterial(0, m / 18.75);
+	cierre2->mPosition.z += m / 2.5;
+
+	cierre2->mTexturePaths = { "../bmps/wood2.bmp" };
+
+	cierre2->setMaterial(mat2);
+
+	addEntity(cierre2);
+
+	// Estructura farol
+	Material* mat3 = new Material();
+	mat3->upload();
+	mat3->setBrass();
+	
+	// Cadena
+	EntityWithMaterial* cadena = new Toroid(0.5, m / 18.75, 200, 200);
+	cadena->setMaterial(mat3);
+	cadena->mRotation.x += 90;
+	cadena->mPosition.z += m / 2.75;
+
+	addEntity(cadena);
+
+	// Arriba
+	EntityWithMaterial* arriba = new IndexedPiramidWithMaterial(m / 18.75);
+	arriba->setMaterial(mat3);
+
+	arriba->mPosition.z += m / 2.75;
+	arriba->mPosition.y -= m / 15;
+
+	addEntity(arriba);
+
+}
+
+void Farolillo::render(glm::dmat4 const& modelViewMat) const {
+
+	glm::dmat4 modelViewMatComp = complete_transform(modelViewMat) * mModelMat;
+	upload(modelViewMatComp);
+
+	for (Abs_Entity* ent : gObjects) {
+		ent->render(modelViewMatComp);
+	}
+}
+
+//----------------------------------------------------------------------------------------------
 // Casa
 //----------------------------------------------------------------------------------------------
 
@@ -243,6 +390,7 @@ Casa::Casa(int m)
 
 	// Roof
 	EntityWithMaterial* roof = new IndexedPiramidWithMaterial(m * 1.2);
+	roof->mTexturePaths = { "../bmps/roof.bmp" };
 
 	Material* mat2 = new Material();
 	mat2->upload();

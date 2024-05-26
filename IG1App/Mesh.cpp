@@ -722,7 +722,7 @@ MbR* MbR::generaIndexMbR(GLuint mm, GLuint nn, glm::dvec3* perfil)
 //----------------------------------------------------------------------------------------------
 // Atalaya
 //----------------------------------------------------------------------------------------------
-MbR* MbR::generaIndexAtalaya(GLuint mm, GLuint nn, glm::dvec3* perfil)
+MbR* MbR::generaIndexTextCords(GLuint mm, GLuint nn, glm::dvec3* perfil)
 {
 	MbR* mesh = MbR::generaIndexMbR(mm, nn, perfil);
 

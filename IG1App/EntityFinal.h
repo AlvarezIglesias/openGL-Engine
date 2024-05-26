@@ -56,6 +56,52 @@ public:
 };
 
 //----------------------------------------------------------------------------------------------
+// RevCilinder
+//----------------------------------------------------------------------------------------------
+class RevCilinder : public EntityWithMaterial
+{
+public:
+	~RevCilinder() {};
+	explicit RevCilinder(GLdouble r, GLdouble h, GLuint m, GLuint p);
+	virtual void render(glm::dmat4 const& modelViewMat) const;
+};
+
+//----------------------------------------------------------------------------------------------
+// QuadricWithMaterialEntity
+//----------------------------------------------------------------------------------------------
+class QuadricWithMaterialEntity : public EntityWithMaterial {
+public:
+	QuadricWithMaterialEntity() : EntityWithMaterial() { q = gluNewQuadric(); };
+	~QuadricWithMaterialEntity() { gluDeleteQuadric(q); };
+protected:
+	GLUquadricObj* q;
+};
+
+//----------------------------------------------------------------------------------------------
+// DiskWithMaterial
+//----------------------------------------------------------------------------------------------
+class DiskWithMaterial : public QuadricWithMaterialEntity
+{
+public:
+	explicit DiskWithMaterial(GLdouble rri, GLdouble rro);
+	virtual void render(glm::dmat4 const& modelViewMat) const;
+protected:
+	GLdouble ri, ro;
+};
+
+//----------------------------------------------------------------------------------------------
+// Farolillo
+//----------------------------------------------------------------------------------------------
+
+class Farolillo : public CompoundEntity {
+public:
+	Farolillo(int m);
+	~Farolillo() {}
+
+	virtual void render(glm::dmat4 const& modelViewMat) const;
+};
+
+//----------------------------------------------------------------------------------------------
 // Yunque
 //----------------------------------------------------------------------------------------------
 class Yunque : public Abs_Entity {
@@ -71,10 +117,6 @@ public:
 
 //----------------------------------------------------------------------------------------------
 // Carromato
-//----------------------------------------------------------------------------------------------
-
-//----------------------------------------------------------------------------------------------
-// Farolillo
 //----------------------------------------------------------------------------------------------
 
 //----------------------------------------------------------------------------------------------

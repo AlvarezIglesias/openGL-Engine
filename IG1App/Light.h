@@ -22,6 +22,7 @@ public:
 	void setStone();
 	void setGlass();
 	void setWood();
+	void setBrass();
 };
 
 // Apartado 75

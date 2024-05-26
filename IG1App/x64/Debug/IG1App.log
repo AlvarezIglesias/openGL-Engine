@@ -1,22 +1,6 @@
-﻿  IG1App.cpp
-C:\Users\alvar\Documents\GitHub\openGL-Engine\IG1App\Scene.h(49,110): warning C4244: 'argumento': conversión de 'T' a 'GLclampf'; posible pérdida de datos
-          with
-          [
-              T=glm::f64
-          ]
-C:\Users\alvar\Documents\GitHub\openGL-Engine\IG1App\Scene.h(49,91): warning C4244: 'argumento': conversión de 'T' a 'GLclampf'; posible pérdida de datos
-          with
-          [
-              T=glm::f64
-          ]
-C:\Users\alvar\Documents\GitHub\openGL-Engine\IG1App\Scene.h(49,72): warning C4244: 'argumento': conversión de 'T' a 'GLclampf'; posible pérdida de datos
-          with
-          [
-              T=glm::f64
-          ]
-C:\Users\alvar\Documents\GitHub\openGL-Engine\IG1App\Scene.h(49,53): warning C4244: 'argumento': conversión de 'T' a 'GLclampf'; posible pérdida de datos
-          with
-          [
-              T=glm::f64
-          ]
+﻿  EntityFinal.cpp
+C:\Users\alvar\Documents\GitHub\openGL-Engine\IG1App\EntityFinal.cpp(56,73): warning C4267: 'argumento': conversión de 'size_t' a 'GLuint'; posible pérdida de datos
+C:\Users\alvar\Documents\GitHub\openGL-Engine\IG1App\EntityFinal.cpp(228,73): warning C4267: 'argumento': conversión de 'size_t' a 'GLuint'; posible pérdida de datos
+C:\Users\alvar\Documents\GitHub\openGL-Engine\IG1App\EntityFinal.cpp(352,64): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\alvar\Documents\GitHub\openGL-Engine\IG1App\EntityFinal.cpp(392,62): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
   IG1App.vcxproj -> C:\Users\alvar\Documents\GitHub\openGL-Engine\bin\IG1AppDebug.exe

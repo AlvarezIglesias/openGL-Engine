@@ -101,9 +101,9 @@ IG1App::init()
 	casa8->mPosition.z -= 150;
 	casa8->mRotation.y += 180;
 
-	final->initPr3({ new Ground(400,400), new Atalaya(30, 25, 200, 200, 200), 
-		casa, casa2, casa3, casa4, casa5, casa6, casa7, casa8,
-		new EjesRGB(2000) }); //
+	final->initPr3({ //new Ground(400,400), new Atalaya(30, 25, 200, 200, 200), 
+		//casa, casa2, casa3, casa4, casa5, casa6, casa7, casa8,
+		new Farolillo(50), new EjesRGB(2000) }); //
 
 	mScenes.push_back(final);
 

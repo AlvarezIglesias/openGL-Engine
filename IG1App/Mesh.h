@@ -92,7 +92,7 @@ class MbR : public IndexMesh
 {
 public:
 	static MbR* generaIndexMbR(GLuint mm, GLuint mn, glm::dvec3* perfil);
-	static MbR* generaIndexAtalaya(GLuint mm, GLuint mn, glm::dvec3* perfil);
+	static MbR* generaIndexTextCords(GLuint mm, GLuint mn, glm::dvec3* perfil);
 
 protected:
 
