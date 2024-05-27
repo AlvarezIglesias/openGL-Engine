@@ -1,4 +1,26 @@
-﻿  Scene.cpp
+﻿  EntityFinal.cpp
+C:\Users\alvar\Documents\GitHub\openGL-Engine\IG1App\EntityFinal.cpp(34,73): warning C4267: 'argumento': conversión de 'size_t' a 'GLuint'; posible pérdida de datos
+C:\Users\alvar\Documents\GitHub\openGL-Engine\IG1App\EntityFinal.cpp(206,73): warning C4267: 'argumento': conversión de 'size_t' a 'GLuint'; posible pérdida de datos
+C:\Users\alvar\Documents\GitHub\openGL-Engine\IG1App\EntityFinal.cpp(582,38): warning C4305: 'argumento': truncamiento de 'double' a 'GLfloat'
+C:\Users\alvar\Documents\GitHub\openGL-Engine\IG1App\EntityFinal.cpp(620,26): error C2509: 'enableLight': función miembro no declarada en 'Farolillo'
+C:\Users\alvar\Documents\GitHub\openGL-Engine\IG1App\EntityFinal.h(97): message : vea la declaración de 'Farolillo'
+C:\Users\alvar\Documents\GitHub\openGL-Engine\IG1App\EntityFinal.cpp(625,27): error C2509: 'disableLight': función miembro no declarada en 'Farolillo'
+C:\Users\alvar\Documents\GitHub\openGL-Engine\IG1App\EntityFinal.h(97): message : vea la declaración de 'Farolillo'
+C:\Users\alvar\Documents\GitHub\openGL-Engine\IG1App\EntityFinal.cpp(648,62): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\alvar\Documents\GitHub\openGL-Engine\IG1App\EntityFinal.cpp(743,21): error C2509: 'enableLight': función miembro no declarada en 'Casa'
+C:\Users\alvar\Documents\GitHub\openGL-Engine\IG1App\EntityFinal.h(50): message : vea la declaración de 'Casa'
+C:\Users\alvar\Documents\GitHub\openGL-Engine\IG1App\EntityFinal.cpp(750,22): error C2509: 'disableLight': función miembro no declarada en 'Casa'
+C:\Users\alvar\Documents\GitHub\openGL-Engine\IG1App\EntityFinal.h(50): message : vea la declaración de 'Casa'
+C:\Users\alvar\Documents\GitHub\openGL-Engine\IG1App\EntityFinal.cpp(781,54): warning C4305: 'argumento': truncamiento de 'double' a 'GLfloat'
+C:\Users\alvar\Documents\GitHub\openGL-Engine\IG1App\EntityFinal.cpp(805,21): error C2509: 'enableLight': función miembro no declarada en 'Luna'
+C:\Users\alvar\Documents\GitHub\openGL-Engine\IG1App\EntityFinal.h(117): message : vea la declaración de 'Luna'
+C:\Users\alvar\Documents\GitHub\openGL-Engine\IG1App\EntityFinal.cpp(810,22): error C2509: 'disableLight': función miembro no declarada en 'Luna'
+C:\Users\alvar\Documents\GitHub\openGL-Engine\IG1App\EntityFinal.h(117): message : vea la declaración de 'Luna'
+  EntityPr5.cpp
+C:\Users\alvar\Documents\GitHub\openGL-Engine\IG1App\EntityPr5.cpp(56,20): warning C4018: '<': no coinciden signed/unsigned
+C:\Users\alvar\Documents\GitHub\openGL-Engine\IG1App\EntityPr5.cpp(67,73): warning C4267: 'argumento': conversión de 'size_t' a 'GLuint'; posible pérdida de datos
+C:\Users\alvar\Documents\GitHub\openGL-Engine\IG1App\EntityPr5.cpp(119,20): warning C4018: '<': no coinciden signed/unsigned
+  IG1App.cpp
 C:\Users\alvar\Documents\GitHub\openGL-Engine\IG1App\Scene.h(53,110): warning C4244: 'argumento': conversión de 'T' a 'GLclampf'; posible pérdida de datos
           with
           [
@@ -19,25 +41,25 @@ C:\Users\alvar\Documents\GitHub\openGL-Engine\IG1App\Scene.h(53,53): warning C42
           [
               T=glm::f64
           ]
-C:\Users\alvar\Documents\GitHub\openGL-Engine\IG1App\Scene.cpp(130,87): warning C4244: 'argumento': conversión de 'T' a 'GLclampf'; posible pérdida de datos
+  main.cpp
+C:\Users\alvar\Documents\GitHub\openGL-Engine\IG1App\Scene.h(53,110): warning C4244: 'argumento': conversión de 'T' a 'GLclampf'; posible pérdida de datos
           with
           [
               T=glm::f64
           ]
-C:\Users\alvar\Documents\GitHub\openGL-Engine\IG1App\Scene.cpp(130,68): warning C4244: 'argumento': conversión de 'T' a 'GLclampf'; posible pérdida de datos
+C:\Users\alvar\Documents\GitHub\openGL-Engine\IG1App\Scene.h(53,91): warning C4244: 'argumento': conversión de 'T' a 'GLclampf'; posible pérdida de datos
           with
           [
               T=glm::f64
           ]
-C:\Users\alvar\Documents\GitHub\openGL-Engine\IG1App\Scene.cpp(130,49): warning C4244: 'argumento': conversión de 'T' a 'GLclampf'; posible pérdida de datos
+C:\Users\alvar\Documents\GitHub\openGL-Engine\IG1App\Scene.h(53,72): warning C4244: 'argumento': conversión de 'T' a 'GLclampf'; posible pérdida de datos
           with
           [
               T=glm::f64
           ]
-C:\Users\alvar\Documents\GitHub\openGL-Engine\IG1App\Scene.cpp(130,30): warning C4244: 'argumento': conversión de 'T' a 'GLclampf'; posible pérdida de datos
+C:\Users\alvar\Documents\GitHub\openGL-Engine\IG1App\Scene.h(53,53): warning C4244: 'argumento': conversión de 'T' a 'GLclampf'; posible pérdida de datos
           with
           [
               T=glm::f64
           ]
-C:\Users\alvar\Documents\GitHub\openGL-Engine\IG1App\Scene.cpp(221,49): warning C4305: 'argumento': truncamiento de 'double' a 'GLfloat'
-  IG1App.vcxproj -> C:\Users\alvar\Documents\GitHub\openGL-Engine\bin\IG1AppDebug.exe
+  Generando código...

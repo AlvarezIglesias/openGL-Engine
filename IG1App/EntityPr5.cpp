@@ -14,6 +14,8 @@ Cone::Cone(GLdouble h, GLdouble r, GLuint n) {
 	perfil[1] = dvec3(r, 0.0, 0.0);
 	perfil[2] = dvec3(0.5, h, 0.0);
 	this->mMesh = MbR::generaIndexMbR(m, n, perfil);
+
+	delete[] perfil;
 }
 
 
@@ -125,6 +127,8 @@ Toroid::Toroid(GLdouble r, GLdouble R, GLuint m, GLuint p) : EntityWithMaterial(
 	}
 
 	this->mMesh = MbR::generaIndexMbR(m + 1, p, perfil);
+
+	delete[] perfil;
 }
 
 

@@ -99,7 +99,10 @@ protected:
 class Farolillo : public CompoundEntity {
 public:
 	Farolillo(int m);
-	~Farolillo() {}
+	~Farolillo() {
+		delete light;
+		light = nullptr;
+	}
 
 	virtual void render(glm::dmat4 const& modelViewMat) const;
 	virtual void update();
@@ -118,7 +121,10 @@ protected:
 class Luna : public CompoundEntity {
 public:
 	Luna(double r);
-	~Luna() {};
+	~Luna() {
+		delete light;
+		light = nullptr;
+	};
 	void update();
 	void enableLight();
 	void disableLight();
@@ -127,3 +133,15 @@ public:
 protected:
 	SpotLight* light;
 };
+
+//----------------------------------------------------------------------------------------------
+// Yunque
+//----------------------------------------------------------------------------------------------
+
+//----------------------------------------------------------------------------------------------
+// Jarrón
+//----------------------------------------------------------------------------------------------
+
+//----------------------------------------------------------------------------------------------
+// Carromato
+//----------------------------------------------------------------------------------------------
