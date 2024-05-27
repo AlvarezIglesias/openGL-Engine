@@ -1,2 +1,43 @@
-﻿  Camera.cpp
+﻿  Scene.cpp
+C:\Users\alvar\Documents\GitHub\openGL-Engine\IG1App\Scene.h(49,110): warning C4244: 'argumento': conversión de 'T' a 'GLclampf'; posible pérdida de datos
+          with
+          [
+              T=glm::f64
+          ]
+C:\Users\alvar\Documents\GitHub\openGL-Engine\IG1App\Scene.h(49,91): warning C4244: 'argumento': conversión de 'T' a 'GLclampf'; posible pérdida de datos
+          with
+          [
+              T=glm::f64
+          ]
+C:\Users\alvar\Documents\GitHub\openGL-Engine\IG1App\Scene.h(49,72): warning C4244: 'argumento': conversión de 'T' a 'GLclampf'; posible pérdida de datos
+          with
+          [
+              T=glm::f64
+          ]
+C:\Users\alvar\Documents\GitHub\openGL-Engine\IG1App\Scene.h(49,53): warning C4244: 'argumento': conversión de 'T' a 'GLclampf'; posible pérdida de datos
+          with
+          [
+              T=glm::f64
+          ]
+C:\Users\alvar\Documents\GitHub\openGL-Engine\IG1App\Scene.cpp(130,87): warning C4244: 'argumento': conversión de 'T' a 'GLclampf'; posible pérdida de datos
+          with
+          [
+              T=glm::f64
+          ]
+C:\Users\alvar\Documents\GitHub\openGL-Engine\IG1App\Scene.cpp(130,68): warning C4244: 'argumento': conversión de 'T' a 'GLclampf'; posible pérdida de datos
+          with
+          [
+              T=glm::f64
+          ]
+C:\Users\alvar\Documents\GitHub\openGL-Engine\IG1App\Scene.cpp(130,49): warning C4244: 'argumento': conversión de 'T' a 'GLclampf'; posible pérdida de datos
+          with
+          [
+              T=glm::f64
+          ]
+C:\Users\alvar\Documents\GitHub\openGL-Engine\IG1App\Scene.cpp(130,30): warning C4244: 'argumento': conversión de 'T' a 'GLclampf'; posible pérdida de datos
+          with
+          [
+              T=glm::f64
+          ]
+C:\Users\alvar\Documents\GitHub\openGL-Engine\IG1App\Scene.cpp(205,49): warning C4305: 'argumento': truncamiento de 'double' a 'GLfloat'
   IG1App.vcxproj -> C:\Users\alvar\Documents\GitHub\openGL-Engine\bin\IG1AppDebug.exe

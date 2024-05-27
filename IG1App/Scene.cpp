@@ -187,7 +187,7 @@ void Scene::sceneDirLight(Camera const& cam) const {
 
 // APARTADO 76
 void Scene::initDirLight() {
-	Scene::dirLight->setPosDir(glm::fvec3{ 1, 1, 1 });
+	Scene::dirLight->setPosDir(glm::fvec3{ 0.0, 1, 0.0 });
 	Scene::dirLight->setAmb(glm::fvec4{ 1.0, 0, 0, 1 });
 	Scene::dirLight->setDiff(glm::fvec4{ 1.0, 0.0, 0.0, 1 });
 	Scene::dirLight->setSpec(glm::fvec4{ 1.0, 0.0, 0.0, 1 });

@@ -732,7 +732,7 @@ void Casa::update() {
 //----------------------------------------------------------------------------------------------
 
 Luna::Luna(double r) {
-	EntityWithMaterial* luna = new RevSphere(r, 200, 200);
+	EntityWithMaterial* luna = new RevSphere(r, 400, 400);
 	luna->mTexturePaths = { "../bmps/luna.bmp" };
 
 	luna->mRotation.x += 90;

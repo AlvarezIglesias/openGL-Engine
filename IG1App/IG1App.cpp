@@ -114,7 +114,7 @@ IG1App::init()
 
 	//new Ground(1300, 1300);
 
-	final->initPr3({ ground, new Atalaya(90, 75, 750, 200, 200), 
+	final->initPr3({ ground, new Atalaya(90, 75, 750, 400, 400), 
 		casa, casa2, casa3, casa4, casa5, casa6, casa7, casa8,
 		new Luna(500) }); // ,
 		//new EjesRGB(2000) });
