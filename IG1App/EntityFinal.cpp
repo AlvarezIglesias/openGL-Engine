@@ -6,28 +6,6 @@
 using namespace glm;
 
 //----------------------------------------------------------------------------------------------
-// Yunque
-//----------------------------------------------------------------------------------------------
-
-Yunque::Yunque() {
-	mMesh = IndexMesh::generateIndexedBox(200);
-}
-
-void
-Yunque::render(glm::dmat4 const& modelViewMat) const {
-	dmat4 aMat = complete_transform(modelViewMat);
-	upload(aMat);
-
-	glPolygonMode(GL_BACK, GL_FILL);
-	mMesh->render();
-
-	glPointSize(1);
-	glLineWidth(1);
-	glColor4d(1.0, 1.0, 1.0, 1.0);
-	glPolygonMode(GL_FRONT, GL_FILL);
-}
-
-//----------------------------------------------------------------------------------------------
 // Atalaya
 //----------------------------------------------------------------------------------------------
 
@@ -676,7 +654,7 @@ Casa::Casa(int m, bool fa)
 	mat3->setWood();
 	door->setMaterial(mat3);
 	
-	door->mPosition.z -= (m / 2) + 0.1;
+	door->mPosition.z -= (m / 2) + 0.5;
 	door->mPosition.y += (m * 0.75) / 2;
 	
 	door->mRotation.x += 90;
@@ -693,7 +671,7 @@ Casa::Casa(int m, bool fa)
 	mat4->setGlass();
 	rWindow->setMaterial(mat4);
 
-	rWindow->mPosition.x -= (m / 2) + 0.1;
+	rWindow->mPosition.x -= (m / 2) + 0.5;
 	rWindow->mPosition.y += m / 2;
 
 	rWindow->mRotation.x += 90;
@@ -708,7 +686,7 @@ Casa::Casa(int m, bool fa)
 
 	lWindow->setMaterial(mat4);
 
-	lWindow->mPosition.x += (m / 2) + 0.1;
+	lWindow->mPosition.x += (m / 2) + 0.5;
 	lWindow->mPosition.y += m / 2;
 
 	lWindow->mRotation.x += 90;
@@ -753,4 +731,46 @@ void Casa::update() {
 // Luna
 //----------------------------------------------------------------------------------------------
 
+Luna::Luna(double r) {
+	EntityWithMaterial* luna = new RevSphere(r, 200, 200);
+	luna->mTexturePaths = { "../bmps/luna.bmp" };
 
+	luna->mRotation.x += 90;
+
+	luna->mPosition.x = 1300;
+	luna->mPosition.y = 1750;
+	
+	addEntity(luna);
+
+	Abs_Entity* circle = new RegularPolygon(0, 0);
+	addEntity(circle);
+
+	light = new SpotLight();
+
+	light->setAmb(glm::fvec4{ 0, 0, 0, 1 });
+	light->setDiff(glm::fvec4{ 0.2, 0.2, 0.2, 1 });
+	light->setSpec(glm::fvec4{ 0.2, 0.2, 0.2, 1 });
+	light->setPosDir(glm::fvec3{ luna->mPosition.x, luna->mPosition.y, luna->mPosition.z });
+
+	light->setSpot(glm::vec3{ -0.5, -1.0, 0.0 }, 15, 0.2);
+
+	light->enable();
+}
+
+void Luna::render(glm::dmat4 const& modelViewMat) const {
+
+	glm::dmat4 modelViewMatComp = complete_transform(modelViewMat) * mModelMat;
+	upload(modelViewMatComp);
+
+	for (Abs_Entity* ent : gObjects) {
+		ent->render(modelViewMatComp);
+	}
+
+	light->upload(modelViewMatComp);
+}
+
+void
+Luna::update() {
+	mRotation.y += 0.1;
+	gObjects[0]->mRotation.y += 0.1;
+}

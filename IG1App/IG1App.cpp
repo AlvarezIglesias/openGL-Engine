@@ -75,7 +75,7 @@ IG1App::init()
 
 	casa3->mRotation.y += 135;
 
-	Casa* casa4 = new Casa(200, true);
+	Casa* casa4 = new Casa(200);
 
 	casa4->mPosition.x -= 500;
 	casa4->mPosition.z -= 500;
@@ -101,149 +101,34 @@ IG1App::init()
 	casa8->mPosition.z -= 500;
 	casa8->mRotation.y += 180;
 
-	final->initPr3({ new Ground(1300,1300), new Atalaya(90, 75, 750, 200, 200), 
+	DiskWithMaterial* ground = new DiskWithMaterial(0, 1000);
+
+	ground->mRotation.x -= 90;
+	ground->mTexturePaths = { "../bmps/grassPaint.bmp" };
+	
+	Material* mat = new Material();
+	mat->upload();
+	mat->setGrass();
+
+	ground->setMaterial(mat);
+
+	//new Ground(1300, 1300);
+
+	final->initPr3({ ground, new Atalaya(90, 75, 750, 200, 200), 
 		casa, casa2, casa3, casa4, casa5, casa6, casa7, casa8,
-		new EjesRGB(2000) }); //
+		new Luna(500) }); // ,
+		//new EjesRGB(2000) });
 
 	mScenes.push_back(final);
 
-	/*
-	// Pr4
-
-	Scene* sP4 = new Scene();
-
-	Abs_Entity* planet = new Sphere(500);
-	planet->mColor = { 255.0 / 255.0, 233.0 / 255.0, 0.0 , 1.0};
-
-	ShipOrbit* ship = new ShipOrbit(800);
-	sP4->setShip(ship);
-	sP4->setAdvancedTIE((AdvancedTIE*)ship->getAdvancedTie());
-	sP4->enableTieLight();
-
-	current_camera()->setEye(ship->mPosition);
-
-	sP4->backgroundColor = {0.0, 0.0, 0.0, 1.0};
-
-	sP4->initPr3({ planet, ship , new EjesRGB(2000) }); // , new Ground(400,400), new AdvancedTIE() new IndexedBox()
-	mScenes.push_back(sP4);
-
-	// Toroid
-	Scene* sP5 = new Scene();
-	Toroid* toro = new Toroid(12, 20, 200, 200);
-	toro->mColor = { 0.0, 255.0/255.0, 0.0, 1.0 };
-	sP5->initPr3({ toro, new EjesRGB(200) }); // , new Ground(400,400), new AdvancedTIE() new IndexedBox()
-	mScenes.push_back(sP5);
-
-	// Spheres
-
-	Scene* sPesf = new Scene();
-
-	RevSphere* yellowSphere = new RevSphere(50, 200, 200);
-	yellowSphere->mColor = { 255.0/255.0, 255.0 / 255.0, 0.0 , 1.0 };
-	
-	EntityWithMaterial* copperSphere = new RevSphere(50, 200, 200);
-	Material* mat = new Material();
-	mat->upload();
-	mat->setCopper();
-	copperSphere->setMaterial(mat);
-	copperSphere->mPosition.x = 200;
-
-
-	sPesf->initPr3({ yellowSphere, copperSphere, new EjesRGB(200) }); // , new Ground(400,400), new AdvancedTIE() new IndexedBox()
-	mScenes.push_back(sPesf);	
-	
-	// Cube
-	Scene* sPcube = new Scene();
-	sPcube->initPr3({ new IndexedBox() , new EjesRGB(200) }); // , new Ground(400,400), new AdvancedTIE() new IndexedBox()
-	mScenes.push_back(sPcube);
-
-	// Granjero Opcional
-
-	Scene* sP4Opt = new Scene();
-	CompoundEntity* granjero = new CompoundEntity();
-
-	Abs_Entity* cabeza = new Sphere(150);
-	cabeza->mColor = {255.0 / 255.0, 127.5 / 255.0, 0.0, 1.0};
-	granjero->addEntity(cabeza);
-
-	Abs_Entity* sombrero = new Disk(20, 150);
-	sombrero->mColor = { 255.0 / 255.0, 0.0, 0.0, 1.0 };
-	sombrero->mRotation.x = 90;
-	sombrero->mPosition.y = 120;
-	granjero->addEntity(sombrero);
-
-	Abs_Entity* barba = new PartialDisk(45, 90);
-	barba->mColor = { 0.0, 255.0, 0.0, 1.0 };
-	barba->mRotation.z = 45;
-	barba->mPosition.y = -20;
-	barba->mPosition.z = 120;
-	granjero->addEntity(barba);
-
-	Abs_Entity* ojoD = new Cylinder(0, 15, 25);
-	ojoD->mColor = { 0.3, 0.33, 0.4, 1.0 };
-	ojoD->mPosition.y = 70;
-	ojoD->mPosition.z = 150;
-	ojoD->mPosition.x = -30;
-	ojoD->mRotation.x = 180;
-	granjero->addEntity(ojoD);
-
-	Abs_Entity* ojoI = new Cylinder(0, 15, 25);
-	ojoI->mColor = { 0.0, 0.19, 0.3, 1.0 };
-	ojoI->mPosition.y = 70;
-	ojoI->mPosition.z = 150;
-	ojoI->mPosition.x = 30;
-	ojoI->mRotation.x = 180;
-	granjero->addEntity(ojoI);
-
-	sP4Opt->initPr3({ granjero });
-	mScenes.push_back(sP4Opt);
-
-	Scene* sP4_2 = new Scene();
-	AdvancedTIE* tie = new AdvancedTIE();
-	sP4_2->setAdvancedTIE(tie); // APARTADO 79
-	sP4_2->enableTieLight();
-	sP4_2->initPr3({ new TrianguloFicticio() , tie , new EjesRGB(400)}); // , new Ground(400,400), new AdvancedTIE() new IndexedBox()
-	mScenes.push_back(sP4_2);
-
-	Scene* sP4_3 = new Scene();
-	sP4_3->initPr3({ new TrianguloFicticio() , new AdvancedTIE() , new EjesRGB(400)}); // , new Ground(400,400), new AdvancedTIE() new IndexedBox()
-	mScenes.push_back(sP4_3);
-
-	Scene* s2D = new Scene();
-	s2D->init({ new RGBRectangle(400,200) , new RegularPolygon(40, 200), new RGBTriangle(50), new EjesRGB(300) });
-	mScenes.push_back(s2D);
-
-	Scene* s3D = new Scene();
-	s3D->init({ new RGBCube(200) , new EjesRGB(300) });
-	mScenes.push_back(s3D);
-
-	Scene* sPr2 = new Scene();
-	photo = new Photo(200, 100);
-	sPr2->initPr3({
-		  new Ground(400,400)
-		, new Box(100)
-		, new Star3D(30, 8, 30)
-		, new GlassParapet(400)
-		, new Grass(60,60)
-		, photo
-		});
-
-	mScenes.push_back(sPr2);
-	*/
 	current_camera()->set3D();
 	current_camera()->changePrj();
-/*	mCameras[1]->set3D();
-	//mCameras[1]->setCenital();*/
 
 	setScene(0);
 	current_scene()->setBackground();
 
-	/*if (mId == 0) {
-		mCameras[0]->setOnTriangle();
-	}
-
-	mCameras[1]->setOnTriangle();*/
-
+	current_scene()->render(*mCameras[0]);
+	//glutIdleFunc(s_update);
 }
 
 void
@@ -361,33 +246,18 @@ IG1App::key(unsigned char key, int x, int y)
 			break;
 		case 'l':
 			current_camera()->set3D();
+			current_scene()->render(*mCameras[0]);
 			break;
 		case 'o':
 			current_camera()->set2D();
+			current_scene()->render(*mCameras[0]);
 			break;
-		case '0':
-			if (current_scene()->hasAdvandcedTIE()) current_scene()->disableTieLight();
-			setScene(--mId);
-			current_scene()->setBackground();
-			break;
-		case '1':
-			if (current_scene()->hasAdvandcedTIE()) current_scene()->disableTieLight();
-			setScene(++mId);
-			current_scene()->setBackground();
-			break;
-		//case '2':
-		//	setScene(2);
-		//	break;
 		case 'u':
 			update();
 			break;
 		case 'U':
 			// APARTADO 16
 			glutIdleFunc(s_update);
-			break;
-		case 'F':
-			// APARTADO 37
-			photo->save("image.bmp");
 			break;
 		case 'p':
 			current_camera()->changePrj();
@@ -397,15 +267,7 @@ IG1App::key(unsigned char key, int x, int y)
 			break;
 		case 'c':
 			current_camera()->setCenital();
-			break;
-		case 'f':
-			current_scene()->rotate();
-			break;
-		case 'g':
-			current_scene()->orbit();
-			break;
-		case 'k':
-			m2Vistas = !m2Vistas;
+			current_scene()->render(*mCameras[0]);
 			break;
 		case 'q':
 			// APARTADO 76
@@ -430,14 +292,6 @@ IG1App::key(unsigned char key, int x, int y)
 		case 'x':
 			// APARTADO 78
 			current_scene()->spotLight->disable();
-			break;
-		case 'v':
-			// APARTADO 79
-			if (current_scene()->hasAdvandcedTIE()) current_scene()->enableTieLight();
-			break;
-		case 'b':
-			// APARTADO 79
-			if (current_scene()->hasAdvandcedTIE()) current_scene()->disableTieLight();
 			break;
 		default:
 			need_redisplay = false;

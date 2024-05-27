@@ -730,9 +730,9 @@ MbR* MbR::generaIndexTextCords(GLuint mm, GLuint nn, glm::dvec3* perfil)
 
 	// Añadimos las textcoords
 	for (GLuint i = 0; i < nn; ++i) {
-		GLdouble u = static_cast<GLdouble>(i) / (nn - 1); // Asegúrate de que 'u' esté en el rango [0, 1]
+		GLdouble u = static_cast<GLdouble>(i) / (nn - 1); // rango [0, 1]
 		for (GLuint j = 0; j < mm; ++j) {
-			GLdouble v = static_cast<GLdouble>(j) / (mm - 1); // Calcula el valor de 'v'
+			GLdouble v = static_cast<GLdouble>(j) / (mm - 1);
 			mesh->vTexCoords.push_back(dvec2(u, v));
 		}
 	}

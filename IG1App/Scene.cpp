@@ -187,10 +187,10 @@ void Scene::sceneDirLight(Camera const& cam) const {
 
 // APARTADO 76
 void Scene::initDirLight() {
-	Scene::dirLight->setPosDir(glm::fvec3{ -0.5, 1, 1 });
-	Scene::dirLight->setAmb(glm::fvec4{ 0, 0, 0, 1 });
-	Scene::dirLight->setDiff(glm::fvec4{ 1, 1, 1, 1 });
-	Scene::dirLight->setSpec(glm::fvec4{ 0.5, 0.5, 0.5, 1 });
+	Scene::dirLight->setPosDir(glm::fvec3{ 1, 1, 1 });
+	Scene::dirLight->setAmb(glm::fvec4{ 1.0, 0, 0, 1 });
+	Scene::dirLight->setDiff(glm::fvec4{ 1.0, 0.0, 0.0, 1 });
+	Scene::dirLight->setSpec(glm::fvec4{ 1.0, 0.0, 0.0, 1 });
 	
 	Scene::dirLight->disable();
 }
@@ -198,9 +198,11 @@ void Scene::initDirLight() {
 // APARTADO 77
 void Scene::initPosLight() {
 	Scene::posLight->setAmb(glm::fvec4{ 0, 0, 0, 1 });
-	Scene::posLight->setDiff(glm::fvec4{ 1, 1, 0, 1 });
+	Scene::posLight->setDiff(glm::fvec4{ 0.6, 0.6, 1.0, 1 });
 	Scene::posLight->setSpec(glm::fvec4{ 0.5, 0.5, 0.5, 1 });
-	Scene::posLight->setPosDir(glm::fvec3{ 100, 100, 0.0});
+	Scene::posLight->setPosDir(glm::fvec3{ 0.0, 755.0, 0.0 });
+
+	Scene::posLight->setAtte(1.0, 0.00005, 0.000005);
 
 	Scene::posLight->disable();
 }
@@ -208,11 +210,12 @@ void Scene::initPosLight() {
 // APARTADO 78
 void Scene::initSpotLight() {
 	Scene::spotLight->setAmb(glm::fvec4{ 0, 0, 0, 1 });
-	Scene::spotLight->setDiff(glm::fvec4{ 1, 1, 1, 1 });
+	Scene::spotLight->setDiff(glm::fvec4{ 0.6, 0.6, 1.0, 1 });
 	Scene::spotLight->setSpec(glm::fvec4{ 0.5, 0.5, 0.5, 1 });
-	Scene::spotLight->setPosDir(glm::fvec3{ 0.0, 500, 500});
 
-	// Scene::spotLight->setSpot(glm::vec3{ 0.0, 0.0, -1.0 }, 20, 10);
+	Scene::spotLight->setPosDir(glm::fvec3{ 0.0, 755, 0.0});
+
+	Scene::spotLight->setSpot(glm::vec3{ -0.75, -1, -0.75 }, 20.0, 10.0);
 
 	Scene::spotLight->disable();
 }
