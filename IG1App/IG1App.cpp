@@ -75,7 +75,7 @@ IG1App::init()
 
 	casa3->mRotation.y += 135;
 
-	Casa* casa4 = new Casa(200);
+	Casa* casa4 = new Casa(200, true);
 
 	casa4->mPosition.x -= 500;
 	casa4->mPosition.z -= 500;
@@ -292,6 +292,12 @@ IG1App::key(unsigned char key, int x, int y)
 		case 'x':
 			// APARTADO 78
 			current_scene()->spotLight->disable();
+			break;
+		case 'v':
+			current_scene()->enable_lights();
+			break;
+		case 'b':
+			current_scene()->disable_lights();
 			break;
 		default:
 			need_redisplay = false;

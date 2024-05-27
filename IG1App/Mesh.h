@@ -76,7 +76,6 @@ public:
 
 	static IndexMesh* generateIndexedBox(GLdouble length);
 	static IndexMesh* generateIndexedPiramid(GLdouble length);
-	static IndexMesh* generateYunque(GLdouble length, GLdouble base, GLdouble top);
 	glm::dvec3 buildNormalVectors(int init);
 
 

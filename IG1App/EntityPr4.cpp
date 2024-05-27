@@ -120,8 +120,6 @@ void CompoundEntity::initTextures(std::vector<Texture*>& sceneTextures) {
 // Wing Advanced TIE
 //----------------------------------------------------------------------------------------------
 
-SpotLight* AdvancedTIE::spotLight = new SpotLight();
-
 WingAdvancedTIE::WingAdvancedTIE(GLdouble w, GLdouble h)
 			: Abs_Entity() {
 	mMesh = Mesh::generateWingAdvancedTIE(w, h);
@@ -204,6 +202,8 @@ AdvancedTIE::AdvancedTIE()
 	addEntity(disk);
 
 	// APARTADO 79 FOCO
+	spotLight = new SpotLight();
+
 	spotLight->setAmb(glm::fvec4{ 0, 0, 0, 1 });
 	spotLight->setDiff(glm::fvec4{ 1, 1, 1, 1 });
 	spotLight->setSpec(glm::fvec4{ 0.5, 0.5, 0.5, 1 });

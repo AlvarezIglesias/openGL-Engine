@@ -80,7 +80,7 @@ public:
 	~AdvancedTIE() {}
 
 	// APARTADO 79
-	static SpotLight* spotLight;
+	SpotLight* spotLight;
 	virtual void render(glm::dmat4 const& modelViewMat) const;
 };
 

@@ -614,6 +614,16 @@ void Farolillo::update() {
 	}
 }
 
+void
+Farolillo::enableLight() {
+	light->enable();
+}
+
+void
+Farolillo::disableLight() {
+	light->disable();
+}
+
 //----------------------------------------------------------------------------------------------
 // Casa
 //----------------------------------------------------------------------------------------------
@@ -727,6 +737,20 @@ void Casa::update() {
 	}
 }
 
+void
+Casa::enableLight() {
+	for (Abs_Entity* ent : gObjects) {
+		ent->enableLight();
+	}
+}
+
+void
+Casa::disableLight() {
+	for (Abs_Entity* ent : gObjects) {
+		ent->disableLight();
+	}
+}
+
 //----------------------------------------------------------------------------------------------
 // Luna
 //----------------------------------------------------------------------------------------------
@@ -735,7 +759,7 @@ Luna::Luna(double r) {
 	EntityWithMaterial* luna = new RevSphere(r, 400, 400);
 	luna->mTexturePaths = { "../bmps/luna.bmp" };
 
-	luna->mRotation.x += 90;
+	luna->mRotation.x += 135;
 
 	luna->mPosition.x = 1300;
 	luna->mPosition.y = 1750;
@@ -772,5 +796,15 @@ void Luna::render(glm::dmat4 const& modelViewMat) const {
 void
 Luna::update() {
 	mRotation.y += 0.1;
-	gObjects[0]->mRotation.y += 0.1;
+	gObjects[0]->mRotation.z -= 0.1;
+}
+
+void 
+Luna::enableLight() {
+	light->enable();
+}
+
+void 
+Luna::disableLight() {
+	light->disable();
 }

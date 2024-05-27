@@ -34,6 +34,10 @@ public:
 	// APARTADO 13
 	void update() const;
 
+	// PR FINAL
+	void enable_lights() const;
+	void disable_lights() const;
+
 	// APARTADO 56
 	void sceneDirLight(Camera const& cam) const;
 

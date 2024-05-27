@@ -169,6 +169,22 @@ Scene::update() const
 	}
 }
 
+void
+Scene::enable_lights() const
+{
+	for (Abs_Entity* el : gObjects) {
+		el->enableLight();
+	}
+}
+
+void
+Scene::disable_lights() const
+{
+	for (Abs_Entity* el : gObjects) {
+		el->disableLight();
+	}
+}
+
 // Apartado 56
 void Scene::sceneDirLight(Camera const& cam) const {
 	glEnable(GL_LIGHTING);
@@ -215,7 +231,7 @@ void Scene::initSpotLight() {
 
 	Scene::spotLight->setPosDir(glm::fvec3{ 0.0, 755, 0.0});
 
-	Scene::spotLight->setSpot(glm::vec3{ -0.75, -1, -0.75 }, 20.0, 10.0);
+	Scene::spotLight->setSpot(glm::vec3{ 0.85, -1, -0.85 }, 20.0, 10.0);
 
 	Scene::spotLight->disable();
 }

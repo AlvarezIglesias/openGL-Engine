@@ -54,6 +54,8 @@ public:
 
 	virtual void render(glm::dmat4 const& modelViewMat) const;
 	virtual void update();
+	void enableLight();
+	void disableLight();
 };
 
 //----------------------------------------------------------------------------------------------
@@ -101,6 +103,8 @@ public:
 
 	virtual void render(glm::dmat4 const& modelViewMat) const;
 	virtual void update();
+	void enableLight();
+	void disableLight();
 
 protected:
 	PosLight* light;
@@ -116,20 +120,10 @@ public:
 	Luna(double r);
 	~Luna() {};
 	void update();
+	void enableLight();
+	void disableLight();
 	virtual void render(glm::dmat4 const& modelViewMat) const;
 
 protected:
 	SpotLight* light;
 };
-
-//----------------------------------------------------------------------------------------------
-// Yunque
-//----------------------------------------------------------------------------------------------
-
-//----------------------------------------------------------------------------------------------
-// Jarrón
-//----------------------------------------------------------------------------------------------
-
-//----------------------------------------------------------------------------------------------
-// Carromato
-//----------------------------------------------------------------------------------------------

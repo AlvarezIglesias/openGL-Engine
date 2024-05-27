@@ -30,6 +30,10 @@ public:
 	// APARTADO 13
 	virtual void update() {};
 
+	// PR FINAL
+	virtual void enableLight() {};
+	virtual void disableLight() {};
+
 	// APARTADO 19
 	//void addTextures(std::vector<Texture*> & textures) { mTextures = textures ; };
 
