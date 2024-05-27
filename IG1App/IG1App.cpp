@@ -40,7 +40,7 @@ IG1App::init()
 	// allocate memory and resources
 	mViewPorts =
 	{ new Viewport(mWinW, mWinH), new Viewport(mWinW, mWinH) };
-	
+
 	for (Viewport* vp : mViewPorts) mCameras.push_back(new Camera(vp));
 
 	// Set Lights
@@ -56,7 +56,8 @@ IG1App::init()
 
 	Scene* sP4 = new Scene();
 
-	Material::plastic->setPlastic();
+	Material::whitePlastic->setWhitePlastic();
+	Material::blackPlastic->setBlackPlastic();
 	Material::copper->setCopper();
 	glm::dvec4 whiteColor = { 237.0 / 255.0, 215.0 / 255.0, 149.0 / 255.0 , 1.0 };
 	glm::dvec4 blackColor = { 0.1, 0.1, 0.1 , 1.0 };
@@ -64,13 +65,12 @@ IG1App::init()
 	// ********************************************************** Piezas ajedrez
 
 
-	Material* material = Material::plastic;
-	material->setPlastic();
+	Material* material = Material::whitePlastic;
 	for (int i = 0; i < 8; i++)
 	{
 
 		Peon* p = new Peon();
-		p->mPosition = { i * 100 - 350, 0, 50*5 };
+		p->mPosition = { i * 100 - 350, 0, 50 * 5 };
 		p->mScale = { 15,15,15 };
 		p->mColor = whiteColor;
 		p->setMaterial(material);
@@ -81,12 +81,14 @@ IG1App::init()
 	torre->mPosition = { -350,0,50 * 7 };
 	torre->mScale = { 15,15,15 };
 	torre->mColor = whiteColor;
+	torre->setMaterial(material);
 	objects.push_back(torre);
 
 	Torre* torre2 = new Torre();
 	torre2->mPosition = { 350,0,50 * 7 };
 	torre2->mScale = { 15,15,15 };
 	torre2->mColor = whiteColor;
+	torre2->setMaterial(material);
 	objects.push_back(torre2);
 
 
@@ -94,8 +96,8 @@ IG1App::init()
 	caballo->mPosition = { -250,0,50 * 7 };
 	caballo->mScale = { 15,15,15 };
 	caballo->mRotation = { 0, -90, 0 };
-	caballo->getChildren(0)->mColor = whiteColor;
-	caballo->getChildren(1)->mColor = whiteColor;
+	((EntityWithMaterial*)caballo->getChildren(0))->setMaterial(Material::whitePlastic);
+	((EntityWithMaterial*)caballo->getChildren(1))->setMaterial(Material::whitePlastic);
 	objects.push_back(caballo);
 
 
@@ -103,40 +105,44 @@ IG1App::init()
 	caballo2->mPosition = { 250,0,50 * 7 };
 	caballo2->mScale = { 15,15,15 };
 	caballo2->mRotation = { 0, -90, 0 };
-	caballo2->getChildren(0)->mColor = whiteColor;
-	caballo2->getChildren(1)->mColor = whiteColor;
+	((EntityWithMaterial*)caballo2->getChildren(0))->setMaterial(Material::whitePlastic);
+	((EntityWithMaterial*)caballo2->getChildren(1))->setMaterial(Material::whitePlastic);
 	objects.push_back(caballo2);
 
 	Alfil* alfil = new Alfil();
 	alfil->mPosition = { -150,0,50 * 7 };
 	alfil->mScale = { 15,15,15 };
 	alfil->mColor = whiteColor;
+	alfil->setMaterial(material);
 	objects.push_back(alfil);
 
 	Alfil* alfil2 = new Alfil();
 	alfil2->mPosition = { 150,0,50 * 7 };
 	alfil2->mScale = { 15,15,15 };
 	alfil2->mColor = whiteColor;
+	alfil2->setMaterial(material);
 	objects.push_back(alfil2);
 
 	Reina* reina = new Reina();
 	reina->mPosition = { -50,0,50 * 7 };
 	reina->mScale = { 15,15,15 };
 	reina->mColor = whiteColor;
+	reina->setMaterial(material);
 	objects.push_back(reina);
 
 	Rey* rey = new Rey();
 	rey->mPosition = { 50,0,50 * 7 };
 	rey->mScale = { 15,15,15 };
 	rey->mColor = whiteColor;
+	rey->setMaterial(material);
 	objects.push_back(rey);
 
 
-
+	material = Material::blackPlastic;
 	for (int i = 0; i < 8; i++)
 	{
 		Peon* p = new Peon();
-		p->mPosition = { i * 100 - 350, 0, 50*-5 };
+		p->mPosition = { i * 100 - 350, 0, 50 * -5 };
 		p->mScale = { 15,15,15 };
 		p->mColor = blackColor;
 		p->setMaterial(material);
@@ -147,12 +153,14 @@ IG1App::init()
 	torreN->mPosition = { -350,0,-50 * 7 };
 	torreN->mScale = { 15,15,15 };
 	torreN->mColor = blackColor;
+	torreN->setMaterial(material);
 	objects.push_back(torreN);
 
 	Torre* torreN2 = new Torre();
 	torreN2->mPosition = { 350,0,-50 * 7 };
 	torreN2->mScale = { 15,15,15 };
 	torreN2->mColor = blackColor;
+	torreN2->setMaterial(material);
 	objects.push_back(torreN2);
 
 
@@ -160,8 +168,8 @@ IG1App::init()
 	caballoN->mPosition = { -250,0,-50 * 7 };
 	caballoN->mScale = { 15,15,15 };
 	caballoN->mRotation = { 0, 90, 0 };
-	caballoN->getChildren(0)->mColor = blackColor;
-	caballoN->getChildren(1)->mColor = blackColor;
+	((EntityWithMaterial*)caballoN->getChildren(0))->setMaterial(Material::blackPlastic);
+	((EntityWithMaterial*)caballoN->getChildren(1))->setMaterial(Material::blackPlastic);
 	objects.push_back(caballoN);
 
 
@@ -169,32 +177,36 @@ IG1App::init()
 	caballoN2->mPosition = { 250,0,-50 * 7 };
 	caballoN2->mScale = { 15,15,15 };
 	caballoN2->mRotation = { 0, 90, 0 };
-	caballoN2->getChildren(0)->mColor = blackColor;
-	caballoN2->getChildren(1)->mColor = blackColor;
+	((EntityWithMaterial*)caballoN2->getChildren(0))->setMaterial(Material::blackPlastic);
+	((EntityWithMaterial*)caballoN2->getChildren(1))->setMaterial(Material::blackPlastic);
 	objects.push_back(caballoN2);
 
 	Alfil* alfilN = new Alfil();
 	alfilN->mPosition = { -150,0,-50 * 7 };
 	alfilN->mScale = { 15,15,15 };
 	alfilN->mColor = blackColor;
+	alfilN->setMaterial(material);
 	objects.push_back(alfilN);
 
 	Alfil* alfilN2 = new Alfil();
 	alfilN2->mPosition = { 150,0,-50 * 7 };
 	alfilN2->mScale = { 15,15,15 };
 	alfilN2->mColor = blackColor;
+	alfilN2->setMaterial(material);
 	objects.push_back(alfilN2);
 
 	Reina* reinaN = new Reina();
 	reinaN->mPosition = { 50,0,-50 * 7 };
 	reinaN->mScale = { 15,15,15 };
 	reinaN->mColor = blackColor;
+	reinaN->setMaterial(material);
 	objects.push_back(reinaN);
 
 	Rey* reyN = new Rey();
 	reyN->mPosition = { -50,0,-50 * 7 };
 	reyN->mScale = { 15,15,15 };
 	reyN->mColor = blackColor;
+	reyN->setMaterial(material);
 	objects.push_back(reyN);
 
 	// ********************************************************** Flexo
@@ -206,7 +218,7 @@ IG1App::init()
 	baseFlexo->mColor = blackColor;
 	compoundBaseFlexo->addEntity(baseFlexo);
 
-	Disk* tapaBaseFlexo = new Disk(0,100);
+	Disk* tapaBaseFlexo = new Disk(0, 100);
 	tapaBaseFlexo->mRotation = { -90,0,0 };
 	tapaBaseFlexo->mPosition = { 0,30,0 };
 	tapaBaseFlexo->mColor = blackColor;
@@ -262,7 +274,7 @@ IG1App::init()
 
 	//Brazo 3
 
-	Eje* pivoteTercerEje = new Eje( - 30, 0, 30);
+	Eje* pivoteTercerEje = new Eje(-30, 0, 30);
 	pivoteTercerEje->mPosition = { 0,385,0 };
 	pivoteTercerEje->mRotation = { 0,0,60 };
 	pivoteSegundoEje->addEntity(pivoteTercerEje);
@@ -316,12 +328,12 @@ IG1App::init()
 
 	compoundBaseFlexo->mPosition = { 600,0,0 };
 
-	DensePlain * cb = new DensePlain(50);
+	DensePlain* cb = new DensePlain(50);
 	cb->addTexturePath("../bmps/chessBoard.bmp");
 	cb->mScale = { 800,800,800 };
 	cb->mRotation = { -90,0,0 };
 	cb->mPosition = { 0,0,0 };
-	cb->setMaterial(material);
+	cb->setMaterial(Material::whitePlastic);
 	objects.push_back(cb);
 
 	DensePlain* cbLateral1 = new DensePlain(5);
@@ -365,17 +377,17 @@ IG1App::init()
 	objects.push_back(suelo);
 
 
-	Vela* vela = new Vela(200,400,20);
+	Vela* vela = new Vela(400, 400, 20);
 	vela->initialPos = { 1800, -2000, 0 };
 	vela->mPosition = { 1800, -2000, 0 };
 	objects.push_back(vela);
 
-	Vela* vela1 = new Vela(300, 400, 60);
+	Vela* vela1 = new Vela(300, 300, 60);
 	vela1->initialPos = { -1800, -2000, 0 };
 	vela1->mPosition = { -1800, -2000, 0 };
 	objects.push_back(vela1);
 
-	Vela* vela2 = new Vela(250, 400, 120);
+	Vela* vela2 = new Vela(250, 250, 120);
 	vela2->initialPos = { 0, -2000, 1800 };
 	vela2->mPosition = { 0, -2000, 1800 };
 	objects.push_back(vela2);
@@ -425,11 +437,11 @@ IG1App::iniWinOpenGL()
 	// glutInitWindowPosition (140, 140);
 
 	glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE |
-	                    GLUT_DEPTH /*| GLUT_STENCIL*/); // RGBA colors, double buffer, depth
-	                                                    // buffer and stencil buffer
+		GLUT_DEPTH /*| GLUT_STENCIL*/); // RGBA colors, double buffer, depth
+	// buffer and stencil buffer
 
 	mWinId = glutCreateWindow(
-	  "IG1App"); // with its associated OpenGL context, return window's identifier
+		"IG1App"); // with its associated OpenGL context, return window's identifier
 
 	// Callback registration
 	glutReshapeFunc(s_resize);
@@ -449,13 +461,14 @@ IG1App::iniWinOpenGL()
 void
 IG1App::free()
 { // release memory and resources
-	for( Scene* s : mScenes)
+	for (Scene* s : mScenes)
 		delete s;
 
-	for(Camera* c : mCameras) delete c;
-	for(Viewport* vp : mViewPorts) delete vp;
+	for (Camera* c : mCameras) delete c;
+	for (Viewport* vp : mViewPorts) delete vp;
 
-	delete Material::plastic;
+	delete Material::whitePlastic;
+	delete Material::blackPlastic;
 	delete Material::copper;
 
 }
@@ -472,14 +485,14 @@ IG1App::display() const
 
 void
 IG1App::display1V() const
-{ 
+{
 	mViewPorts[0]->setSize(mWinW, mWinH);
 	mCameras[0]->setSize(mViewPorts[0]->width(), mViewPorts[0]->height());
 	current_scene()->render(*mCameras[0]); // uploads the viewport and camera to the GPU
 }
 
-void 
-IG1App::display2V() const{
+void
+IG1App::display2V() const {
 
 	for (int i = 0; i < 2; i++)
 	{
@@ -515,103 +528,108 @@ IG1App::key(unsigned char key, int x, int y)
 	bool need_redisplay = true;
 
 	switch (key) {
-		case 27:                     // Escape key
-			glutLeaveMainLoop(); // stops main loop and destroy the OpenGL context
-			break;
-		case '+':
-			current_camera()->setScale(+0.01); // zoom in  (increases the scale)
-			break;
-		case '-':
-			current_camera()->setScale(-0.01); // zoom out (decreases the scale)
-			break;
-		case 'l':
-			current_camera()->set3D();
-			break;
-		case 'o':
-			current_camera()->set2D();
-			break;
-		case '0':
-			if (current_scene()->hasAdvandcedTIE()) current_scene()->disableTieLight();
-			setScene(--mId);
-			current_scene()->setBackground();
-			break;
-		case '1':
-			if (current_scene()->hasAdvandcedTIE()) current_scene()->disableTieLight();
-			setScene(++mId);
-			current_scene()->setBackground();
-			break;
+	case 27:                     // Escape key
+		glutLeaveMainLoop(); // stops main loop and destroy the OpenGL context
+		break;
+	case '+':
+		current_camera()->setScale(+0.01); // zoom in  (increases the scale)
+		break;
+	case '-':
+		current_camera()->setScale(-0.01); // zoom out (decreases the scale)
+		break;
+	case 'l':
+		current_camera()->set3D();
+		break;
+	case 'o':
+		current_camera()->set2D();
+		break;
+	case '0':
+		//if (current_scene()->hasAdvandcedTIE()) current_scene()->disableTieLight();
+		//setScene(--mId);
+		//current_scene()->setBackground();
+		break;
+	case '1':
+		//if (current_scene()->hasAdvandcedTIE()) current_scene()->disableTieLight();
+		//setScene(++mId);
+		//current_scene()->setBackground();
+		break;
 		//case '2':
 		//	setScene(2);
 		//	break;
-		case 'u':
-			update();
-			break;
-		case 'U':
-			// APARTADO 16
-			glutIdleFunc(s_update);
-			break;
-		case 'F':
-			// APARTADO 37
-			photo->save("image.bmp");
-			break;
-		case 'p':
-			current_camera()->changePrj();
-			break;
-		case 'O':
-			current_camera()->orbit(1, 1);
-			break;
-		case 'c':
-			current_camera()->setCenital();
-			break;
-		case 'f':
-			current_scene()->rotate();
-			break;
-		case 'g':
-			current_scene()->orbit();
-			break;
-		case 'k':
-			m2Vistas = !m2Vistas;
-			break;
-		case 'q':
-			// APARTADO 76
-			//current_scene()->dirLight->enable();
-			break;
-		case 'w':
-			// APARTADO 76
-			//current_scene()->dirLight->disable();
-			break;
-		case 'a':
-			// APARTADO 77
-			//current_scene()->posLight->enable();
-			break;
-		case 's':
-			// APARTADO 77
-			//current_scene()->posLight->disable();
-			break;
-		case 'z':
-			// APARTADO 78
-			//current_scene()->spotLight->enable();
-			break;
-		case 'x':
-			// APARTADO 78
-			//current_scene()->spotLight->disable();
-			break;
-		case 'v':
-			// APARTADO 79
-			//if (current_scene()->hasAdvandcedTIE()) current_scene()->enableTieLight();
-			break;
-		case 'b':
-			// APARTADO 79
-			//if (current_scene()->hasAdvandcedTIE()) current_scene()->disableTieLight();
-			break;
-		default:
-			need_redisplay = false;
-			break;
+	case 'u':
+		update();
+		break;
+	case 'U':
+		// APARTADO 16
+		glutIdleFunc(s_update);
+		break;
+	case 'F':
+		// APARTADO 37
+		//photo->save("image.bmp");
+		break;
+	case 'p':
+		current_camera()->changePrj();
+		break;
+	case 'O':
+		current_camera()->orbit(1, 1);
+		break;
+	case 'c':
+		current_camera()->setCenital();
+		break;
+	case 'f':
+		current_scene()->rotate();
+		break;
+	case 'g':
+		current_scene()->orbit();
+		break;
+	case 'k':
+		//m2Vistas = !m2Vistas;
+		break;
+	case 'q':
+		// APARTADO 76
+		PantallaFlexo::spotLight->enable();
+		break;
+	case 'w':
+		// APARTADO 76
+		PantallaFlexo::spotLight->disable();
+		break;
+	case 'a':
+		// APARTADO 77
+		current_scene()->dirLight->enable();
+		current_scene()->backgroundColor = { 100.0 / 255.0, 103.0 / 255.0, 41.0 / 255.0, 1.0 };
+		current_scene()->setBackground();
+
+		break;
+	case 's':
+		// APARTADO 77
+		current_scene()->dirLight->disable();
+		current_scene()->backgroundColor = { 21.0 / 255.0, 13.0 / 255.0, 41.0 / 255.0, 1.0 };
+		current_scene()->setBackground();
+		break;
+	case 'z':
+		// APARTADO 78
+		//current_scene()->spotLight->enable();
+		break;
+	case 'x':
+		// APARTADO 78
+		//current_scene()->spotLight->disable();
+		break;
+	case 'v':
+		// APARTADO 79
+		//if (current_scene()->hasAdvandcedTIE()) current_scene()->enableTieLight();
+		break;
+	case 'b':
+		// APARTADO 79
+		//if (current_scene()->hasAdvandcedTIE()) current_scene()->disableTieLight();
+		break;
+	default:
+		need_redisplay = false;
+		break;
 	} // switch
 
 	if (need_redisplay)
 		glutPostRedisplay(); // marks the window as needing to be redisplayed -> calls to
-		                     // display()
+	// display()
 }
 
 void
@@ -621,56 +639,57 @@ IG1App::specialKey(int key, int x, int y)
 	int mdf = glutGetModifiers(); // returns the modifiers (Shift, Ctrl, Alt)
 
 	switch (key) {
-		case GLUT_KEY_RIGHT:
-			if (mdf == GLUT_ACTIVE_CTRL)
-				//mCamera->pitch(-1); // rotates -1 on the X axis
-				current_camera()->pitchReal(-5);
-			else
-				//mCamera->pitch(1); // rotates 1 on the X axis
-				current_camera()->pitchReal(5);
-			break;
-		case GLUT_KEY_LEFT:
-			if (mdf == GLUT_ACTIVE_CTRL)
-				//mCamera->yaw(1); // rotates 1 on the Y axis
-				current_camera()->yawReal(5);
-			else
-				//mCamera->yaw(-1); // rotate -1 on the Y axis
-				current_camera()->yawReal(-5);
-			break;
-		case GLUT_KEY_UP:
-			//mCamera->roll(1); // rotates 1 on the Z axis
-			current_camera()->rollReal(0.01);
-			break;
-		case GLUT_KEY_DOWN:
-			//mCamera->roll(-1); // rotates -1 on the Z axis
-			current_camera()->rollReal(-0.01);
-			break;
-		default:
-			need_redisplay = false;
-			break;
+	case GLUT_KEY_RIGHT:
+		if (mdf == GLUT_ACTIVE_CTRL)
+			//mCamera->pitch(-1); // rotates -1 on the X axis
+			current_camera()->pitchReal(-5);
+		else
+			//mCamera->pitch(1); // rotates 1 on the X axis
+			current_camera()->pitchReal(5);
+		break;
+	case GLUT_KEY_LEFT:
+		if (mdf == GLUT_ACTIVE_CTRL)
+			//mCamera->yaw(1); // rotates 1 on the Y axis
+			current_camera()->yawReal(5);
+		else
+			//mCamera->yaw(-1); // rotate -1 on the Y axis
+			current_camera()->yawReal(-5);
+		break;
+	case GLUT_KEY_UP:
+		//mCamera->roll(1); // rotates 1 on the Z axis
+		current_camera()->rollReal(0.01);
+		break;
+	case GLUT_KEY_DOWN:
+		//mCamera->roll(-1); // rotates -1 on the Z axis
+		current_camera()->rollReal(-0.01);
+		break;
+	default:
+		need_redisplay = false;
+		break;
 	} // switch
 
 	if (need_redisplay)
 		glutPostRedisplay(); // marks the window as needing to be redisplayed -> calls to
-		                     // display()
+	// display()
 }
 
-void 
+void
 IG1App::mouse(int button, int state, int x, int y) {
 	mMouseButt = button;
 	mMouseCoord = glm::dvec2(x, glutGet(GLUT_WINDOW_HEIGHT) - y);
 
 }
-void 
+void
 IG1App::motion(int x, int y) {
 
 	glm::dvec2 newPos = glm::dvec2(x, glutGet(GLUT_WINDOW_HEIGHT) - y);
 	glm::dvec2 delta = mMouseCoord - newPos;
-	
-	if (mMouseButt==0) {
+
+	if (mMouseButt == 0) {
 		current_camera()->moveLR(delta.x);
 		current_camera()->moveUD(delta.y);
-	}else if (mMouseButt == 2) {
+	}
+	else if (mMouseButt == 2) {
 		current_camera()->yawReal(delta.x);
 		current_camera()->pitchReal(delta.y);
 	}
@@ -678,16 +697,16 @@ IG1App::motion(int x, int y) {
 
 	glutPostRedisplay();
 }
-void 
+void
 IG1App::mouseWheel(int n, int d, int x, int y) {
 
 	int mdf = glutGetModifiers(); // returns the modifiers (Shift, Ctrl, Alt)
 
 	if (mdf == GLUT_ACTIVE_CTRL) {
-		current_camera()->moveFB(d*5);
+		current_camera()->moveFB(d * 5);
 	}
 	else {
-		current_camera()->setScale(d*0.10);
+		current_camera()->setScale(d * 0.10);
 
 	}
 	glutPostRedisplay();
@@ -718,7 +737,7 @@ void IG1App::update()
 	}
 }
 
-Camera* 
+Camera*
 IG1App::current_camera() const {
 	if (!m2Vistas) return mCameras[0];
 	else {

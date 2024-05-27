@@ -9,7 +9,8 @@ using namespace glm;
 // Material
 //----------------------------------------------------------------------------------------------
 
-Material* Material::plastic = new Material();
+Material* Material::whitePlastic = new Material();
+Material* Material::blackPlastic = new Material();
 Material* Material::copper = new Material();
 
 void Material::upload() {
@@ -27,9 +28,15 @@ void Material::setCopper() {
 	expF = 12.8;
 }
 
-void Material::setPlastic() {
+void Material::setWhitePlastic() {
+	ambient = { 0.1, 0.1, 0.1 , 1 };
+	diffuse = { 237.0 / 255.0, 215.0 / 255.0, 149.0 / 255.0 , 1.0 };
+	specular = { 1.0 , 1.0 , 1.0 , 1.0 };
+	expF = 89.0;
+}
+void Material::setBlackPlastic() {
 	ambient = { 0.0, 0.0, 0.0 , 1 };
-	diffuse = { 1.0 , 1.0 , 1.0 , 1.0 };
+	diffuse = { 0.4, 0.4, 0.4 , 1.0 };
 	specular = { 1.0 , 1.0 , 1.0 , 1.0 };
 	expF = 89.0;
 }
@@ -55,9 +62,9 @@ void Light::uploadL() const {
 	glLightfv(id, GL_SPECULAR, value_ptr(specular));
 }
 
-void Light::disable() { if (id < GL_LIGHT0 + GL_MAX_LIGHTS) glDisable(id); };
+void Light::disable() { if (id < GL_LIGHT0 + GL_MAX_LIGHTS) glDisable(id); enabled = false; };
 
-void Light::enable() { if (id < GL_LIGHT0 + GL_MAX_LIGHTS) glEnable(id); };
+void Light::enable() { if (id < GL_LIGHT0 + GL_MAX_LIGHTS) glEnable(id); enabled = true; };
 
 void Light::setAmb(glm::fvec4 amb) {
 	ambient = amb; uploadL();
@@ -68,7 +75,7 @@ void Light::setDiff(glm::fvec4 diff) {
 };
 
 void Light::setSpec(glm::fvec4 sp) {
-	specular= sp; uploadL();
+	specular = sp; uploadL();
 };
 
 /*void Light::setPosDir(glm::fvec4 pd) {

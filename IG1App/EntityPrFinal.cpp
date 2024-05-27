@@ -55,10 +55,10 @@ void ChessPiece::render(glm::dmat4 const& modelViewMat) const
 
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 		glEnable(GL_NORMALIZE);
-		glEnable(GL_COLOR_MATERIAL);
+		//glEnable(GL_COLOR_MATERIAL);
 
 
-		if(material != nullptr) material->upload();
+		if (material != nullptr) material->upload();
 
 		mMesh->render();
 
@@ -80,8 +80,8 @@ void ChessPiece::update()
 
 	counter += 0.5;
 	float hight = abs(
-		sin(glm::radians(counter+phase) * glm::pi<float>() ) +
-		sin(0.5 * glm::radians(counter+ phase) * glm::pi<float>() + 3.9 )) * 40;
+		sin(glm::radians(counter + phase) * glm::pi<float>()) +
+		sin(0.5 * glm::radians(counter + phase) * glm::pi<float>() + 3.9)) * 40;
 
 	mPosition = { mPosition.x, hight, mPosition.z };
 }
@@ -122,7 +122,7 @@ Peon::Peon()
 
 	GLdouble step = 180.0 / GLdouble(10);
 	GLdouble initialAngle = -90.0;
-	for (int i = 1; i < 10+1; i++)
+	for (int i = 1; i < 10 + 1; i++)
 	{
 		GLdouble currentAngle = initialAngle + step * i;
 		GLdouble alpha = radians(currentAngle);
@@ -131,10 +131,6 @@ Peon::Peon()
 		GLdouble y = cy + r * glm::sin(alpha);
 		perfil.push_back({ x, y, 0.0 });
 	}
-
-
-
-
 
 	this->mMesh = MbR::generaIndexMbR(perfil.size(), 100, perfil.data());
 }
@@ -155,7 +151,7 @@ Torre::Torre()
 	perfil.push_back(perfil.back() + dvec3(0.0, 0.5, 0));
 	perfil.push_back(perfil.back() + dvec3(-0.3, 0.2, 0));
 	perfil.push_back(perfil.back() + dvec3(-0.2, 1, 0));
-	perfil.push_back(perfil.back() + dvec3( 0, 0.5, 0));
+	perfil.push_back(perfil.back() + dvec3(0, 0.5, 0));
 	perfil.push_back(perfil.back() + dvec3(+0.1, 1, 0));
 	perfil.push_back(perfil.back() + dvec3(+0.1, 0.2, 0));
 	perfil.push_back(perfil.back() + dvec3(+0.1, 0.2, 0));
@@ -241,7 +237,7 @@ Reina::Reina()
 	perfil.push_back(perfil.back() + dvec3(-0.2, 0.5, 0));
 	perfil.push_back(perfil.back() + dvec3(0.3, 0.8, 0));
 	perfil.push_back(perfil.back() + dvec3(0.2, 0.2, 0));
-	perfil.push_back(perfil.back() + dvec3( 0, 0.2, 0));
+	perfil.push_back(perfil.back() + dvec3(0, 0.2, 0));
 	perfil.push_back(perfil.back() + dvec3(-0.2, -0.2, 0));
 	perfil.push_back(perfil.back() + dvec3(-0.6, 0, 0));
 	perfil.push_back(perfil.back() + dvec3(0.1, 0.4, 0));
@@ -287,10 +283,10 @@ Rey::Rey()
 	perfil.push_back(perfil.back() + dvec3(0, 0.2, 0));
 	perfil.push_back(perfil.back() + dvec3(-0.2, 0, 0));
 	perfil.push_back(perfil.back() + dvec3(-0.7, 0.1, 0));
-	perfil.push_back(perfil.back() + dvec3( 0, 0.2, 0));
-	perfil.push_back(perfil.back() + dvec3( -0.1, 0.05, 0));
-	perfil.push_back(perfil.back() + dvec3(  0, 0.6, 0));
-	perfil.push_back(perfil.back() + dvec3( -0.2, 0, 0));
+	perfil.push_back(perfil.back() + dvec3(0, 0.2, 0));
+	perfil.push_back(perfil.back() + dvec3(-0.1, 0.05, 0));
+	perfil.push_back(perfil.back() + dvec3(0, 0.6, 0));
+	perfil.push_back(perfil.back() + dvec3(-0.2, 0, 0));
 
 
 
@@ -329,7 +325,7 @@ void BaseCaballo::render(glm::dmat4 const& modelViewMat) const
 
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 		glEnable(GL_NORMALIZE);
-		glEnable(GL_COLOR_MATERIAL);
+		//glEnable(GL_COLOR_MATERIAL);
 
 
 		if (material != nullptr) material->upload();
@@ -349,7 +345,7 @@ void BaseCaballo::render(glm::dmat4 const& modelViewMat) const
 
 CabezaCaballo::CabezaCaballo()
 {
-	
+
 	this->mMesh = IndexMesh::generateCaballo();
 }
 
@@ -366,7 +362,7 @@ void CabezaCaballo::render(glm::dmat4 const& modelViewMat) const
 
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 		glEnable(GL_NORMALIZE);
-		glEnable(GL_COLOR_MATERIAL);
+		//glEnable(GL_COLOR_MATERIAL);
 
 
 		if (material != nullptr) material->upload();
@@ -388,7 +384,7 @@ void CabezaCaballo::render(glm::dmat4 const& modelViewMat) const
 
 Caballo::Caballo()
 {
-	
+
 	BaseCaballo* bc = new BaseCaballo();
 	bc->mScale = { 1 ,1, 1 };
 	CabezaCaballo* cc = new CabezaCaballo();
@@ -402,9 +398,13 @@ Caballo::Caballo()
 
 
 
-Luz::Luz(GLdouble rru, GLdouble rrd, GLdouble hh): QuadricEntity() { ru = rru; rd = rrd; h = hh; mTexturePaths = { "../bmps/luz.bmp" };
+Luz::Luz(GLdouble rru, GLdouble rrd, GLdouble hh) : QuadricEntity() {
+	ru = rru; rd = rrd; h = hh; mTexturePaths = { "../bmps/luz.bmp" };
 }
 void Luz::render(glm::dmat4 const& modelViewMat) const {
+
+	if (!PantallaFlexo::spotLight->isEnabled()) return;
+
 	dmat4 aMat = complete_transform(modelViewMat);
 	upload(aMat);
 	// Aquí se puede fijar el color de la esfera así:
@@ -414,7 +414,7 @@ void Luz::render(glm::dmat4 const& modelViewMat) const {
 
 	glColor4f(mColor[0], mColor[1], mColor[2], 1.0f);
 	// Aquí se puede fijar el modo de dibujar la esfera :
-	gluQuadricDrawStyle (q, GLU_FILL);
+	gluQuadricDrawStyle(q, GLU_FILL);
 	gluQuadricTexture(q, GL_TRUE);
 	mTextures[0]->bind(GL_ADD);
 	gluCylinder(q, ru, rd, h, 50, 50);
@@ -450,11 +450,11 @@ PantallaFlexo::PantallaFlexo() : EntityWithMaterial()
 	perfil.push_back(perfil.back() + dvec3(0.3, 0.6, 0));
 	perfil.push_back(perfil.back() + dvec3(0.2, 0.9, 0));
 	perfil.push_back(perfil.back() + dvec3(0.1, 1.2, 0));
-	perfil.push_back(perfil.back() + dvec3(0.1 , 0.1, 0));
-	perfil.push_back(perfil.back() + dvec3(2 , 0, 0));
+	perfil.push_back(perfil.back() + dvec3(0.1, 0.1, 0));
+	perfil.push_back(perfil.back() + dvec3(2, 0, 0));
 	perfil.push_back(perfil.back() + dvec3(0.3, 0.4, 0));
 	perfil.push_back(perfil.back() + dvec3(0.1, 1, 0));
-	perfil.push_back(perfil.back() + dvec3( 0.1, 2, 0));
+	perfil.push_back(perfil.back() + dvec3(0.1, 2, 0));
 
 	this->mMesh = MbR::generaIndexMbR(perfil.size(), 100, perfil.data());
 
@@ -497,8 +497,8 @@ void PantallaFlexo::render(glm::dmat4 const& modelViewMat) const
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
 
-		spotLight->setPosDir(glm::fvec3{ mPosition.x-90, mPosition.y, mPosition.z });
-		spotLight->setSpot(glm::fvec3{ -1.0, 0, 0}, 40, 3);
+		spotLight->setPosDir(glm::fvec3{ mPosition.x - 90, mPosition.y, mPosition.z });
+		spotLight->setSpot(glm::fvec3{ -1.0, 0, 0 }, 40, 3);
 		spotLight->setAtte(0, 0, 0.000002);
 		spotLight->upload(modelViewMat);
 	}
@@ -506,14 +506,14 @@ void PantallaFlexo::render(glm::dmat4 const& modelViewMat) const
 
 void PantallaFlexo::update() {
 	counter += 0.01;
-	std::cout << counter << std::endl;
+	//std::cout << counter << std::endl;
 }
 
 void Eje::update()
 {
-	counter+= 0.1 ;
+	counter += 0.1;
 
-	mRotation = { 0,0, inicial + glm::sin(glm::radians(counter + desfase)) * apertura };
+	mRotation = { 0,0, inicial + glm::sin(glm::radians((counter * 2.0) + desfase)) * apertura };
 
 	for (Abs_Entity* ent : gObjects) {
 		ent->update();
@@ -548,7 +548,7 @@ void DensePlain::render(glm::dmat4 const& modelViewMat) const
 		glEnable(GL_NORMALIZE);
 
 
-		glEnable(GL_COLOR_MATERIAL);
+		//glEnable(GL_COLOR_MATERIAL);
 		material->upload();
 
 		if (mTexturePaths.size() > 0) { mTextures[0]->bind(GL_MODULATE); }
@@ -612,7 +612,7 @@ void Vela::update()
 {
 	counter += 0.1;
 
-	mPosition = initialPos + dvec3( 0, inicial + glm::sin(glm::radians((counter*5) + desfase)) * apertura ,0 );
+	mPosition = initialPos + dvec3(0, inicial + glm::sin(glm::radians((counter * 5) + desfase)) * apertura, 0);
 
 	for (Abs_Entity* ent : gObjects) {
 		ent->update();
@@ -631,7 +631,7 @@ void Vela::render(glm::dmat4 const& modelViewMat) const
 	}
 
 	poslight->setPosDir(glm::fvec3{ mPosition.x, mPosition.y + 255, mPosition.z });
-	poslight->setAtte(0.025 * glm::sin(glm::radians(counter * 100)) * 10, 0.001 , 0.00001);
+	poslight->setAtte(0.025 * glm::sin(glm::radians(counter * 100)) * 10, 0.001, 0.00001);
 	poslight->upload(modelViewMat);
 }
 

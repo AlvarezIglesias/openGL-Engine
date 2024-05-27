@@ -8,7 +8,7 @@
 using namespace glm;
 
 // Init Lights in order
-DirLight* Scene::dirLight = nullptr; // GL_LIGHT0
+DirLight* Scene::dirLight = new DirLight(); // GL_LIGHT0
 PosLight* Scene::posLight = nullptr; // GL_LIGHT1
 SpotLight* Scene::spotLight = nullptr; // GL_LIGHT2
 
@@ -145,7 +145,7 @@ void
 Scene::render(Camera const& cam) const
 {
 	//sceneDirLight(cam); // APARTADO 56
-	//dirLight->upload(cam.viewMat()); // APARTADO 76
+	dirLight->upload(cam.viewMat()); // APARTADO 76
 	//posLight->upload(cam.viewMat()); // APARTADO 77
 	//spotLight->upload(cam.viewMat()); // APARTADO 78
 
@@ -183,12 +183,12 @@ void Scene::sceneDirLight(Camera const& cam) const {
 
 // APARTADO 76
 void Scene::initDirLight() {
-	/*Scene::dirLight->setPosDir(glm::fvec3{1, 1, 1});
+	Scene::dirLight->setPosDir(glm::fvec3{1, 1, 1});
 	Scene::dirLight->setAmb(glm::fvec4{ 0, 0, 0, 1 });
 	Scene::dirLight->setDiff(glm::fvec4{ 1, 1, 1, 1 });
 	Scene::dirLight->setSpec(glm::fvec4{ 0.5, 0.5, 0.5, 1 });
 	
-	Scene::dirLight->enable();*/
+	Scene::dirLight->disable();
 }
 
 // APARTADO 77

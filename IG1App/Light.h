@@ -18,9 +18,11 @@ public:
 	virtual ~Material() {};
 	virtual void upload();
 	void setCopper();
-	void setPlastic();
+	void setWhitePlastic();
+	void setBlackPlastic();
 
-	static Material* plastic;
+	static Material* whitePlastic;
+	static Material* blackPlastic;
 	static Material* copper;
 };
 
@@ -35,6 +37,7 @@ protected:
 	glm::fvec4 specular = { 0.5 , 0.5 , 0.5 , 1 };
 	glm::fvec4 posDir = { 0 , 0 , 1 , 0 };
 	// Añade setters para cambiar el valor de los atributos lumínicos
+	bool enabled = true;
 public:
 	Light();
 	virtual ~Light() { disable(); }
@@ -48,6 +51,8 @@ public:
 	void setDiff(glm::fvec4 diff);
 	void setSpec(glm::fvec4 sp);
 	//void setPosDir(glm::fvec4 pd);
+
+	bool isEnabled() { return enabled; };
 };
 
 // Apartado 75
