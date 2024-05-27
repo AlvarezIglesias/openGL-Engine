@@ -808,3 +808,200 @@ void
 Luna::disableLight() {
 	light->disable();
 }
+
+//----------------------------------------------------------------------------------------------
+// IndexedOpenBox
+//----------------------------------------------------------------------------------------------
+
+IndexedOpenBox::IndexedOpenBox(int m) {
+	mTexturePaths = { "../bmps/wood.bmp" };
+	mMesh = IndexMesh::generateIndexedOpenBox(m);
+}
+	
+void
+IndexedOpenBox::render(glm::dmat4 const& modelViewMat) const {
+	dmat4 aMat = complete_transform(modelViewMat);
+	upload(aMat);
+
+	glPolygonMode(GL_BACK, GL_FILL);
+	glDisable(GL_COLOR_MATERIAL);
+
+	mTextures[0]->bind(GL_MODULATE);
+	material->upload();
+
+	mMesh->render();
+
+	mTextures[0]->unbind();
+
+	glEnable(GL_COLOR_MATERIAL);
+	glPointSize(1);
+	glLineWidth(1);
+	glColor4d(1.0, 1.0, 1.0, 1.0);
+	glPolygonMode(GL_FRONT, GL_FILL);
+}
+
+//----------------------------------------------------------------------------------------------
+// Carromato
+//----------------------------------------------------------------------------------------------
+Carromato::Carromato(int m)
+	: CompoundEntity() {
+
+	// Material madera
+	Material* mat = new Material();
+	mat->upload();
+	mat->setWood();
+
+	// Estructura Principal
+	IndexedOpenBox* main = new IndexedOpenBox(m/2);
+
+	main->mPosition.y += m / 4;
+
+	main->setMaterial(mat);
+	addEntity(main);
+
+	// Tirador Derecho
+	RevCilinder* tD = new RevCilinder(5, m / 4, 200, 200);
+	tD->mPosition.x -= m / 4;
+	tD->mPosition.y += (m / 2) * 0.75;
+	tD->mPosition.z += m / 4 - 5;
+
+	tD->mRotation.z += 90;
+
+	tD->mTexturePaths = { "../bmps/wood.bmp" };
+
+	tD->setMaterial(mat);
+	addEntity(tD);
+
+	// Tirador Izquierdo
+	RevCilinder* tI = new RevCilinder(5, m / 4, 200, 200);
+	tI->mPosition.x -= m / 4;
+	tI->mPosition.y += (m / 2) * 0.75;
+	tI->mPosition.z -= m / 4 - 5;
+
+	tI->mRotation.z += 90;
+
+	tI->mTexturePaths = { "../bmps/wood.bmp" };
+
+	tI->setMaterial(mat);
+	addEntity(tI);
+
+	// Cierre derecho
+	DiskWithMaterial* dD = new DiskWithMaterial(0, 5);
+	dD->mPosition.x -= m / 4 + m / 4;
+	dD->mPosition.y += (m / 2) * 0.75;
+	dD->mPosition.z += m / 4 - 5;
+
+	dD->mRotation.y += 90;
+
+	dD->mTexturePaths = { "../bmps/wood.bmp" };
+
+	dD->setMaterial(mat);
+	addEntity(dD);
+
+	// Cierre izquierdo
+	DiskWithMaterial* dI = new DiskWithMaterial(0, 5);
+	dI->mPosition.x -= m / 4 + m / 4;
+	dI->mPosition.y += (m / 2) * 0.75;
+	dI->mPosition.z -= m / 4 - 5;
+
+	dI->mRotation.y -= 90;
+
+	dI->mTexturePaths = { "../bmps/wood.bmp" };
+
+	dI->setMaterial(mat);
+	addEntity(dI);
+
+	// Toroide derecho, para darle anchura, como si fuera un neumático
+	Toroid* nDer = new Toroid(5, m/4, 400, 400);
+	
+	nDer->mPosition.z += m / 4 + 2.5;
+	nDer->mRotation.x += 90;
+
+	nDer->mTexturePaths = { "../bmps/wood.bmp" };
+
+	nDer->setMaterial(mat);
+	addEntity(nDer);
+
+	// Toroide Izquierdo
+	Toroid* nIz = new Toroid(5, m / 4, 400, 400);
+
+	nIz->mPosition.z -= m / 4 + 2.5;
+	nIz->mRotation.x -= 90;
+
+	nIz->mTexturePaths = { "../bmps/wood.bmp" };
+
+	nIz->setMaterial(mat);
+	addEntity(nIz);
+
+	mPosition.y += m / 4;
+
+	// Rueda derecha
+	DiskWithMaterial* rDer = new DiskWithMaterial(0, m/4);
+	rDer->mPosition.z += m / 4 + 2.5;
+
+	rDer->mTexturePaths = { "../bmps/wood.bmp" };
+
+	rDer->setMaterial(mat);
+	addEntity(rDer);
+
+	// Rueda Izquierda
+	DiskWithMaterial* rIz = new DiskWithMaterial(0, m / 4);
+	rIz->mPosition.z -= m / 4 + 2.5;
+	rIz->mRotation.y -= 180;
+
+	rIz->mTexturePaths = { "../bmps/wood.bmp" };
+
+	rIz->setMaterial(mat);
+	addEntity(rIz);
+
+	// Carga
+	RevSphere* gold = new RevSphere(m/ 4, 200, 200);
+
+	Material* mat2 = new Material();
+	mat2->upload();
+	mat2->setGold();
+
+	gold->mPosition.y += m / 4;
+
+	gold->setMaterial(mat2);
+
+	addEntity(gold);
+
+	// Lo subimos por encima del suelo
+	mPosition.y += 5;
+
+}
+
+void Carromato::render(glm::dmat4 const& modelViewMat) const {
+
+	glm::dmat4 modelViewMatComp = complete_transform(modelViewMat) * mModelMat;
+	upload(modelViewMatComp);
+
+	for (Abs_Entity* ent : gObjects) {
+		ent->render(modelViewMatComp);
+	}
+}
+
+void Carromato::update() {
+	for (Abs_Entity* ent : gObjects) {
+		ent->update();
+	}
+	
+	if (incrementando){
+		if (mRotation.z < 30) {
+			mRotation.z += 0.1;
+		}
+		else {
+			incrementando = false;
+		}
+	}
+	else {
+		if (mRotation.z > 0) {
+			mRotation.z -= 0.1;
+		}
+		else {
+			incrementando = true;
+		}
+	}
+	
+}

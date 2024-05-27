@@ -65,6 +65,8 @@ RevSphere::RevSphere(GLdouble r, GLuint m, GLuint n) : EntityWithMaterial() {
 
 	//this->mMesh = MbR::generaIndexMbR(m+1, n, perfil);
 	this->mMesh = MbR::generaIndexTextCords(perfil.size(), n, perfil.data());
+
+	//delete[] perfil;
 }
 
 
@@ -108,8 +110,8 @@ void RevSphere::render(glm::dmat4 const& modelViewMat) const {
 
 
 Toroid::Toroid(GLdouble r, GLdouble R, GLuint m, GLuint p) : EntityWithMaterial() {
-
-	dvec3* perfil = new dvec3[m + 1];
+	std::vector<dvec3> perfil;
+	//dvec3* perfil = new dvec3[m + 1];
 
 	GLdouble cx = 0.0;
 	GLdouble cy = 0.0;
@@ -123,12 +125,13 @@ Toroid::Toroid(GLdouble r, GLdouble R, GLuint m, GLuint p) : EntityWithMaterial(
 
 		GLdouble x = cx + r * glm::cos(alpha) + R;
 		GLdouble y = cy + r * glm::sin(alpha);
-		perfil[i] = { x, y, 0.0 };
+		perfil.push_back( { x, y, 0.0 });
 	}
 
-	this->mMesh = MbR::generaIndexMbR(m + 1, p, perfil);
+	//this->mMesh = MbR::generaIndexMbR(m + 1, p, perfil);
+	this->mMesh = MbR::generaIndexTextCords(perfil.size(), p, perfil.data());
 
-	delete[] perfil;
+	//delete[] perfil;
 }
 
 
@@ -138,6 +141,8 @@ void Toroid::render(glm::dmat4 const& modelViewMat) const {
 		dmat4 aMat = complete_transform(modelViewMat);
 
 		upload(aMat);
+
+		if (mTexturePaths.size() > 0) { mTextures[0]->bind(GL_MODULATE); }
 
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
@@ -154,6 +159,8 @@ void Toroid::render(glm::dmat4 const& modelViewMat) const {
 		}
 
 		mMesh->render();
+
+		if (mTexturePaths.size() > 0) { mTextures[0]->unbind(); }
 
 		glEnable(GL_COLOR_MATERIAL);
 		glPointSize(1);

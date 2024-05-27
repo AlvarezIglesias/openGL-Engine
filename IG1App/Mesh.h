@@ -75,6 +75,7 @@ public:
 	std::vector<GLuint> const& indices() const { return vIndexes; };
 
 	static IndexMesh* generateIndexedBox(GLdouble length);
+	static IndexMesh* generateIndexedOpenBox(GLdouble length);
 	static IndexMesh* generateIndexedPiramid(GLdouble length);
 	glm::dvec3 buildNormalVectors(int init);
 

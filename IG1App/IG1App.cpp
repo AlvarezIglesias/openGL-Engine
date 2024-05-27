@@ -114,7 +114,14 @@ IG1App::init()
 
 	//new Ground(1300, 1300);
 
-	final->initPr3({ ground, new Atalaya(90, 75, 750, 400, 400), 
+	Carromato* carromato = new Carromato(200);
+
+	carromato->mRotation.y -= 135;
+
+	carromato->mPosition.x += 650;
+	carromato->mPosition.z -= 350;
+
+	final->initPr3({ ground, new Atalaya(90, 75, 750, 400, 400), carromato,
 		casa, casa2, casa3, casa4, casa5, casa6, casa7, casa8,
 		new Luna(500) }); // ,
 		//new EjesRGB(2000) });
@@ -259,6 +266,8 @@ IG1App::key(unsigned char key, int x, int y)
 			// APARTADO 16
 			glutIdleFunc(s_update);
 			break;
+		case 'S':
+			glutIdleFunc(NULL);
 		case 'p':
 			current_camera()->changePrj();
 			break;

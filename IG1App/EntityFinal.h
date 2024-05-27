@@ -133,3 +133,28 @@ public:
 protected:
 	SpotLight* light;
 };
+
+//----------------------------------------------------------------------------------------------
+// IndexedOpenBox
+//----------------------------------------------------------------------------------------------
+class IndexedOpenBox : public EntityWithMaterial {
+public:
+	IndexedOpenBox(int m);
+	~IndexedOpenBox() {};
+	virtual void render(glm::dmat4 const& modelViewMat) const;
+};
+
+//----------------------------------------------------------------------------------------------
+// Carromato
+//----------------------------------------------------------------------------------------------
+class Carromato : public CompoundEntity {
+public:
+	Carromato(int m);
+	~Carromato() {}
+
+	virtual void render(glm::dmat4 const& modelViewMat) const;
+	virtual void update();
+
+protected:
+	bool incrementando = true;
+};
