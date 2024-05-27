@@ -9,6 +9,9 @@ using namespace glm;
 // Material
 //----------------------------------------------------------------------------------------------
 
+Material* Material::plastic = new Material();
+Material* Material::copper = new Material();
+
 void Material::upload() {
 	glMaterialfv(face, GL_AMBIENT, value_ptr(ambient));
 	glMaterialfv(face, GL_DIFFUSE, value_ptr(diffuse));

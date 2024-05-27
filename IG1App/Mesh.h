@@ -70,7 +70,7 @@ protected:
 // Apartado 62
 class IndexMesh : public Mesh {
 public:
-	//~IndexMesh() { delete[] vIndexes; }
+	//~IndexMesh() = default;
 	GLuint index_size() const { return nNumIndices; }; // number of elements
 	std::vector<GLuint> const& indices() const { return vIndexes; };
 
@@ -94,7 +94,8 @@ protected:
 class MbR : public IndexMesh
 {
 public:
-	static MbR* generaIndexMbR(GLuint mm, GLuint mn, glm::dvec3* perfil);
+	//~MbR() = default;
+	static Mesh* generaIndexMbR(GLuint mm, GLuint mn, glm::dvec3* perfil);
 
 protected:
 

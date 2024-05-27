@@ -19,7 +19,7 @@ public:
 class ChessPiece : public EntityWithMaterial
 {
 public:
-	~ChessPiece() {};
+	~ChessPiece() {  };
 	virtual void render(glm::dmat4 const& modelViewMat) const;
 	void update();
 	bool shouldUpdate = true;
@@ -32,7 +32,7 @@ protected:
 class Peon : public ChessPiece
 {
 public:
-	~Peon() {};
+	~Peon() { delete mMesh; mMesh = nullptr; };
 	explicit Peon();
 };
 
@@ -46,7 +46,7 @@ public:
 class Alfil : public ChessPiece
 {
 public:
-	~Alfil() {};
+	~Alfil() { delete mMesh; };
 	explicit Alfil();
 };
 
@@ -94,7 +94,7 @@ class PantallaFlexo : public EntityWithMaterial
 {
 public:
 	static SpotLight* spotLight;
-	~PantallaFlexo() {};
+	~PantallaFlexo() { delete spotLight; };
 	explicit PantallaFlexo();
 	virtual void render(glm::dmat4 const& modelViewMat) const;
 	float counter = 0.0;
@@ -132,4 +132,30 @@ public:
 	~DensePlain() {};
 	explicit DensePlain(const int& density, float textCoorRepeat = 1.0);
 	virtual void render(glm::dmat4 const& modelViewMat) const;
+};
+
+class Vela : public CompoundEntity
+{
+public:
+	~Vela() { delete poslight; };
+	Vela(float _apertura, float _inicial, float _desfase);
+	void update();
+	virtual void render(glm::dmat4 const& modelViewMat) const;
+	glm::dvec3 initialPos = glm::dvec3(0);
+
+private:
+	float counter = 0.0;
+	float apertura = 0.0;
+	float inicial = 0.0;
+	float desfase = 0.0;
+	PosLight* poslight;
+
+};
+
+class CirculoMagia : public Luz
+{
+public:
+	CirculoMagia(GLdouble rru, GLdouble rrd, GLdouble hh);
+	void update();
+	float counter = 0.0;
 };

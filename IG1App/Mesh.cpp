@@ -580,7 +580,7 @@ IndexMesh* IndexMesh::generateIndexedBox(GLdouble length) {
 }
 
 
-MbR* MbR::generaIndexMbR(GLuint mm, GLuint nn, glm::dvec3* perfil)
+Mesh* MbR::generaIndexMbR(GLuint mm, GLuint nn, glm::dvec3* perfil)
 {
 	MbR* mesh = new MbR();
 	mesh->mNumVertices = mm * nn;
@@ -590,7 +590,7 @@ MbR* MbR::generaIndexMbR(GLuint mm, GLuint nn, glm::dvec3* perfil)
 	// Definir la primitiva como GL_TRIANGLES
 	// Definir el número de vértices como nn*mm
 	// Usar un vector auxiliar de vértices
-	dvec3* vs = new dvec3[mesh->mNumVertices];
+	//dvec3* vs = new dvec3[mesh->mNumVertices];
 	for (int i = 0; i < nn; i++) {
 		// Generar la muestra i- ésima de vértices
 		GLdouble theta = i * 360 / nn;
@@ -600,7 +600,7 @@ MbR* MbR::generaIndexMbR(GLuint mm, GLuint nn, glm::dvec3* perfil)
 		for (int j = 0; j < mm; j++) {
 			GLdouble z = -s * perfil[j].x + c * perfil[j].z;
 			GLdouble x = c * perfil[j].x + s * perfil[j].z;
-			vs[i] = dvec3(perfil[j].x, perfil[j].y, z);
+			//vs[i] = dvec3(perfil[j].x, perfil[j].y, z);
 			mesh->vVertices.push_back(dvec3(x, perfil[j].y, z));
 		}
 	}
@@ -628,6 +628,7 @@ MbR* MbR::generaIndexMbR(GLuint mm, GLuint nn, glm::dvec3* perfil)
 
 	mesh->nNumIndices = mesh->vIndexes.size();
 	mesh->buildNormalVectors();
+
 	return mesh;
 }
 

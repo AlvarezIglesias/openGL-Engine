@@ -567,3 +567,82 @@ void DensePlain::render(glm::dmat4 const& modelViewMat) const
 }
 
 
+Vela::Vela(float _apertura, float _inicial, float _desfase) : apertura(_apertura), inicial(_inicial), desfase(_desfase) {
+	Disk* fondoPlatoVela = new Disk(0, 100);
+	fondoPlatoVela->mPosition = { 0,20,0 };
+	fondoPlatoVela->mRotation = { -90,0,0 };
+	fondoPlatoVela->mColor = { 191.0 / 255.0, 140.0 / 255.0, 0.0 / 255.0, 255.0 / 255.0 };
+	addEntity(fondoPlatoVela);
+
+	Cylinder* ladosPlato = new Cylinder(100, 150, 30);
+	ladosPlato->mPosition = { 0,20,0 };
+	ladosPlato->mRotation = { -90,0,0 };
+	ladosPlato->mColor = { 191.0 / 255.0, 140.0 / 255.0, 0.0 / 255.0, 255.0 / 255.0 };
+	addEntity(ladosPlato);
+
+	Cylinder* ladosVela = new Cylinder(30, 30, 200);
+	ladosVela->mPosition = { 0,20,0 };
+	ladosVela->mRotation = { -90,0,0 };
+	addEntity(ladosVela);
+
+	Cylinder* topeVela = new Cylinder(30, 0, 20);
+	topeVela->mPosition = { 0,220,0 };
+	topeVela->mRotation = { -90,0,0 };
+	addEntity(topeVela);
+
+	Sphere* baseFuego = new Sphere(15);
+	baseFuego->mPosition = { 0,250,0 };
+	baseFuego->mColor = { 191.0 / 255.0,135.0 / 255.0,0,1 };
+	addEntity(baseFuego);
+
+	Cylinder* topeFuego = new Cylinder(15, 0, 40);
+	topeFuego->mPosition = { 0,255,0 };
+	topeFuego->mRotation = { -90,0,0 };
+	topeFuego->mColor = { 191.0 / 255.0,135.0 / 255.0,0,1 };
+	addEntity(topeFuego);
+
+	poslight = new PosLight();
+	poslight->setPosDir({ 0,255,0 });
+	poslight->setAmb({ 0.5,0.25,0,1 });
+	poslight->uploadL();
+	poslight->enable();
+}
+
+void Vela::update()
+{
+	counter += 0.1;
+
+	mPosition = initialPos + dvec3( 0, inicial + glm::sin(glm::radians((counter*5) + desfase)) * apertura ,0 );
+
+	for (Abs_Entity* ent : gObjects) {
+		ent->update();
+	}
+
+
+}
+
+void Vela::render(glm::dmat4 const& modelViewMat) const
+{
+	glm::dmat4 modelViewMatComp = complete_transform(modelViewMat) * mModelMat;
+	upload(modelViewMatComp);
+
+	for (Abs_Entity* ent : gObjects) {
+		ent->render(modelViewMatComp);
+	}
+
+	poslight->setPosDir(glm::fvec3{ mPosition.x, mPosition.y + 255, mPosition.z });
+	poslight->setAtte(0.025 * glm::sin(glm::radians(counter * 100)) * 10, 0.001 , 0.00001);
+	poslight->upload(modelViewMat);
+}
+
+
+CirculoMagia::CirculoMagia(GLdouble rru, GLdouble rrd, GLdouble hh) : Luz(rru, rrd, hh) {
+	mTexturePaths = { "../bmps/letras.bmp" };
+}
+
+void CirculoMagia::update()
+{
+	counter += 0.01;
+	mRotation = { -90, 0, counter };
+
+}

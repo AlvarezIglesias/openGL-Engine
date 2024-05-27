@@ -1,3 +1,101 @@
-﻿  Light.cpp
-C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\Light.cpp(24,9): warning C4305: '=': truncamiento de 'double' a 'GLfloat'
+﻿  EntityPrFinal.cpp
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\EntityPrFinal.h(28,23): warning C4244: 'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
+  (compilando archivo de origen "EntityPrFinal.cpp")
+  
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\EntityPrFinal.cpp(82,14): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\EntityPrFinal.cpp(139,47): warning C4267: 'argumento': conversión de 'size_t' a 'GLuint'; posible pérdida de datos
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\EntityPrFinal.cpp(170,47): warning C4267: 'argumento': conversión de 'size_t' a 'GLuint'; posible pérdida de datos
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\EntityPrFinal.cpp(209,47): warning C4267: 'argumento': conversión de 'size_t' a 'GLuint'; posible pérdida de datos
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\EntityPrFinal.cpp(252,47): warning C4267: 'argumento': conversión de 'size_t' a 'GLuint'; posible pérdida de datos
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\EntityPrFinal.cpp(297,47): warning C4267: 'argumento': conversión de 'size_t' a 'GLuint'; posible pérdida de datos
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\EntityPrFinal.cpp(316,47): warning C4267: 'argumento': conversión de 'size_t' a 'GLuint'; posible pérdida de datos
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\EntityPrFinal.cpp(415,42): warning C4244: 'argumento': conversión de 'const T' a 'GLfloat'; posible pérdida de datos
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\EntityPrFinal.cpp(415,42): warning C4244:         with
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\EntityPrFinal.cpp(415,42): warning C4244:         [
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\EntityPrFinal.cpp(415,42): warning C4244:             T=glm::f64
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\EntityPrFinal.cpp(415,42): warning C4244:         ]
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\EntityPrFinal.cpp(415,31): warning C4244: 'argumento': conversión de 'const T' a 'GLfloat'; posible pérdida de datos
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\EntityPrFinal.cpp(415,31): warning C4244:         with
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\EntityPrFinal.cpp(415,31): warning C4244:         [
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\EntityPrFinal.cpp(415,31): warning C4244:             T=glm::f64
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\EntityPrFinal.cpp(415,31): warning C4244:         ]
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\EntityPrFinal.cpp(415,20): warning C4244: 'argumento': conversión de 'const T' a 'GLfloat'; posible pérdida de datos
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\EntityPrFinal.cpp(415,20): warning C4244:         with
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\EntityPrFinal.cpp(415,20): warning C4244:         [
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\EntityPrFinal.cpp(415,20): warning C4244:             T=glm::f64
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\EntityPrFinal.cpp(415,20): warning C4244:         ]
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\EntityPrFinal.cpp(459,47): warning C4267: 'argumento': conversión de 'size_t' a 'GLuint'; posible pérdida de datos
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\EntityPrFinal.cpp(502,28): warning C4305: 'argumento': truncamiento de 'double' a 'GLfloat'
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\EntityPrFinal.cpp(508,17): warning C4305: '+=': truncamiento de 'double' a 'float'
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\EntityPrFinal.cpp(514,16): warning C4305: '+=': truncamiento de 'double' a 'float'
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\EntityPrFinal.cpp(613,16): warning C4305: '+=': truncamiento de 'double' a 'float'
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\EntityPrFinal.cpp(634,80): warning C4305: 'argumento': truncamiento de 'double' a 'GLfloat'
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\EntityPrFinal.cpp(634,72): warning C4305: 'argumento': truncamiento de 'double' a 'GLfloat'
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\EntityPrFinal.cpp(634,66): warning C4244: 'argumento': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\EntityPrFinal.cpp(645,17): warning C4305: '+=': truncamiento de 'double' a 'float'
+  IG1App.cpp
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\Scene.h(49,110): warning C4244: 'argumento': conversión de 'T' a 'GLclampf'; posible pérdida de datos
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\Scene.h(49,110): warning C4244:         with
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\Scene.h(49,110): warning C4244:         [
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\Scene.h(49,110): warning C4244:             T=glm::f64
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\Scene.h(49,110): warning C4244:         ]
+  (compilando archivo de origen "IG1App.cpp")
+  
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\Scene.h(49,91): warning C4244: 'argumento': conversión de 'T' a 'GLclampf'; posible pérdida de datos
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\Scene.h(49,91): warning C4244:         with
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\Scene.h(49,91): warning C4244:         [
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\Scene.h(49,91): warning C4244:             T=glm::f64
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\Scene.h(49,91): warning C4244:         ]
+  (compilando archivo de origen "IG1App.cpp")
+  
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\Scene.h(49,72): warning C4244: 'argumento': conversión de 'T' a 'GLclampf'; posible pérdida de datos
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\Scene.h(49,72): warning C4244:         with
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\Scene.h(49,72): warning C4244:         [
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\Scene.h(49,72): warning C4244:             T=glm::f64
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\Scene.h(49,72): warning C4244:         ]
+  (compilando archivo de origen "IG1App.cpp")
+  
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\Scene.h(49,53): warning C4244: 'argumento': conversión de 'T' a 'GLclampf'; posible pérdida de datos
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\Scene.h(49,53): warning C4244:         with
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\Scene.h(49,53): warning C4244:         [
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\Scene.h(49,53): warning C4244:             T=glm::f64
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\Scene.h(49,53): warning C4244:         ]
+  (compilando archivo de origen "IG1App.cpp")
+  
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\EntityPrFinal.h(28,23): warning C4244: 'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
+  (compilando archivo de origen "IG1App.cpp")
+  
+  main.cpp
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\Scene.h(49,110): warning C4244: 'argumento': conversión de 'T' a 'GLclampf'; posible pérdida de datos
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\Scene.h(49,110): warning C4244:         with
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\Scene.h(49,110): warning C4244:         [
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\Scene.h(49,110): warning C4244:             T=glm::f64
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\Scene.h(49,110): warning C4244:         ]
+  (compilando archivo de origen "main.cpp")
+  
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\Scene.h(49,91): warning C4244: 'argumento': conversión de 'T' a 'GLclampf'; posible pérdida de datos
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\Scene.h(49,91): warning C4244:         with
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\Scene.h(49,91): warning C4244:         [
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\Scene.h(49,91): warning C4244:             T=glm::f64
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\Scene.h(49,91): warning C4244:         ]
+  (compilando archivo de origen "main.cpp")
+  
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\Scene.h(49,72): warning C4244: 'argumento': conversión de 'T' a 'GLclampf'; posible pérdida de datos
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\Scene.h(49,72): warning C4244:         with
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\Scene.h(49,72): warning C4244:         [
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\Scene.h(49,72): warning C4244:             T=glm::f64
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\Scene.h(49,72): warning C4244:         ]
+  (compilando archivo de origen "main.cpp")
+  
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\Scene.h(49,53): warning C4244: 'argumento': conversión de 'T' a 'GLclampf'; posible pérdida de datos
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\Scene.h(49,53): warning C4244:         with
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\Scene.h(49,53): warning C4244:         [
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\Scene.h(49,53): warning C4244:             T=glm::f64
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\Scene.h(49,53): warning C4244:         ]
+  (compilando archivo de origen "main.cpp")
+  
+C:\MisCosas\Programacion\Clase\openGL-Engine\IG1App\EntityPrFinal.h(28,23): warning C4244: 'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
+  (compilando archivo de origen "main.cpp")
+  
+  Generando código...
   IG1App.vcxproj -> C:\MisCosas\Programacion\Clase\openGL-Engine\bin\IG1AppDebug.exe

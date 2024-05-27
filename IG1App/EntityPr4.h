@@ -90,7 +90,7 @@ public:
 class IndexedBox : public Abs_Entity {
 public:
 	IndexedBox();
-	~IndexedBox() {};
+	~IndexedBox() { delete mMesh; };
 	virtual void render(glm::dmat4 const& modelViewMat) const;
 };
 

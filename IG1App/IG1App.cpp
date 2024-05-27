@@ -56,14 +56,15 @@ IG1App::init()
 
 	Scene* sP4 = new Scene();
 
-
+	Material::plastic->setPlastic();
+	Material::copper->setCopper();
 	glm::dvec4 whiteColor = { 237.0 / 255.0, 215.0 / 255.0, 149.0 / 255.0 , 1.0 };
 	glm::dvec4 blackColor = { 0.1, 0.1, 0.1 , 1.0 };
 
 	// ********************************************************** Piezas ajedrez
 
 
-	Material* material = new Material();
+	Material* material = Material::plastic;
 	material->setPlastic();
 	for (int i = 0; i < 8; i++)
 	{
@@ -364,8 +365,36 @@ IG1App::init()
 	objects.push_back(suelo);
 
 
+	Vela* vela = new Vela(200,400,20);
+	vela->initialPos = { 1800, -2000, 0 };
+	vela->mPosition = { 1800, -2000, 0 };
+	objects.push_back(vela);
+
+	Vela* vela1 = new Vela(300, 400, 60);
+	vela1->initialPos = { -1800, -2000, 0 };
+	vela1->mPosition = { -1800, -2000, 0 };
+	objects.push_back(vela1);
+
+	Vela* vela2 = new Vela(250, 400, 120);
+	vela2->initialPos = { 0, -2000, 1800 };
+	vela2->mPosition = { 0, -2000, 1800 };
+	objects.push_back(vela2);
+
+	Vela* vela3 = new Vela(400, 400, 240);
+	vela3->initialPos = { 0 , -2000, -1800 };
+	vela3->mPosition = { 0 , -2000, -1800 };
+	objects.push_back(vela3);
+
+
+
 	compoundBaseFlexo->mScale = { 1.5,1.5,1.5 };
 	objects.push_back(compoundBaseFlexo); //Ultimo en aniadirse para que el cono de luz se renderice bien
+
+	CirculoMagia* letras = new CirculoMagia(1200, 1200, 1000);
+	letras->mRotation = { -90,0,0 };
+	letras->mScale = { 2,2,2 };
+	letras->mPosition = { 0,-1800,0 };
+	objects.push_back(letras);
 
 	sP4->backgroundColor = { 21.0 / 255.0, 13.0 / 255.0, 41.0 / 255.0, 1.0 };
 	sP4->initPr3({ std::vector<Abs_Entity*>(objects) });
@@ -425,6 +454,9 @@ IG1App::free()
 
 	for(Camera* c : mCameras) delete c;
 	for(Viewport* vp : mViewPorts) delete vp;
+
+	delete Material::plastic;
+	delete Material::copper;
 
 }
 
@@ -542,35 +574,35 @@ IG1App::key(unsigned char key, int x, int y)
 			break;
 		case 'q':
 			// APARTADO 76
-			current_scene()->dirLight->enable();
+			//current_scene()->dirLight->enable();
 			break;
 		case 'w':
 			// APARTADO 76
-			current_scene()->dirLight->disable();
+			//current_scene()->dirLight->disable();
 			break;
 		case 'a':
 			// APARTADO 77
-			current_scene()->posLight->enable();
+			//current_scene()->posLight->enable();
 			break;
 		case 's':
 			// APARTADO 77
-			current_scene()->posLight->disable();
+			//current_scene()->posLight->disable();
 			break;
 		case 'z':
 			// APARTADO 78
-			current_scene()->spotLight->enable();
+			//current_scene()->spotLight->enable();
 			break;
 		case 'x':
 			// APARTADO 78
-			current_scene()->spotLight->disable();
+			//current_scene()->spotLight->disable();
 			break;
 		case 'v':
 			// APARTADO 79
-			if (current_scene()->hasAdvandcedTIE()) current_scene()->enableTieLight();
+			//if (current_scene()->hasAdvandcedTIE()) current_scene()->enableTieLight();
 			break;
 		case 'b':
 			// APARTADO 79
-			if (current_scene()->hasAdvandcedTIE()) current_scene()->disableTieLight();
+			//if (current_scene()->hasAdvandcedTIE()) current_scene()->disableTieLight();
 			break;
 		default:
 			need_redisplay = false;
