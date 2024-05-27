@@ -35,6 +35,5 @@ main(int argc, char* argv[])
 		std::cout << "ERROR: Closing application...\n";
 		std::cin.ignore(INT_MAX, '\n');
 	};
-
 	return 0;
 }

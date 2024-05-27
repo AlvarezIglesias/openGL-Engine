@@ -332,7 +332,7 @@ void BaseCaballo::render(glm::dmat4 const& modelViewMat) const
 		glEnable(GL_COLOR_MATERIAL);
 
 
-		//material->upload();
+		if (material != nullptr) material->upload();
 
 		mMesh->render();
 
@@ -369,7 +369,7 @@ void CabezaCaballo::render(glm::dmat4 const& modelViewMat) const
 		glEnable(GL_COLOR_MATERIAL);
 
 
-		//material->upload();
+		if (material != nullptr) material->upload();
 
 		mMesh->render();
 
@@ -483,7 +483,7 @@ void PantallaFlexo::render(glm::dmat4 const& modelViewMat) const
 		glEnable(GL_COLOR_MATERIAL);
 
 
-		//material->upload();
+		if (material != nullptr) material->upload();
 
 		mMesh->render();
 

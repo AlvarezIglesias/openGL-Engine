@@ -12,7 +12,12 @@ class Abs_Entity // abstract class
 public:
 	Abs_Entity()
 	  : mModelMat(1.0), mColor(1), mPosition(0), mRotation(0), mScale(1){}; // 4x4 identity matrix
-	virtual ~Abs_Entity() = default;
+	virtual ~Abs_Entity() {
+		if(mMesh != nullptr){
+		delete mMesh;
+		mMesh = nullptr;
+		}
+	};;
 
 	Abs_Entity(const Abs_Entity& e) = delete;            // no copy constructor
 	Abs_Entity& operator=(const Abs_Entity& e) = delete; // no copy assignment

@@ -19,7 +19,7 @@ public:
 class ChessPiece : public EntityWithMaterial
 {
 public:
-	~ChessPiece() {  };
+	~ChessPiece() {};
 	virtual void render(glm::dmat4 const& modelViewMat) const;
 	void update();
 	bool shouldUpdate = true;
@@ -32,7 +32,7 @@ protected:
 class Peon : public ChessPiece
 {
 public:
-	~Peon() { delete mMesh; mMesh = nullptr; };
+	~Peon() {};
 	explicit Peon();
 };
 
@@ -46,7 +46,7 @@ public:
 class Alfil : public ChessPiece
 {
 public:
-	~Alfil() { delete mMesh; };
+	~Alfil() {};
 	explicit Alfil();
 };
 

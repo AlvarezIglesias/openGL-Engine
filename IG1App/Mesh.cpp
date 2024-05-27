@@ -586,7 +586,8 @@ Mesh* MbR::generaIndexMbR(GLuint mm, GLuint nn, glm::dvec3* perfil)
 	mesh->mNumVertices = mm * nn;
 	
 	mesh->mPrimitive = GL_TRIANGLES;
-
+	mesh->vVertices.reserve(mesh->mNumVertices);
+	mesh->vIndexes.reserve(mesh->mNumVertices);
 	// Definir la primitiva como GL_TRIANGLES
 	// Definir el número de vértices como nn*mm
 	// Usar un vector auxiliar de vértices
@@ -601,7 +602,7 @@ Mesh* MbR::generaIndexMbR(GLuint mm, GLuint nn, glm::dvec3* perfil)
 			GLdouble z = -s * perfil[j].x + c * perfil[j].z;
 			GLdouble x = c * perfil[j].x + s * perfil[j].z;
 			//vs[i] = dvec3(perfil[j].x, perfil[j].y, z);
-			mesh->vVertices.push_back(dvec3(x, perfil[j].y, z));
+			mesh->vVertices.emplace_back(dvec3(x, perfil[j].y, z));
 		}
 	}
 
@@ -616,12 +617,12 @@ Mesh* MbR::generaIndexMbR(GLuint mm, GLuint nn, glm::dvec3* perfil)
 			// de los índices generados hasta ahora . Se recorre
 			// la cara desde la esquina inferior izquierda
 			int indice = i * mm + j;
-			mesh->vIndexes.push_back(indice);
-			mesh->vIndexes.push_back((indice + mm) % (nn * mm));
-			mesh->vIndexes.push_back((indice + mm + 1) % (nn * mm));
-			mesh->vIndexes.push_back((indice + mm + 1) % (nn * mm));
-			mesh->vIndexes.push_back(indice + 1);
-			mesh->vIndexes.push_back(indice);
+			mesh->vIndexes.emplace_back(indice);
+			mesh->vIndexes.emplace_back((indice + mm) % (nn * mm));
+			mesh->vIndexes.emplace_back((indice + mm + 1) % (nn * mm));
+			mesh->vIndexes.emplace_back((indice + mm + 1) % (nn * mm));
+			mesh->vIndexes.emplace_back(indice + 1);
+			mesh->vIndexes.emplace_back(indice);
 
 		}
 	}
@@ -753,18 +754,20 @@ Mesh* IndexMesh::generateDensePlain(const int& density, float textCoorRepeat)
 	IndexMesh* mesh = new IndexMesh();
 
 	mesh->mPrimitive = GL_TRIANGLES;
+	mesh->mNumVertices = (density+1)*(density+1);
+	mesh->vVertices.reserve(mesh->mNumVertices);
+	mesh->vIndexes.reserve(mesh->mNumVertices);
 
 	for (int i = 0; i < density+1; i++)
 	{
 		for (int j = 0; j < density+1; j++)
 		{
-			mesh->vVertices.push_back({ float(i) / float(density) - 0.5,float(j) / float(density) - 0.5,0.0 });
+			mesh->vVertices.emplace_back(dvec3( float(i) / float(density) - 0.5,float(j) / float(density) - 0.5,0.0 ));
 			//mesh->vNormals.push_back({ 0, 1, 0 });
-			mesh->vTexCoords.push_back({ (float(i) / float(density)) * textCoorRepeat , (float(j) / float(density)) * textCoorRepeat });
+			mesh->vTexCoords.emplace_back(dvec2( (float(i) / float(density)) * textCoorRepeat , (float(j) / float(density)) * textCoorRepeat ));
 		}
 	}
 
-	mesh->mNumVertices = mesh->vVertices.size();
 
 	// El contador i recorre las muestras alrededor del eje Y
 	for (int i = 0; i < density ; i++) {
@@ -780,12 +783,12 @@ Mesh* IndexMesh::generateDensePlain(const int& density, float textCoorRepeat)
 			int bottomLeft = i * (density + 1) + (j + 1);
 			int bottomRight = (i + 1) * (density + 1) + (j + 1);
 
-			mesh->vIndexes.push_back(topLeft);
-			mesh->vIndexes.push_back(topRight);
-			mesh->vIndexes.push_back(bottomLeft);
-			mesh->vIndexes.push_back(topRight);
-			mesh->vIndexes.push_back(bottomRight);
-			mesh->vIndexes.push_back(bottomLeft);
+			mesh->vIndexes.emplace_back(topLeft);
+			mesh->vIndexes.emplace_back(topRight);
+			mesh->vIndexes.emplace_back(bottomLeft);
+			mesh->vIndexes.emplace_back(topRight);
+			mesh->vIndexes.emplace_back(bottomRight);
+			mesh->vIndexes.emplace_back(bottomLeft);
 
 
 		}
